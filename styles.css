@@ -1,0 +1,244 @@
+ /* تصميم عام */
+        body {
+           font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        .material-icons {
+            font-size: 18px;
+            vertical-align: middle;
+        }
+
+        .bar {
+            animation: dance 1s infinite alternate ease-in-out;
+        }
+
+      .bar:nth-child(1) { animation-delay: 0.1s; background: #ff4d4d; }
+            .bar:nth-child(2) { animation-delay: 0.2s; background: #ff7f50; }
+            .bar:nth-child(3) { animation-delay: 0.3s; background: #ffa500; }
+            .bar:nth-child(4) { animation-delay: 0.4s; background: #ffff00; }
+            .bar:nth-child(5) { animation-delay: 0.5s; background: #90ee90; }
+            .bar:nth-child(6) { animation-delay: 0.6s; background: #00bfff; }
+            .bar:nth-child(7) { animation-delay: 0.7s; background: #8a2be2; }
+
+
+        @keyframes dance {
+            0% { height: 8px; }
+            100% { height: 40px; }
+        }
+
+/* الحاوية الرئيسية */
+.albums-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+/* شريط التمرير للألبومات */
+.album-scroll-container {
+    width: 80%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* إخفاء شريط التمرير */
+.album-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* قائمة الألبومات */
+.album-list {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    white-space: nowrap;
+}
+        
+.album-list-music {
+    font-size: 13px;
+    color: #010417;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+
+        
+/* كل ألبوم */
+.album-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* زر الألبوم */
+.album-btn {
+    width: 75px;
+    height: 75px;
+    background-size: cover;
+    background-position: center;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);   
+}
+
+/* أسماء الألبومات (تحكم منفصل) */
+.album-name {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #ff4d4d;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* أزرار التمرير */
+.scroll-arrow {
+    background: rgba(236, 21, 32, 0.84);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px; /* تعديل قليل لتحسين المظهر */
+    font-size: 22px; /* تعديل الحجم قليلاً */
+    border-radius: 12%; /* لتحسين شكل الزر */
+    transition: 0.3s;
+    position: absolute;
+    top: 50%; /* تم تعديله ليكون في المنتصف بشكل دقيق */
+    transform: translateY(-50%); /* تعديل المركز عموديًا */
+}
+
+/* تأثير عند تمرير الماوس */
+.scroll-arrow:hover {
+    background: rgb(32, 16, 20);
+}
+
+.scroll-left {
+    left: 10px; /* تعديل المسافة من اليسار */
+}
+
+.scroll-right {
+    right: 10px; /* تعديل المسافة من اليمين */
+}
+
+/* تحسين المظهر للأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .album-scroll-container {
+        width: 100%;
+    }
+
+    .scroll-arrow {
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+
+/* تنسيق قائمة الأغاني */
+.songs-container {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    margin-top: 11px;
+}
+
+
+/* تنسيق الأغاني */
+.song {
+    display: flex;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    color: #f0f0f0;
+    gap: 2px; /* المسافة بين الأيقونة واسم المغني */
+    
+}
+
+.song:hover {
+    transform: scale(1);
+    background-color: #d71212;
+}
+        
+        
+        
+ /* تنسيق الزر */       
+.hidden {
+    display: none;
+}
+/* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
+.container {
+    text-align: center; /* لتوسيط العناصر داخل الحاوية */
+}
+/* تنسيق الزر */
+.show-more-btn {
+    background-color: #fefeff; /* خلفية حمراء */
+    color: #ee082e; /* لون النص */
+    padding: 8px 24px; /* مساحة داخلية */
+    border: 2px solid #ee082e; /* إطار أبيض بسُمك 10px */
+    cursor: pointer; /* تغيير شكل المؤشر عند التمرير فوق الزر */
+    font-size: 14px; /* حجم الخط */
+    border-radius: 12px; /* حواف دائرية */
+    display: flex; /* استخدام flex لتوسيط العناصر */
+    justify-content: center; /* محاذاة العناصر عموديا */
+    align-items: center; /* محاذاة العناصر أفقيا */
+    margin: 10px auto; /* توسيط الزر في الحاوية */
+    text-align: center; /* محاذاة النص داخل الزر */
+    position: relative; /* للسماح بحركة العناصر بداخله */
+    width: 122px; /* تحديد عرض الزر */
+}
+
+.show-more-btn:hover {
+    border-color: #b51818; /* تغيير لون الإطار عند تمرير الماوس */
+}
+
+/* دائرة تدور */
+.spinner {
+    position: absolute; /* وضع الدائرة بشكل مطلق داخل الزر */
+    left: 50%; /* توسيط الدائرة أفقيا */
+    top: 50%; /* توسيط الدائرة عموديا */
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f60808;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+    display: none; /* إخفاءها في البداية */
+}
+
+/* تأثير دوران الدائرة */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* خصائص لألبوم يحتوي على زر عرض المزيد */
+.songs-container[data-album="popular-songs"] .show-more-btn {
+    display: block; /* إظهار الزر فقط إذا كان الألبوم يحتوي على أغاني مخفية */
+}
+
+.songs-container[data-album="other-songs"] .show-more-btn {
+    display: none; /* إخفاء الزر إذا كان الألبوم لا يحتوي على أغاني مخفية */
+}
+
+
+
+
