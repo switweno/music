@@ -32,14 +32,19 @@ const songs = [
     { file: '16 nayda nouda.mp3', name: 'nayda nouda 16', album: 'naydanouda' },
     { file: '17 nayda nouda.mp3', name: 'nayda nouda 17', album: 'naydanouda' },
 	{ file: '18 nayda nouda.mp3', name: 'nayda nouda 18', album: 'naydanouda' },
-
 	{ file: '19 nayda nouda.mp3', name: 'nayda nouda 19', album: 'naydanouda' },
-
     { file: '20 nayda nouda.mp3', name: 'nayda nouda 20', album: 'naydanouda' },
     { file: '21 nayda nouda.mp3', name: 'nayda nouda 21', album: 'naydanouda' },
     { file: '22 nayda nouda.mp3', name: 'nayda nouda 22', album: 'naydanouda' },
     { file: '23 nayda nouda.mp3', name: 'nayda nouda 23', album: 'naydanouda' },
-  
+    
+    { file: '01 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '02 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '03 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '04 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '05 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '06 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    
     { file: '01 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 1', album: 'popular' },
     { file: '02 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 2', album: 'popular' },
     { file: '03 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 3', album: 'popular' },
@@ -232,7 +237,7 @@ function restoreLastPlayed() {
             currentAlbum = lastPlayed.album || "naydanouda";
             showAlbum(currentAlbum);
             changeTrack(lastPlayed.file, lastPlayed.name);
-            audioPlayer.pause(); // لا يبدأ التشغيل تلقائيًا
+            audioPlayer.play(); // لا يبدأ التشغيل تلقائيًا
         }
     } catch (error) {
         console.error("خطأ في استعادة الأغنية:", error);

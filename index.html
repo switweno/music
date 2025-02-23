@@ -83,6 +83,10 @@
                     <span class="album-name">casa star</span>
                 </div>
                 <div class="album-item">
+                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('star.jpg');"></button>
+                    <span class="album-name">kamal new</span>
+                </div>
+                <div class="album-item">
                     <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('chaabi.jpg');"></button>
                     <span class="album-name">shab loutar</span>
                 </div>
@@ -118,6 +122,36 @@
         <button class="scroll-arrow scroll-right absolute right-2" onclick="scrollAlbums(1)">❯</button>
     </div>
 
+    <!-- kamal el 3abdi -->
+        <div class="songs-container kamalnew" id="kamalnew-songs" style="display: none;">
+            <div class="song" onclick="changeTrack('01 kamal el 3abdi.mp3', 'kamal el 3abdi 1')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 1</div>
+            </div>
+            <div class="song" onclick="changeTrack('02 kamal el 3abdi.mp3', 'kamal el 3abdi 2')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 2</div>
+            </div>
+            <div class="song" onclick="changeTrack('03 kamal el 3abdi.mp3', 'kamal el 3abdi 3')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 3</div>
+            </div>
+            <div class="song" onclick="changeTrack('04 kamal el 3abdi.mp3', 'kamal el 3abdi 4')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 4</div>
+            </div>
+            <div class="song" onclick="changeTrack('05 kamal el 3abdi.mp3', 'kamal el 3abdi 5')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 5</div>
+            </div>
+            <div class="song" onclick="changeTrack('06 kamal el 3abdi.mp3', 'kamal el 3abdi 6')" style="border-color: #3af406;">
+                <i class="material-symbols-outlined">headphones</i>
+                <div class="song-title">kamal el 3abdi 6</div>
+            </div>
+        </div>
+    
+    
+    
     <!-- قسم الأغاني -->
     <div class="songs-container-wrapper">
         <!-- nayda nouda -->
@@ -344,6 +378,8 @@
                 Afficher plus
             </button>
         </div>
+        
+         
 
         <!-- أغاني الراي -->
         <div class="songs-container rai" id="rai-songs" style="display: none;">
