@@ -107,7 +107,6 @@ let currentTrackIndex = 0;
 let isRandomPlaying = false;
 let currentAlbum = "naydanouda"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
-
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
