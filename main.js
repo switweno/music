@@ -59,6 +59,15 @@ const songs = [
     { file: 'LOOP022.mp3', name: 'أغنية مغربية 4', album: 'moroccan' }
 ];
 
+const audioPlayer = document.getElementById("audio-player");
+const playPauseButton = document.getElementById("play-pause-btn");
+const progressBar = document.getElementById("progress-bar");
+const volumeControl = document.getElementById("volume-control");
+const volumeControlContainer = document.getElementById("volume-control-container");
+const volumeButton = document.getElementById("volume-btn");
+const currentTimeElement = document.getElementById("current-time");
+const durationTimeElement = document.getElementById("duration-time");
+
 let currentTrackIndex = 0;
 let isRandomPlaying = false;
 let currentAlbum = "casastar"; // الألبوم الافتراضي
@@ -74,64 +83,56 @@ function showAlbum(album) {
     currentTrackIndex = 0; // إعادة المؤشر إلى البداية
 }
 
+// دالة تنسيق الوقت
+function formatTime(time) {
+    if (isNaN(time) || time < 0) return "00:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
 // دالة تغيير الأغنية
 function changeTrack(audioFile, trackName) {
-    if (isRandomPlaying) {
-        isRandomPlaying = false;
-    }
+    if (isRandomPlaying) isRandomPlaying = false;
 
     document.getElementById("track-name").textContent = trackName;
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
 
-    const audioPlayer = document.getElementById("audio-player");
     audioPlayer.load();
     audioPlayer.play();
 
-    // تحديث حالة زر التشغيل/الإيقاف المؤقت
     playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
 
-    saveLastPlayed(audioFile, trackName, currentAlbum); // حفظ الأغنية والألبوم
+    saveLastPlayed(audioFile, trackName, currentAlbum);
 }
 
-const audioPlayer = document.getElementById("audio-player");
-const playPauseButton = document.getElementById("play-pause-btn");
-const progressBar = document.getElementById("progress-bar");
-const volumeControl = document.getElementById("volume-control");
-const volumeControlContainer = document.getElementById("volume-control-container");
-const volumeButton = document.getElementById("volume-btn");
-const currentTimeElement = document.getElementById("current-time");
-const durationTimeElement = document.getElementById("duration-time");
-
-// تحديث شريط التقدم وتوقيت الأغنية
+// تحديث شريط التقدم والتوقيت
 audioPlayer.addEventListener("timeupdate", () => {
     const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     progressBar.value = progress;
-
-    // تحديث توقيت بداية الأغنية
-    const currentMinutes = Math.floor(audioPlayer.currentTime / 60);
-    const currentSeconds = Math.floor(audioPlayer.currentTime % 60);
-    currentTimeElement.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
-
-    // تحديث توقيت انتهاء الأغنية
-    const durationMinutes = Math.floor(audioPlayer.duration / 60);
-    const durationSeconds = Math.floor(audioPlayer.duration % 60);
-    durationTimeElement.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+    currentTimeElement.textContent = formatTime(audioPlayer.currentTime);
 });
 
-// تغيير موقع التشغيل عند تحريك شريط التقدم
+// عند تحميل البيانات الصوتية، تأكد من تحديث مدة الأغنية بشكل صحيح
+audioPlayer.addEventListener("loadedmetadata", () => {
+    durationTimeElement.textContent = formatTime(audioPlayer.duration);
+});
+
+// تحديث شريط التقدم عند تحريكه
 progressBar.addEventListener("input", () => {
-    const newTime = (progressBar.value / 100) * audioPlayer.duration;
-    audioPlayer.currentTime = newTime;
+    audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
 });
 
-// تغيير مستوى الصوت عند تحريك شريط التحكم في الصوت
+// تغيير مستوى الصوت
 volumeControl.addEventListener("input", () => {
     audioPlayer.volume = volumeControl.value / 100;
-    volumeButton.innerHTML = audioPlayer.volume === 0 ? '<span class="material-icons">volume_off</span>' : '<span class="material-icons">volume_up</span>';
+    volumeButton.innerHTML = audioPlayer.volume === 0
+        ? '<span class="material-icons">volume_off</span>'
+        : '<span class="material-icons">volume_up</span>';
 });
 
-// تبديل بين الإيقاف والتشغيل
+// تشغيل/إيقاف الأغنية
 function togglePlayPause() {
     if (audioPlayer.paused) {
         audioPlayer.play();
@@ -142,65 +143,60 @@ function togglePlayPause() {
     }
 }
 
-// دالة تشغيل الأغنية التالية
+// تشغيل الأغنية التالية
 function playNext() {
     const activeSongs = songs.filter(song => song.album === currentAlbum);
-
-    currentTrackIndex = (currentTrackIndex + 1) % activeSongs.length; // الانتقال للأغنية التالية (دائرية)
-    const nextSong = activeSongs[currentTrackIndex];
-
-    changeTrack(nextSong.file, nextSong.name);
+    currentTrackIndex = (currentTrackIndex + 1) % activeSongs.length;
+    changeTrack(activeSongs[currentTrackIndex].file, activeSongs[currentTrackIndex].name);
 }
 
-// دالة تشغيل الأغنية السابقة
+// تشغيل الأغنية السابقة
 function playPrevious() {
     const activeSongs = songs.filter(song => song.album === currentAlbum);
-
-    currentTrackIndex = (currentTrackIndex - 1 + activeSongs.length) % activeSongs.length; // الانتقال للأغنية السابقة (دائرية)
-    const prevSong = activeSongs[currentTrackIndex];
-
-    changeTrack(prevSong.file, prevSong.name);
+    currentTrackIndex = (currentTrackIndex - 1 + activeSongs.length) % activeSongs.length;
+    changeTrack(activeSongs[currentTrackIndex].file, activeSongs[currentTrackIndex].name);
 }
 
-// دالة حفظ آخر أغنية مشغلة
+// حفظ آخر أغنية مشغلة
 function saveLastPlayed(file, name, album) {
     localStorage.setItem('lastPlayed', JSON.stringify({ file, name, album }));
 }
 
-// استعادة آخر أغنية تم تشغيلها
+// استعادة آخر أغنية مشغلة عند فتح الموقع
 function restoreLastPlayed() {
-    const lastPlayed = JSON.parse(localStorage.getItem('lastPlayed'));
-    if (lastPlayed) {
-        currentAlbum = lastPlayed.album || "casastar"; // تحديد الألبوم الحالي
-        showAlbum(currentAlbum); // عرض الألبوم الصحيح
-        changeTrack(lastPlayed.file, lastPlayed.name);
+    try {
+        const lastPlayed = JSON.parse(localStorage.getItem('lastPlayed'));
+        if (lastPlayed) {
+            currentAlbum = lastPlayed.album || "casastar";
+            showAlbum(currentAlbum);
+            changeTrack(lastPlayed.file, lastPlayed.name);
+            audioPlayer.pause(); // لا يبدأ التشغيل تلقائيًا
+        }
+    } catch (error) {
+        console.error("خطأ في استعادة الأغنية:", error);
     }
 
-    // تحديث حالة زر التشغيل/الإيقاف المؤقت بناءً على حالة مشغل الصوت
-    if (audioPlayer.paused) {
-        playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
-    } else {
-        playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
-    }
+    playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
 }
 
 // تشغيل الأغنية التالية تلقائيًا عند الانتهاء
-document.getElementById("audio-player").addEventListener("ended", playNext);
+audioPlayer.addEventListener("ended", playNext);
 
 // تحميل الصفحة
-window.onload = function () {
+window.addEventListener("load", () => {
     showAlbum("casastar");
     restoreLastPlayed();
-};
 
-// دالة تبديل عرض شريط التحكم في الصوت
+    // تعيين التوقيت الافتراضي
+    currentTimeElement.textContent = "00:00";
+    durationTimeElement.textContent = "00:00";
+});
+
+// تبديل عرض التحكم في الصوت
 function toggleVolumeControl() {
-    if (volumeControlContainer.classList.contains("hidden")) {
-        volumeControlContainer.classList.remove("hidden");
-    } else {
-        volumeControlContainer.classList.add("hidden");
-    }
+    volumeControlContainer.classList.toggle("hidden");
 }
+
 
 function scrollAlbums(direction) {
     const scrollContainer = document.querySelector('.album-scroll-container');
