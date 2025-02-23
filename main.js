@@ -34,6 +34,9 @@ const songs = [
     { file: '12 khalij.mp3', name: 'أغنية خليجية 12', album: 'khalij' },
     { file: '13 khalij.mp3', name: 'أغنية خليجية 13', album: 'khalij' },
     { file: '14 khalij.mp3', name: 'أغنية خليجية 14', album: 'khalij' },
+    { file: '15 khalij.mp3', name: 'أغنية خليجية 15', album: 'khalij' },
+    { file: '16 khalij.mp3', name: 'أغنية خليجية 16', album: 'khalij' },
+    { file: '17 khalij.mp3', name: 'أغنية خليجية 17', album: 'khalij' },
     
     { file: 'eastern1.mp3', name: 'أغنية شرقية 1', album: 'eastern' },
     { file: 'eastern2.mp3', name: 'أغنية شرقية 2', album: 'eastern' },
