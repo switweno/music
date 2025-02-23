@@ -1,18 +1,18 @@
 // قائمة الأغاني
 const songs = [
-    { file: '01 casa star.mp3', name: 'أغنية شعبية 1', album: 'casastar' },
-    { file: '02 casa star.mp3', name: 'أغنية شعبية 2', album: 'casastar' },
-    { file: '03 casa star.mp3', name: 'أغنية شعبية 3', album: 'casastar' },
-    { file: '04 casa star.mp3', name: 'أغنية شعبية 4', album: 'casastar' },
-	{ file: '05 casa star.mp3', name: 'أغنية شعبية 5', album: 'casastar' },
-	{ file: '06 casa star.mp3', name: 'أغنية شعبية 6', album: 'casastar' },
-    { file: '07 casa star.mp3', name: 'أغنية شعبية 7', album: 'casastar' },
-    { file: '08 casa star.mp3', name: 'أغنية شعبية 8', album: 'casastar' },
-    { file: '09 casa star.mp3', name: 'أغنية شعبية 9', album: 'casastar' },
-    { file: '10 casa star.mp3', name: 'أغنية شعبية 10', album: 'casastar' },
-    { file: '11 casa star.mp3', name: 'أغنية شعبية 11', album: 'casastar' },
-    { file: '12 casa star.mp3', name: 'أغنية شعبية 12', album: 'casastar' },
-    { file: '13 casa star.mp3', name: 'أغنية شعبية 13', album: 'casastar' },
+    { file: '01 casa star.mp3', name: 'casa star 1', album: 'casastar' },
+    { file: '02 casa star.mp3', name: 'casa star 2 ', album: 'casastar' },
+    { file: '03 casa star.mp3', name: 'casa star 3', album: 'casastar' },
+    { file: '04 casa star.mp3', name: 'casa star 4', album: 'casastar' },
+	{ file: '05 casa star.mp3', name: 'casa star 5', album: 'casastar' },
+	{ file: '06 casa star.mp3', name: 'casa star 6', album: 'casastar' },
+    { file: '07 casa star.mp3', name: 'casa star 7', album: 'casastar' },
+    { file: '08 casa star.mp3', name: 'casa star 8', album: 'casastar' },
+    { file: '09 casa star.mp3', name: 'casa star 9', album: 'casastar' },
+    { file: '10 casa star.mp3', name: 'casa star 10', album: 'casastar' },
+    { file: '11 casa star.mp3', name: 'casa star 11', album: 'casastar' },
+    { file: '12 casa star.mp3', name: 'casa star 12', album: 'casastar' },
+    { file: '13 casa star.mp3', name: 'casa star 13', album: 'casastar' },
     { file: '01 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 1', album: 'popular' },
     { file: '02 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 2', album: 'popular' },
     { file: '03 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 3', album: 'popular' },
@@ -138,7 +138,7 @@ function saveLastPlayed(file, name, album) {
 function restoreLastPlayed() {
     const lastPlayed = JSON.parse(localStorage.getItem('lastPlayed'));
     if (lastPlayed) {
-        currentAlbum = lastPlayed.album || "popular"; // تحديد الألبوم الحالي
+        currentAlbum = lastPlayed.album || "casastar"; // تحديد الألبوم الحالي
         showAlbum(currentAlbum); // عرض الألبوم الصحيح
         changeTrack(lastPlayed.file, lastPlayed.name);
     }
@@ -156,7 +156,7 @@ document.getElementById("audio-player").addEventListener("ended", playNext);
 
 // تحميل الصفحة
 window.onload = function () {
-    showAlbum("popular");
+    showAlbum("casastar");
     restoreLastPlayed();
 };
 
