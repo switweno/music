@@ -75,7 +75,7 @@ body {
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 13px;
-    border: 2px solid #ff4d4d; /* إطار أحمر */
+    border: 2px solid #b9b9b9; /* إطار أحمر */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +97,7 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 5px 1px #857d7e;
+    box-shadow: 0 0 5px 1px #615758;
 }
 
 /* أسماء الألبومات (تحكم منفصل) */
@@ -164,7 +164,7 @@ body {
     align-items: center;
     background-color: #1e1e1e;
     padding: 10px;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -173,7 +173,7 @@ body {
 }
 
 .song:hover {
-    transform: scale(1.05);
+    transform: scale(1);
     background-color: #d71212;
 }
 
