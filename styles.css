@@ -223,9 +223,7 @@ body {
     width: 122px; /* تحديد عرض الزر */
 }
 
-.show-more-btn:hover {
-    border-color: #b51818; /* تغيير لون الإطار عند تمرير الماوس */
-}
+
 
 /* دائرة تدور */
 .spinner {
