@@ -7,6 +7,13 @@
             background-color: #1a1a1a;
             color: #f0f0f0;
         }
+.cairo-play-text {
+  font-family: "Cairo Play", serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* يمكن تغييره حسب الحاجة */
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
 
         .material-icons {
             font-size: 18px;
@@ -94,7 +101,7 @@
     border: none;
     border-radius: 50px;
     cursor: pointer;
-   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);   
+   box-shadow: 0 0 5px 1px #857d7e;   
 }
 
 /* أسماء الألبومات (تحكم منفصل) */
@@ -253,7 +260,7 @@ footer {
 
 footer p {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 
