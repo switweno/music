@@ -67,7 +67,7 @@
     color: #010417;
     background-color: #f0f0f0;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 13px;
     border: 1px solid #ffffff;
     display: flex;
     justify-content: center;
@@ -100,7 +100,7 @@
 /* أسماء الألبومات (تحكم منفصل) */
 .album-name {
     margin-top: 5px;
-    font-size: 16px;
+    font-size: 14px;
     color: #ff4d4d;
     font-weight: bold;
     text-align: center;
@@ -127,11 +127,11 @@
 }
 
 .scroll-left {
-    left: 10px; /* تعديل المسافة من اليسار */
+    left: 12px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 10px; /* تعديل المسافة من اليمين */
+    right: 12px; /* تعديل المسافة من اليمين */
 }
 
 /* تحسين المظهر للأجهزة الصغيرة */
@@ -239,6 +239,22 @@
     display: none; /* إخفاء الزر إذا كان الألبوم لا يحتوي على أغاني مخفية */
 }
 
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
 
 
 
