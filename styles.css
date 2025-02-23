@@ -185,7 +185,7 @@ body {
 /* تنسيق مشغل الصوت المخصص */
 #audio-player-container {
     background-color: #ffffff; /* خلفية بيضاء */
-    color: #333;
+    color: #393b39;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
