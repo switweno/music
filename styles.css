@@ -1,4 +1,14 @@
 /* تصميم عام */
+
+@font-face {
+    font-family: 'Tajawal';
+    src: url('Tajawal-Medium.ttf') format('woff2'),
+         url('Tajawal.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 body {
     font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
     margin: 0;
