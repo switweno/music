@@ -71,14 +71,16 @@ body {
 
 .album-list-music {
     font-size: 13px;
-    color: #010417;
+    color: #636366;
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 13px;
-    border: 2px solid #b9b9b9; /* إطار أحمر */
+    border: 1px solid #b9b9b9; /* إطار أحمر */
     display: flex;
     justify-content: center;
     align-items: center;
+     width: 262px;
+    height: 34px;
 }
 
 /* كل ألبوم */
@@ -196,14 +198,7 @@ body {
     margin-top: 10px;
 }
 
-button {
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-button:hover {
-    background-color: #555;
-}
 
 /* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
 .container {
@@ -263,7 +258,7 @@ button:hover {
 }
 
 .track-name {
-    border: 2px solid #ff4d4d;
+    border: 1px solid #c9c6c6;
     padding: 8px;
     border-radius: 5px;
     margin-top: 8px;
