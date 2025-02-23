@@ -99,7 +99,8 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 5px 1px #615758;
+    box-shadow: 0 0 2px 2px #333;
+    margin-top: 4px;
 }
 
 /* أسماء الألبومات (تحكم منفصل) */
@@ -217,11 +218,13 @@ body {
     display: flex; /* استخدام flex لتوسيط العناصر */
     justify-content: center; /* محاذاة العناصر عموديا */
     align-items: center; /* محاذاة العناصر أفقيا */
-    margin: 10px auto; /* توسيط الزر في الحاوية */
+    margin: 10px auto; /* توسيط الزر في الحاوية مع هامش */
     text-align: center; /* محاذاة النص داخل الزر */
     position: relative; /* للسماح بحركة العناصر بداخله */
-    width: 122px; /* تحديد عرض الزر */
+    width: calc(100% - 5px); /* جعل الزر يأخذ كامل العرض مع ترك هامش 20px من كل جهة */
+    max-width: 500px; /* تحديد حد أقصى للعرض لمنع الامتداد الزائد */
 }
+
 
 
 
