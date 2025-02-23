@@ -38,12 +38,12 @@ const songs = [
     { file: '22 nayda nouda.mp3', name: 'nayda nouda 22', album: 'naydanouda' },
     { file: '23 nayda nouda.mp3', name: 'nayda nouda 23', album: 'naydanouda' },
     
-    { file: '01 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
-    { file: '02 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
-    { file: '03 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
-    { file: '04 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
-    { file: '05 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
-    { file: '06 kamal el 3abdi', name: 'kamal el 3abdi', album: 'kamalnew' },
+    { file: '01 kamal el 3abdi.mp3', name: 'kamal el 3abdi 1', album: 'kamalnew' },
+    { file: '02 kamal el 3abdi.mp3', name: 'kamal el 3abdi 2', album: 'kamalnew' },
+    { file: '03 kamal el 3abdi.mp3', name: 'kamal el 3abdi 3', album: 'kamalnew' },
+    { file: '04 kamal el 3abdi.mp3', name: 'kamal el 3abdi 4', album: 'kamalnew' },
+    { file: '05 kamal el 3abdi.mp3', name: 'kamal el 3abdi 5', album: 'kamalnew' },
+    { file: '06 kamal el 3abdi.mp3', name: 'kamal el 3abdi 6', album: 'kamalnew' },
     
     { file: '01 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 1', album: 'popular' },
     { file: '02 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 2', album: 'popular' },
@@ -107,6 +107,7 @@ let currentTrackIndex = 0;
 let isRandomPlaying = false;
 let currentAlbum = "naydanouda"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
+
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
