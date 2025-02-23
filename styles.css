@@ -1,42 +1,42 @@
 /* تصميم عام */
-        body {
-           font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-        }
-.cairo-play-text {
-  font-family: "Cairo Play", serif;
-  font-optical-sizing: auto;
-  font-weight: 400; /* يمكن تغييره حسب الحاجة */
-  font-style: normal;
-  font-variation-settings: "slnt" 0;
+body {
+    font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-        .material-icons {
-            font-size: 18px;
-            vertical-align: middle;
-        }
+.cairo-play-text {
+    font-family: "Cairo Play", serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* يمكن تغييره حسب الحاجة */
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+}
 
-        .bar {
-            animation: dance 1s infinite alternate ease-in-out;
-        }
+.material-icons {
+    font-size: 18px;
+    vertical-align: middle;
+}
 
-      .bar:nth-child(1) { animation-delay: 0.1s; background: #ff4d4d; }
-            .bar:nth-child(2) { animation-delay: 0.2s; background: #ff7f50; }
-            .bar:nth-child(3) { animation-delay: 0.3s; background: #ffa500; }
-            .bar:nth-child(4) { animation-delay: 0.4s; background: #ffff00; }
-            .bar:nth-child(5) { animation-delay: 0.5s; background: #90ee90; }
-            .bar:nth-child(6) { animation-delay: 0.6s; background: #00bfff; }
-            .bar:nth-child(7) { animation-delay: 0.7s; background: #8a2be2; }
+.bar {
+    animation: dance 1s infinite alternate ease-in-out;
+}
 
+.bar:nth-child(1) { animation-delay: 0.1s; background: #ff4d4d; }
+.bar:nth-child(2) { animation-delay: 0.2s; background: #ff7f50; }
+.bar:nth-child(3) { animation-delay: 0.3s; background: #ffa500; }
+.bar:nth-child(4) { animation-delay: 0.4s; background: #ffff00; }
+.bar:nth-child(5) { animation-delay: 0.5s; background: #90ee90; }
+.bar:nth-child(6) { animation-delay: 0.6s; background: #00bfff; }
+.bar:nth-child(7) { animation-delay: 0.7s; background: #8a2be2; }
 
-        @keyframes dance {
-            0% { height: 8px; }
-            100% { height: 40px; }
-        }
+@keyframes dance {
+    0% { height: 8px; }
+    100% { height: 40px; }
+}
 
 /* الحاوية الرئيسية */
 .albums-wrapper {
@@ -68,23 +68,19 @@
     padding: 10px;
     white-space: nowrap;
 }
-        
+
 .album-list-music {
     font-size: 13px;
-    color: #010417;
+    color: #323346;
     background-color: #f0f0f0;
     padding: 10px;
-    border-radius: 13px;
-    border: 1px solid #ffffff;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0; /* إطار أحمر */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-
 }
 
-
-        
 /* كل ألبوم */
 .album-item {
     display: flex;
@@ -101,7 +97,7 @@
     border: none;
     border-radius: 50px;
     cursor: pointer;
-   box-shadow: 0 0 5px 1px #857d7e;   
+    box-shadow: 0 0 5px 1px #857d7e;
 }
 
 /* أسماء الألبومات (تحكم منفصل) */
@@ -134,11 +130,11 @@
 }
 
 .scroll-left {
-    left: 12px; /* تعديل المسافة من اليسار */
+    left: 10px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 12px; /* تعديل المسافة من اليمين */
+    right: 10px; /* تعديل المسافة من اليمين */
 }
 
 /* تحسين المظهر للأجهزة الصغيرة */
@@ -153,7 +149,6 @@
     }
 }
 
-
 /* تنسيق قائمة الأغاني */
 .songs-container {
     display: none;
@@ -163,45 +158,44 @@
     margin-top: 11px;
 }
 
-
 /* تنسيق الأغاني */
 .song {
     display: flex;
     align-items: center;
-    background-color: #2a2a2a;
+    background-color: #1e1e1e;
     padding: 10px;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    color: #f0f0f0;
+    color: #e0e0e0;
     gap: 2px; /* المسافة بين الأيقونة واسم المغني */
-    
 }
 
 .song:hover {
     transform: scale(1);
     background-color: #d71212;
 }
-        
-        
-/* تنسيق الزر */       
+
+/* تنسيق الزر */
 .hidden {
     display: none;
 }
+
 /* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
 .container {
     text-align: center; /* لتوسيط العناصر داخل الحاوية */
 }
+
 /* تنسيق الزر */
 .show-more-btn {
-    background-color: #fefeff; /* خلفية حمراء */
+    background-color: #fefeff; /* خلفية بيضاء */
     color: #ee082e; /* لون النص */
     padding: 8px 24px; /* مساحة داخلية */
-    border: 2px solid #ee082e; /* إطار أبيض بسُمك 10px */
+    border: 1px solid #ff4d4d; /* إطار أحمر */
     cursor: pointer; /* تغيير شكل المؤشر عند التمرير فوق الزر */
     font-size: 14px; /* حجم الخط */
-    border-radius: 12px; /* حواف دائرية */
+    border-radius: 2px; /* حواف دائرية */
     display: flex; /* استخدام flex لتوسيط العناصر */
     justify-content: center; /* محاذاة العناصر عموديا */
     align-items: center; /* محاذاة العناصر أفقيا */
@@ -245,19 +239,28 @@
     display: none; /* إخفاء الزر إذا كان الألبوم لا يحتوي على أغاني مخفية */
 }
 
-/* إزالة تنسيق حقل البحث
-.search-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+.track-name {
+    border: 2px solid #dad6d6;
+    color: #ee082e; /* لون النص */
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 8px;
 }
 
-.search-input {
-    width: 80%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-} 
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
 
 
