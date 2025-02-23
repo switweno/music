@@ -13,25 +13,53 @@ const songs = [
     { file: '11 casa star.mp3', name: 'casa star 11', album: 'casastar' },
     { file: '12 casa star.mp3', name: 'casa star 12', album: 'casastar' },
     { file: '13 casa star.mp3', name: 'casa star 13', album: 'casastar' },
-    { file: '01 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 1', album: 'popular' },
-    { file: '02 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 2', album: 'popular' },
-    { file: '03 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 3', album: 'popular' },
-    { file: '04 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 4', album: 'popular' },
-	{ file: '05 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 5', album: 'popular' },
-	{ file: '06 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 6', album: 'popular' },
-    { file: '07 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 7', album: 'popular' },
-    { file: '08 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 8', album: 'popular' },
-    { file: '09 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 9', album: 'popular' },
-    { file: '10 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 10', album: 'popular' },
-    { file: '11 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 11', album: 'popular' },
-    { file: '12 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 12', album: 'popular' },
-    { file: '13 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 13', album: 'popular' },
-    { file: '14 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 14', album: 'popular' },
+    
+    { file: '01 nayda nouda.mp3', name: 'nayda nouda 1', album: 'naydanouda' },
+    { file: '02 nayda nouda.mp3', name: 'nayda nouda 2 ', album: 'naydanouda' },
+    { file: '03 nayda nouda.mp3', name: 'nayda nouda 3', album: 'naydanouda' },
+    { file: '04 nayda nouda.mp3', name: 'nayda nouda 4', album: 'naydanouda' },
+	{ file: '05 nayda nouda.mp3', name: 'nayda nouda 5', album: 'naydanouda' },
+	{ file: '06 nayda nouda.mp3', name: 'nayda nouda 6', album: 'naydanouda' },
+    { file: '07 nayda nouda.mp3', name: 'nayda nouda 7', album: 'naydanouda' },
+    { file: '08 nayda nouda.mp3', name: 'nayda nouda 8', album: 'naydanouda' },
+    { file: '09 nayda nouda.mp3', name: 'nayda nouda 9', album: 'naydanouda' },
+    { file: '10 nayda nouda.mp3', name: 'nayda nouda 10', album: 'naydanouda' },
+    { file: '11 nayda nouda.mp3', name: 'nayda nouda 11', album: 'naydanouda' },
+    { file: '12 nayda nouda.mp3', name: 'nayda nouda 12', album: 'naydanouda' },
+    { file: '13 nayda nouda.mp3', name: 'nayda nouda 13', album: 'naydanouda' },
+    { file: '01 nayda nouda.mp3', name: 'nayda nouda 14', album: 'naydanouda' },
+    { file: '02 nayda nouda.mp3', name: 'nayda nouda 15 ',album: 'naydanouda' },
+    { file: '03 nayda nouda.mp3', name: 'nayda nouda 16', album: 'naydanouda' },
+    { file: '04 nayda nouda.mp3', name: 'nayda nouda 17', album: 'naydanouda' },
+	{ file: '05 nayda nooda.mp3', name: 'nayda nouda 18', album: 'naydanouda' },
+	{ file: '06 nayda nooda.mp3', name: 'nayda nouda 19', album: 'naydanouda' },
+    { file: '07 nayda nooda.mp3', name: 'nayda nouda 20', album: 'naydanouda' },
+    { file: '08 nayda nooda.mp3', name: 'nayda nouda 21', album: 'naydanouda' },
+    { file: '09 nayda nooda.mp3', name: 'nayda nouda 22', album: 'naydanouda' },
+    { file: '10 nayda nooda.mp3', name: 'nayda nouda 23', album: 'naydanouda' },
+  
+    { file: '01 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 1', album: 'popular' },
+    { file: '02 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 2', album: 'popular' },
+    { file: '03 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 3', album: 'popular' },
+    { file: '04 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 4', album: 'popular' },
+	{ file: '05 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 5', album: 'popular' },
+	{ file: '06 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 6', album: 'popular' },
+    { file: '07 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 7', album: 'popular' },
+    { file: '08 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 8', album: 'popular' },
+    { file: '09 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 9', album: 'popular' },
+    { file: '10 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 10', album: 'popular' },
+    { file: '11 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 11', album: 'popular' },
+    { file: '12 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 12', album: 'popular' },
+    { file: '13 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 13', album: 'popular' },
+    { file: '14 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 14', album: 'popular' },
+    
     { file: 'rai1.mp3', name: 'أغنية راي 1', album: 'rai' },
+    
     { file: 'amazigh2.mp3', name: 'أغنية أمازيغية 1', album: 'amazigh' },
     { file: 'amazigh1.mp3', name: 'أغنية أمازيغية 2', album: 'amazigh' },
     { file: 'amazigh3.mp3', name: 'أغنية أمازيغية 3', album: 'amazigh' },
-    { file: 'amazigh5.mp3', name: 'أغنية أمازيغية 5', album: 'amazigh' },  
+    { file: 'amazigh5.mp3', name: 'أغنية أمازيغية 5', album: 'amazigh' }, 
+    
     { file: '02 khalij.mp3', name: 'أغنية خليجية 1', album: 'khalij' },
     { file: '01 khalij.mp3', name: 'أغنية خليجية 2', album: 'khalij' },
     { file: '03 khalij.mp3', name: 'أغنية خليجية 3', album: 'khalij' },
@@ -70,7 +98,7 @@ const durationTimeElement = document.getElementById("duration-time");
 
 let currentTrackIndex = 0;
 let isRandomPlaying = false;
-let currentAlbum = "casastar"; // الألبوم الافتراضي
+let currentAlbum = "naydanouda"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
 // دالة عرض الألبوم
 function showAlbum(album) {
@@ -199,7 +227,7 @@ function restoreLastPlayed() {
     try {
         const lastPlayed = JSON.parse(localStorage.getItem('lastPlayed'));
         if (lastPlayed) {
-            currentAlbum = lastPlayed.album || "casastar";
+            currentAlbum = lastPlayed.album || "naydanouda";
             showAlbum(currentAlbum);
             changeTrack(lastPlayed.file, lastPlayed.name);
             audioPlayer.pause(); // لا يبدأ التشغيل تلقائيًا
@@ -211,12 +239,14 @@ function restoreLastPlayed() {
     playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
 }
 
+
+
 // تشغيل الأغنية التالية تلقائيًا عند الانتهاء
 audioPlayer.addEventListener("ended", playNext);
 
 // تحميل الصفحة
 window.addEventListener("load", () => {
-    showAlbum("casastar");
+    showAlbum("naydanouda");
     restoreLastPlayed();
 
     // تعيين التوقيت الافتراضي
