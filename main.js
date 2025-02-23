@@ -71,7 +71,7 @@ const durationTimeElement = document.getElementById("duration-time");
 let currentTrackIndex = 0;
 let isRandomPlaying = false;
 let currentAlbum = "casastar"; // الألبوم الافتراضي
-
+let isSeeking = false; // متغير للتحقق من السحب
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
@@ -84,11 +84,10 @@ function showAlbum(album) {
 }
 
 // دالة تنسيق الوقت
-function formatTime(time) {
-    if (isNaN(time) || time < 0) return "00:00";
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
 // دالة تغيير الأغنية
@@ -107,30 +106,63 @@ function changeTrack(audioFile, trackName) {
     saveLastPlayed(audioFile, trackName, currentAlbum);
 }
 
-// تحديث شريط التقدم والتوقيت
-audioPlayer.addEventListener("timeupdate", () => {
-    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-    progressBar.value = progress;
-    currentTimeElement.textContent = formatTime(audioPlayer.currentTime);
-});
-
-// عند تحميل البيانات الصوتية، تأكد من تحديث مدة الأغنية بشكل صحيح
+// تحديث شريط التقدم عند تحميل بيانات الأغنية
 audioPlayer.addEventListener("loadedmetadata", () => {
-    durationTimeElement.textContent = formatTime(audioPlayer.duration);
+    if (!isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+        progressBar.value = 0; // ضمان أن الشريط يبدأ من 0
+        currentTimeElement.textContent = "0:00"; // ضبط الوقت المبدئي
+        durationTimeElement.textContent = formatTime(audioPlayer.duration); // تحديث مدة الأغنية الفعلية
+    }
 });
 
-// تحديث شريط التقدم عند تحريكه
+// تحديث شريط التقدم أثناء التشغيل (يتم تعطيله أثناء السحب)
+audioPlayer.addEventListener("timeupdate", () => {
+    if (!isSeeking && !isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        progressBar.value = progress;
+        currentTimeElement.textContent = formatTime(audioPlayer.currentTime);
+    }
+});
+
+// عندما يبدأ المستخدم في سحب شريط التقدم
+progressBar.addEventListener("mousedown", () => {
+    isSeeking = true; // إيقاف التحديث التلقائي
+});
+
+// تحديث الوقت أثناء السحب
 progressBar.addEventListener("input", () => {
-    audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+    if (!isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+        const newTime = (progressBar.value / 100) * audioPlayer.duration;
+        currentTimeElement.textContent = formatTime(newTime); // تحديث عرض الوقت فقط
+    }
 });
 
-// تغيير مستوى الصوت
+// عند الإفلات، يتم تثبيت الوقت واستئناف التحديث التلقائي
+progressBar.addEventListener("mouseup", () => {
+    if (!isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+        audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+    }
+    isSeeking = false; // إعادة التحديث التلقائي
+});
+
+// تأكيد التحديث عند تغيير القيمة (للأجهزة التي لا تدعم mouseup)
+progressBar.addEventListener("change", () => {
+    if (!isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
+        audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+    }
+    isSeeking = false;
+});
+
+// تغيير مستوى الصوت والتعامل مع زر كتم الصوت
 volumeControl.addEventListener("input", () => {
     audioPlayer.volume = volumeControl.value / 100;
-    volumeButton.innerHTML = audioPlayer.volume === 0
+    audioPlayer.muted = (audioPlayer.volume === 0); // كتم الصوت إذا كان 0
+    volumeButton.innerHTML = audioPlayer.muted
         ? '<span class="material-icons">volume_off</span>'
         : '<span class="material-icons">volume_up</span>';
 });
+
+
 
 // تشغيل/إيقاف الأغنية
 function togglePlayPause() {
