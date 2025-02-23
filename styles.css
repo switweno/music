@@ -1,4 +1,4 @@
- /* تصميم عام */
+/* تصميم عام */
         body {
            font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
             margin: 0;
@@ -185,8 +185,7 @@
 }
         
         
-        
- /* تنسيق الزر */       
+/* تنسيق الزر */       
 .hidden {
     display: none;
 }
@@ -246,22 +245,19 @@
     display: none; /* إخفاء الزر إذا كان الألبوم لا يحتوي على أغاني مخفية */
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  font-family: Arial, sans-serif;
+/* إزالة تنسيق حقل البحث
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-footer p {
-  margin: 0;
-  font-size: 14px;
-}
-
+.search-input {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+} 
 
 
