@@ -22,7 +22,8 @@
     <!-- مشغل الصوت -->
     <div id="audio-player-container" class="p-4 rounded-lg bg-gray-900 text-center text-white shadow-lg">
     <div class="visualizer flex justify-center items-center gap-2 mb-4">
-        <img src="logozik.png" class="w-24 h-auto object-contain">
+        <img src="logozik.png" class="w-24 h-auto object-contain" alt="Logo du site de musique">
+
         <div class="bar w-3 h-7 bg-red-500 animate-bounce"></div>
         <div class="bar w-3 h-7 bg-orange-500 animate-bounce delay-100"></div>
         <div class="bar w-3 h-7 bg-yellow-500 animate-bounce delay-200"></div>
@@ -75,41 +76,61 @@
         <div class="album-scroll-container">
             <div class="album-list">
                 <div class="album-item">
-                    <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('star.jpg');"></button>
+                    <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('star.jpg');" 
+                aria-label="مشاهدة ألبوم Naydanouda">
+                </button>
                     <span class="album-name">nayda nouda</span>
                 </div>
+                
+
                 <div class="album-item">
-                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('star.jpg');"></button>
+                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('star.jpg');"
+                    aria-label="مشاهدة ألبوم kamal new">
+                    </button>
                     <span class="album-name">kamal new</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('star.jpg');"></button>
+                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('star.jpg');"
+                    aria-label="مشاهدة ألبوم casa star">
+                    </button>
                     <span class="album-name">casa star</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');"></button>
+                    <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');"
+                    aria-label="مشاهدة ألبوم khaliji">
+                    </button>
                     <span class="album-name">خليجية </span>
                 </div>
                 
                 <div class="album-item">
-                    <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('chaabi.jpg');"></button>
+                    <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('chaabi.jpg');"
+                    aria-label="مشاهدة ألبوم popular">
+                    </button>
                     <span class="album-name">shab loutar</span>
                 </div>
                 
                 <div class="album-item">
-                    <button onclick="showAlbum('rai')" class="album-btn" style="background-image: url('rai.jpg');"></button>
+                    <button onclick="showAlbum('rai')" class="album-btn" style="background-image: url('rai.jpg');"
+                    aria-label="مشاهدة ألبوم rai">
+                    </button>
                     <span class="album-name">TOP Rai</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('amazigh')" class="album-btn" style="background-image: url('amazigh.jpg');"></button>
+                    <button onclick="showAlbum('amazigh')" class="album-btn" style="background-image: url('amazigh.jpg');"
+                    aria-label="مشاهدة ألبوم amazigh">
+                    </button>
                     <span class="album-name">Amazigh</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('eastern')" class="album-btn" style="background-image: url('char9i.jpeg');"></button>
+                    <button onclick="showAlbum('eastern')" class="album-btn" style="background-image: url('char9i.jpeg');"
+                    aria-label="مشاهدة ألبوم eastern">
+                    </button>
                     <span class="album-name">Eastern</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('moroccan')" class="album-btn" style="background-image: url('image1s.jpeg');"></button>
+                    <button onclick="showAlbum('moroccan')" class="album-btn" style="background-image: url('image1s.jpeg');"
+                    aria-label="مشاهدة ألبوم moroccan">
+                    </button>
                     <span class="album-name">Moroccan</span>
                 </div>
             </div>
@@ -130,7 +151,7 @@
                 <i class="material-symbols-outlined">headphones</i>
                 <div class="song-title">kamal el 3abdi 1</div>
             </div>
-            <div class="song" onclick="changeTrack('02 kamal el 3abdi.mp3', 'kamal el 3abdi 2')" style="border-color: #3af406;">
+            <div class="song" onclick="changeTrack('02 kamal el 3abdi..mp3', 'kamal el 3abdi 2')" style="border-color: #3af406;">
                 <i class="material-symbols-outlined">headphones</i>
                 <div class="song-title">kamal el 3abdi 2</div>
             </div>
