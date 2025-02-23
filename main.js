@@ -1,6 +1,18 @@
-
-     // قائمة الأغاني
+// قائمة الأغاني
 const songs = [
+    { file: '01 casa star.mp3', name: 'أغنية شعبية 1', album: 'casastar' },
+    { file: '02 casa star.mp3', name: 'أغنية شعبية 2', album: 'casastar' },
+    { file: '03 casa star.mp3', name: 'أغنية شعبية 3', album: 'casastar' },
+    { file: '04 casa star.mp3', name: 'أغنية شعبية 4', album: 'casastar' },
+	{ file: '05 casa star.mp3', name: 'أغنية شعبية 5', album: 'casastar' },
+	{ file: '06 casa star.mp3', name: 'أغنية شعبية 6', album: 'casastar' },
+    { file: '07 casa star.mp3', name: 'أغنية شعبية 7', album: 'casastar' },
+    { file: '08 casa star.mp3', name: 'أغنية شعبية 8', album: 'casastar' },
+    { file: '09 casa star.mp3', name: 'أغنية شعبية 9', album: 'casastar' },
+    { file: '10 casa star.mp3', name: 'أغنية شعبية 10', album: 'casastar' },
+    { file: '11 casa star.mp3', name: 'أغنية شعبية 11', album: 'casastar' },
+    { file: '12 casa star.mp3', name: 'أغنية شعبية 12', album: 'casastar' },
+    { file: '13 casa star.mp3', name: 'أغنية شعبية 13', album: 'casastar' },
     { file: '01 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 1', album: 'popular' },
     { file: '02 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 2', album: 'popular' },
     { file: '03 cha3biat shab loutar.mp3.mp3', name: 'أغنية شعبية 3', album: 'popular' },
@@ -49,7 +61,7 @@ const songs = [
 
 let currentTrackIndex = 0;
 let isRandomPlaying = false;
-let currentAlbum = "khalij"; // الألبوم الافتراضي
+let currentAlbum = "casastar"; // الألبوم الافتراضي
 
 // دالة عرض الألبوم
 function showAlbum(album) {
@@ -75,6 +87,9 @@ function changeTrack(audioFile, trackName) {
     const audioPlayer = document.getElementById("audio-player");
     audioPlayer.load();
     audioPlayer.play();
+
+    // تحديث حالة زر التشغيل/الإيقاف المؤقت
+    playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
 
     saveLastPlayed(audioFile, trackName, currentAlbum); // حفظ الأغنية والألبوم
 }
@@ -126,6 +141,13 @@ function restoreLastPlayed() {
         currentAlbum = lastPlayed.album || "popular"; // تحديد الألبوم الحالي
         showAlbum(currentAlbum); // عرض الألبوم الصحيح
         changeTrack(lastPlayed.file, lastPlayed.name);
+    }
+
+    // تحديث حالة زر التشغيل/الإيقاف المؤقت بناءً على حالة مشغل الصوت
+    if (audioPlayer.paused) {
+        playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
+    } else {
+        playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
     }
 }
 
