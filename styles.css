@@ -4,8 +4,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #f5f5f5; /* لون كري */
+    color: #333;
 }
 
 .cairo-play-text {
@@ -71,11 +71,11 @@ body {
 
 .album-list-music {
     font-size: 13px;
-    color: #323346;
+    color: #010417;
     background-color: #f0f0f0;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #e0e0e0; /* إطار أحمر */
+    border-radius: 13px;
+    border: 2px solid #ff4d4d; /* إطار أحمر */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,11 +130,11 @@ body {
 }
 
 .scroll-left {
-    left: 10px; /* تعديل المسافة من اليسار */
+    left: 12px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 10px; /* تعديل المسافة من اليمين */
+    right: 12px; /* تعديل المسافة من اليمين */
 }
 
 /* تحسين المظهر للأجهزة الصغيرة */
@@ -164,7 +164,7 @@ body {
     align-items: center;
     background-color: #1e1e1e;
     padding: 10px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -173,13 +173,36 @@ body {
 }
 
 .song:hover {
-    transform: scale(1);
+    transform: scale(1.05);
     background-color: #d71212;
 }
 
 /* تنسيق الزر */
 .hidden {
     display: none;
+}
+
+/* تنسيق مشغل الصوت المخصص */
+#audio-player-container {
+    background-color: #ffffff; /* خلفية بيضاء */
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#track-name {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
 }
 
 /* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
@@ -192,10 +215,10 @@ body {
     background-color: #fefeff; /* خلفية بيضاء */
     color: #ee082e; /* لون النص */
     padding: 8px 24px; /* مساحة داخلية */
-    border: 1px solid #ff4d4d; /* إطار أحمر */
+    border: 2px solid #ff4d4d; /* إطار أحمر */
     cursor: pointer; /* تغيير شكل المؤشر عند التمرير فوق الزر */
     font-size: 14px; /* حجم الخط */
-    border-radius: 2px; /* حواف دائرية */
+    border-radius: 12px; /* حواف دائرية */
     display: flex; /* استخدام flex لتوسيط العناصر */
     justify-content: center; /* محاذاة العناصر عموديا */
     align-items: center; /* محاذاة العناصر أفقيا */
@@ -240,11 +263,62 @@ body {
 }
 
 .track-name {
-    border: 2px solid #dad6d6;
-    color: #ee082e; /* لون النص */
+    border: 2px solid #ff4d4d;
     padding: 8px;
     border-radius: 5px;
     margin-top: 8px;
+}
+
+#progress-bar {
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #ff4d4d;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#volume-control {
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#volume-control::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #ff4d4d;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.control-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.control-btn:hover {
+    background-color: #555;
 }
 
 footer {

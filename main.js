@@ -96,6 +96,40 @@ function changeTrack(audioFile, trackName) {
 
 const audioPlayer = document.getElementById("audio-player");
 const playPauseButton = document.getElementById("play-pause-btn");
+const progressBar = document.getElementById("progress-bar");
+const volumeControl = document.getElementById("volume-control");
+const volumeControlContainer = document.getElementById("volume-control-container");
+const volumeButton = document.getElementById("volume-btn");
+const currentTimeElement = document.getElementById("current-time");
+const durationTimeElement = document.getElementById("duration-time");
+
+// تحديث شريط التقدم وتوقيت الأغنية
+audioPlayer.addEventListener("timeupdate", () => {
+    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    progressBar.value = progress;
+
+    // تحديث توقيت بداية الأغنية
+    const currentMinutes = Math.floor(audioPlayer.currentTime / 60);
+    const currentSeconds = Math.floor(audioPlayer.currentTime % 60);
+    currentTimeElement.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+
+    // تحديث توقيت انتهاء الأغنية
+    const durationMinutes = Math.floor(audioPlayer.duration / 60);
+    const durationSeconds = Math.floor(audioPlayer.duration % 60);
+    durationTimeElement.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+});
+
+// تغيير موقع التشغيل عند تحريك شريط التقدم
+progressBar.addEventListener("input", () => {
+    const newTime = (progressBar.value / 100) * audioPlayer.duration;
+    audioPlayer.currentTime = newTime;
+});
+
+// تغيير مستوى الصوت عند تحريك شريط التحكم في الصوت
+volumeControl.addEventListener("input", () => {
+    audioPlayer.volume = volumeControl.value / 100;
+    volumeButton.innerHTML = audioPlayer.volume === 0 ? '<span class="material-icons">volume_off</span>' : '<span class="material-icons">volume_up</span>';
+});
 
 // تبديل بين الإيقاف والتشغيل
 function togglePlayPause() {
@@ -107,7 +141,6 @@ function togglePlayPause() {
         playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
     }
 }
-
 
 // دالة تشغيل الأغنية التالية
 function playNext() {
@@ -160,6 +193,14 @@ window.onload = function () {
     restoreLastPlayed();
 };
 
+// دالة تبديل عرض شريط التحكم في الصوت
+function toggleVolumeControl() {
+    if (volumeControlContainer.classList.contains("hidden")) {
+        volumeControlContainer.classList.remove("hidden");
+    } else {
+        volumeControlContainer.classList.add("hidden");
+    }
+}
 
 function scrollAlbums(direction) {
     const scrollContainer = document.querySelector('.album-scroll-container');
@@ -171,8 +212,6 @@ function scrollAlbums(direction) {
     });
 }
 
-    
-  
 function toggleSongs(button) {
     const album = button.closest('.songs-container'); // الحصول على الألبوم المرتبط بالزر
     const hiddenSongs = album.querySelectorAll('.song.hidden'); // العثور على الأغاني المخفية
