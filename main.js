@@ -1,18 +1,16 @@
 // قائمة الأغاني
 const songs = [
-    { file: '01 casa star.mp3', name: 'casa star 1', album: 'casastar' },
-    { file: '02 casa star.mp3', name: 'casa star 2 ', album: 'casastar' },
-    { file: '03 casa star.mp3', name: 'casa star 3', album: 'casastar' },
-    { file: '04 casa star.mp3', name: 'casa star 4', album: 'casastar' },
-	{ file: '05 casa star.mp3', name: 'casa star 5', album: 'casastar' },
-	{ file: '06 casa star.mp3', name: 'casa star 6', album: 'casastar' },
-    { file: '07 casa star.mp3', name: 'casa star 7', album: 'casastar' },
-    { file: '08 casa star.mp3', name: 'casa star 8', album: 'casastar' },
-    { file: '09 casa star.mp3', name: 'casa star 9', album: 'casastar' },
-    { file: '10 casa star.mp3', name: 'casa star 10', album: 'casastar' },
-    { file: '11 casa star.mp3', name: 'casa star 11', album: 'casastar' },
-    { file: '12 casa star.mp3', name: 'casa star 12', album: 'casastar' },
-    { file: '13 casa star.mp3', name: 'casa star 13', album: 'casastar' },
+    { file: '02 casa star.mp3', name: 'casa star 1', album: 'casastar' },
+    { file: '03 casa star.mp3', name: 'casa star 2 ', album: 'casastar' },
+    { file: '04 casa star.mp3', name: 'casa star 3', album: 'casastar' },
+    { file: '05 casa star.mp3', name: 'casa star 4', album: 'casastar' },
+	{ file: '06 casa star.mp3', name: 'casa star 5', album: 'casastar' },
+	{ file: '07 casa star.mp3', name: 'casa star 6', album: 'casastar' },
+    { file: '08 casa star.mp3', name: 'casa star 7', album: 'casastar' },
+    { file: '09 casa star.mp3', name: 'casa star 8', album: 'casastar' },
+    { file: '10 casa star.mp3', name: 'casa star 9', album: 'casastar' },
+    { file: '12 casa star.mp3', name: 'casa star 10', album: 'casastar' },
+    { file: '13 casa star.mp3', name: 'casa star 11', album: 'casastar' },
     
     { file: '01 nayda nouda.mp3', name: 'nayda nouda 1', album: 'naydanouda' },
     { file: '02 nayda nouda.mp3', name: 'nayda nouda 2 ', album: 'naydanouda' },
@@ -338,3 +336,4 @@ function toggleSongs(button) {
             }
         });
     });
+
