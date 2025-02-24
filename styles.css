@@ -355,4 +355,9 @@ h1 {
     box-shadow: none !important;
   }
 }
+#audio-player-container:hover {
+    background-color: inherit !important; /* يمنع تغيير الخلفية عند التمرير */
+    box-shadow: inherit !important; /* يمنع تغييرات الظل */
+    filter: none !important; /* يلغي أي تأثيرات إضافية */
+}
 
