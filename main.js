@@ -298,21 +298,3 @@ function toggleSongs(button) {
     }, 1000); // مدة الدوران (يمكنك تعديلها)
 }
 
-
-document.addEventListener("keydown", function (e) {
-    if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'j' || e.key === 'c' || e.key === 'p' || e.key === 'o')) {
-        e.preventDefault(); // منع اختصارات لوحة المفاتيح
-    }
-});
-
-document.addEventListener("dragstart", function (e) {
-    e.preventDefault(); // منع سحب الملفات من الصفحة
-});
-
-// تعطيل تحميل الصوتيات من الوسوم <audio>
-document.querySelectorAll("audio").forEach(audio => {
-    audio.setAttribute("controlsList", "nodownload");
-    audio.addEventListener("play", function () {
-        this.pause(); // منع تشغيل الصوت (اختياري)
-    });
-});
