@@ -341,33 +341,22 @@ h1 {
 }
 
 
-/* تعطيل تأثير focus و active على الأزرار */
+
+
+/* إزالة التأثيرات عند الضغط على الأزرار */
 button:focus, button:active {
-    outline: none !important; /* إزالة التأثيرات الزرقاء التي تظهر عند الضغط */
-    background-color: inherit !important; /* الحفاظ على اللون الأصلي */
-    box-shadow: none !important; /* إزالة الظلال */
+    outline: none !important; /* إزالة الخط الأزرق */
+    box-shadow: none !important; /* إزالة الظل */
 }
 
-/* تعطيل تأثير focus و active على جميع الأزرار داخل المشغل */
-#audio-player-container button:focus, 
-#audio-player-container button:active {
-    outline: none !important;
-    background-color: inherit !important;
-    box-shadow: none !important;
-}
-/* تأثير hover فقط على الأجهزة التي تدعمها */
-@media (hover: hover) {
-    #audio-player-container:hover {
-        background-color: #333; /* تأكيد تأثير hover في حالة الكمبيوتر */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* إضافة تأثير ظل */
-    }
+/* التأثير على الأزرار التي تحتوي على الأيقونات فقط */
+button i {
+    background-color: transparent !important; /* التأكد من أن الأيقونات لا تأخذ لون الخلفية عند الضغط */
+ }  
+
+/* إضافة تأثير عند تمرير الماوس فوق الأزرار */
+button:hover {
+    opacity: 0.8; /* تأثير خفيف عند التمرير على الأزرار */
 }
 
-/* تعطيل التأثيرات عند الهواتف */
-@media (max-width: 767px) {
-    #audio-player-container:hover {
-        background-color: inherit !important; /* تعطيل الخلفية عند الضغط على الهاتف */
-        box-shadow: inherit !important; /* تعطيل الظل */
-    }
-}
 
