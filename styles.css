@@ -340,9 +340,19 @@ h1 {
     font-size: clamp(24px, 5vw, 48px);
 }
 
-@media (max-width: 768px) {
+/* تعطيل تأثير الضغط والتحديد */
+.music-button:active,
+.music-button:focus {
+  background-color: inherit !important; /* تبقى بنفس لونها */
+  outline: none !important; /* إزالة الحدود الزرقاء في بعض المتصفحات */
+  box-shadow: none !important; /* إزالة أي تأثير */
+}
+
+
+@media (hover: none) {
   .music-button:hover {
     background-color: transparent !important;
     box-shadow: none !important;
   }
 }
+
