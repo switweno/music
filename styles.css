@@ -340,6 +340,21 @@ h1 {
     font-size: clamp(24px, 5vw, 48px);
 }
 
+
+/* تعطيل تأثير focus و active على الأزرار */
+button:focus, button:active {
+    outline: none !important; /* إزالة التأثيرات الزرقاء التي تظهر عند الضغط */
+    background-color: inherit !important; /* الحفاظ على اللون الأصلي */
+    box-shadow: none !important; /* إزالة الظلال */
+}
+
+/* تعطيل تأثير focus و active على جميع الأزرار داخل المشغل */
+#audio-player-container button:focus, 
+#audio-player-container button:active {
+    outline: none !important;
+    background-color: inherit !important;
+    box-shadow: none !important;
+}
 /* تأثير hover فقط على الأجهزة التي تدعمها */
 @media (hover: hover) {
     #audio-player-container:hover {
