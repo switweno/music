@@ -331,14 +331,14 @@ h1 {
 
 .footer {
         text-align: center;
-        padding: 20px;
-        background-color: #333;
+        padding: 1px;
+        background-color: #ffffff;
         color: #fcfcfc;
-        font-size: 14px;
+        font-size: 1px;
     }
 
     .social-buttons {
-        margin-top: 10px;
+        margin-top: 1px;
     }
 
     .social-btn {
