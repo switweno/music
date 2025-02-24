@@ -326,16 +326,5 @@ h1 {
 
 
 
-button:focus, button:active, .material-icons:focus, .material-icons:active {
-    outline: none !important; /* إزالة الحدود التي تظهر عند الضغط */
-    box-shadow: none !important; /* إزالة الظل الذي قد يظهر عند الضغط */
-   
-}
-
-button, .material-icons {
-    transition: none !important; /* منع أي انتقالات قد تسبّب تأثيرات غير مرغوب فيها */
-}
-
-
 
 
