@@ -94,7 +94,7 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 5px 2px #333;
+    box-shadow: 0 0 2px 2px #ff4d4d;
     margin-top: 4px;
 }
 
@@ -109,7 +109,7 @@ body {
 
 /* أزرار التمرير */
 .scroll-arrow {
-    background: rgb(232, 28, 28);
+    background: #ff4d4d;
     color: white;
     border: none;
     cursor: pointer;
@@ -128,11 +128,11 @@ body {
 }
 
 .scroll-left {
-    left: 12px; /* تعديل المسافة من اليسار */
+    left: 8px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 12px; /* تعديل المسافة من اليمين */
+    right: 8px; /* تعديل المسافة من اليمين */
 }
 
 /* تحسين المظهر للأجهزة الصغيرة */
@@ -247,10 +247,13 @@ body {
 }
 
 #track-name {
-    font-size: 16px;
+    font-size: 15px;
     margin-top: 10px;
-    color: #d31717;
+    color: #d31717; 
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(77, 75, 75, 0.5);
 }
+
 
 .track-name {
     border: 1px solid #333;

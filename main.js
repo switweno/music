@@ -56,14 +56,7 @@ const songs = [
     { file: '11 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 11', album: 'popular' },
     { file: '12 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 12', album: 'popular' },
     { file: '13 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 13', album: 'popular' },
-    { file: '14 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 14', album: 'popular' },
-    
-    { file: 'rai1.mp3', name: 'أغنية راي 1', album: 'rai' },
-    
-    { file: 'amazigh2.mp3', name: 'أغنية أمازيغية 1', album: 'amazigh' },
-    { file: 'amazigh1.mp3', name: 'أغنية أمازيغية 2', album: 'amazigh' },
-    { file: 'amazigh3.mp3', name: 'أغنية أمازيغية 3', album: 'amazigh' },
-    { file: 'amazigh5.mp3', name: 'أغنية أمازيغية 5', album: 'amazigh' }, 
+    { file: '14 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 14', album: 'popular' }, 
     
     { file: '02 khalij.mp3', name: 'أغنية خليجية 1', album: 'khalij' },
     { file: '01 khalij.mp3', name: 'أغنية خليجية 2', album: 'khalij' },
@@ -83,13 +76,6 @@ const songs = [
     { file: '16 khalij.mp3', name: 'أغنية خليجية 16', album: 'khalij' },
     { file: '17 khalij.mp3', name: 'أغنية خليجية 17', album: 'khalij' },
     
-    { file: 'eastern1.mp3', name: 'أغنية شرقية 1', album: 'eastern' },
-    { file: 'eastern2.mp3', name: 'أغنية شرقية 2', album: 'eastern' },
-    { file: 'eastern3.mp3', name: 'أغنية شرقية 3', album: 'eastern' },
-    { file: 'LOOP16.mp3', name: 'أغنية مغربية 1', album: 'moroccan' },
-    { file: 'LOOP20.mp3', name: 'أغنية مغربية 2', album: 'moroccan' },
-    { file: 'LOOP21.mp3', name: 'أغنية مغربية 3', album: 'moroccan' },
-    { file: 'LOOP022.mp3', name: 'أغنية مغربية 4', album: 'moroccan' }
 ];
 
 const audioPlayer = document.getElementById("audio-player");
