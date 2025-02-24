@@ -326,16 +326,14 @@ h1 {
 
 
 
-/* إزالة أي تأثيرات عند الضغط أو التمرير على الأزرار */
-button:focus, button:active, button:hover {
-    outline: none !important; /* إزالة الخط الأزرق */
-    box-shadow: none !important; /* إزالة الظل */
-    opacity: 1 !important; /* التأكد من بقاء الشفافية كما هي */
+button:focus, button:active, .material-icons:focus, .material-icons:active {
+    outline: none !important; /* إزالة الحدود التي تظهر عند الضغط */
+    box-shadow: none !important; /* إزالة الظل الذي قد يظهر عند الضغط */
+   
 }
 
-/* التأكد من أن الأيقونات تحتفظ بلونها الأصلي بدون أي تغيير */
-button i {
-    color: inherit !important; /* الحفاظ على اللون الأصلي للأيقونة */
+button, .material-icons {
+    transition: none !important; /* منع أي انتقالات قد تسبّب تأثيرات غير مرغوب فيها */
 }
 
 
