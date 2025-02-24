@@ -8,12 +8,13 @@ body {
     color: #333;
 }
 
-
+/* أيقونات المواد */
 .material-icons {
     font-size: 18px;
     vertical-align: middle;
 }
 
+/* تأثير الرقص على الأعمدة */
 .bar {
     animation: dance 1s infinite alternate ease-in-out;
 }
@@ -62,6 +63,7 @@ body {
     white-space: nowrap;
 }
 
+/* تنسيق الألبومات */
 .album-list-music {
     font-size: 13px;
     color: #ff4d4d;
@@ -72,7 +74,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-     width: 1823px;
+    width: 1823px;
     height: 38px;
 }
 
@@ -96,7 +98,7 @@ body {
     margin-top: 4px;
 }
 
-/* أسماء الألبومات (تحكم منفصل) */
+/* أسماء الألبومات */
 .album-name {
     margin-top: 5px;
     font-size: 14px;
@@ -187,11 +189,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
 /* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
 .container {
     text-align: center; /* لتوسيط العناصر داخل الحاوية */
-      display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -214,9 +215,6 @@ body {
     width: calc(100% - 5px); /* جعل الزر يأخذ كامل العرض مع ترك هامش 20px من كل جهة */
     max-width: 500px; /* تحديد حد أقصى للعرض لمنع الامتداد الزائد */
 }
-
-
-
 
 /* دائرة تدور */
 .spinner {
@@ -299,6 +297,7 @@ body {
     border-radius: 50%;
 }
 
+/* أزرار التحكم */
 .control-btn {
     background-color: #ff4d4d;
     color: #fff;
@@ -309,8 +308,12 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/* إزالة تأثير hover من أزرار التحكم */
 .control-btn:hover {
-    background-color: #555;
+    background-color: initial;
+    color: initial;
+    box-shadow: none;
+    transform: none;
 }
 
 /* اجعل جميع العناصر تتناسب مع الشاشات المختلفة */
@@ -326,7 +329,6 @@ img, video {
     height: auto;
 }
 
-
 /* مثال على جعل زر متجاوب */
 button {
     padding: 10px 20px;
@@ -336,4 +338,11 @@ button {
 /* اجعل النصوص تتناسب مع حجم الشاشة */
 h1 {
     font-size: clamp(24px, 5vw, 48px);
+}
+
+@media (max-width: 768px) {
+  .music-button:hover {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
 }
