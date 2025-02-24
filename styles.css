@@ -87,14 +87,14 @@ body {
 
 /* زر الألبوم */
 .album-btn {
-    width: 75px;
-    height: 75px;
+    width: 80px;
+    height: 80px;
     background-size: cover;
     background-position: center;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 2px 2px #f50c41;
+    box-shadow: 0 0 5px 2px #333;
     margin-top: 4px;
 }
 
