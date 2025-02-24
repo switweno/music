@@ -340,24 +340,19 @@ h1 {
     font-size: clamp(24px, 5vw, 48px);
 }
 
-/* تعطيل تأثير الضغط والتحديد */
-.music-button:active,
-.music-button:focus {
-  background-color: inherit !important; /* تبقى بنفس لونها */
-  outline: none !important; /* إزالة الحدود الزرقاء في بعض المتصفحات */
-  box-shadow: none !important; /* إزالة أي تأثير */
+/* تأثير hover فقط على الأجهزة التي تدعمها */
+@media (hover: hover) {
+    #audio-player-container:hover {
+        background-color: #333; /* تأكيد تأثير hover في حالة الكمبيوتر */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* إضافة تأثير ظل */
+    }
 }
 
-
-@media (hover: none) {
-  .music-button:hover {
-    background-color: transparent !important;
-    box-shadow: none !important;
-  }
-}
-#audio-player-container:hover {
-    background-color: inherit !important; /* يمنع تغيير الخلفية عند التمرير */
-    box-shadow: inherit !important; /* يمنع تغييرات الظل */
-    filter: none !important; /* يلغي أي تأثيرات إضافية */
+/* تعطيل التأثيرات عند الهواتف */
+@media (max-width: 767px) {
+    #audio-player-container:hover {
+        background-color: inherit !important; /* تعطيل الخلفية عند الضغط على الهاتف */
+        box-shadow: inherit !important; /* تعطيل الظل */
+    }
 }
 
