@@ -332,6 +332,7 @@ button {
     padding: 10px 20px;
     font-size: 1rem;
 }
+
 /* اجعل النصوص تتناسب مع حجم الشاشة */
 h1 {
     font-size: clamp(24px, 5vw, 48px);
