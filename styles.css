@@ -92,7 +92,7 @@ body {
     background-size: cover;
     background-position: center;
     border: none;
-    border-radius: 11px;
+    border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 0 2px 2px #f50c41;
     margin-top: 4px;
@@ -166,8 +166,8 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    color: #e0e0e0;
-    gap: 2px; /* المسافة بين الأيقونة واسم المغني */
+    color: #dadada;
+    gap: 3px; /* المسافة بين الأيقونة واسم المغني */
 }
 
 .song:hover {
@@ -202,7 +202,7 @@ body {
     background-color: #fefeff; /* خلفية بيضاء */
     color: #ee082e; /* لون النص */
     padding: 8px 24px; /* مساحة داخلية */
-    border: 2px solid #ff4d4d; /* إطار أحمر */
+    border: 2px solid #f25353; /* إطار أحمر */
     cursor: pointer; /* تغيير شكل المؤشر عند التمرير فوق الزر */
     font-size: 14px; /* حجم الخط */
     border-radius: 12px; /* حواف دائرية */
