@@ -349,14 +349,6 @@ button:focus, button:active {
     box-shadow: none !important; /* إزالة الظل */
 }
 
-/* التأثير على الأزرار التي تحتوي على الأيقونات فقط */
-button i {
-    background-color: transparent !important; /* التأكد من أن الأيقونات لا تأخذ لون الخلفية عند الضغط */
- }  
 
-/* إضافة تأثير عند تمرير الماوس فوق الأزرار */
-button:hover {
-    opacity: 0.8; /* تأثير خفيف عند التمرير على الأزرار */
-}
 
 
