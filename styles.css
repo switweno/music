@@ -251,12 +251,12 @@ body {
     margin-top: 10px;
     color: #d31717; 
     font-weight: bold;
-    box-shadow: 0 0 5px rgba(77, 75, 75, 0.5);
+    box-shadow: 0 0 2px rgba(77, 75, 75, 0.5);
 }
 
 
 .track-name {
-    border: 1px solid #333;
+    border: 1px solid #7c7a7a;
     padding: 8px;
     border-radius: 5px;
     margin-top: 8px;
