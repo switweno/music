@@ -114,11 +114,11 @@ body {
 }
 
 .scroll-left {
-    left: 10px; /* تعديل المسافة من اليسار */
+    left: 40px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 10px; /* تعديل المسافة من اليمين */
+    right: 40px; /* تعديل المسافة من اليمين */
 }
 
 /* تحسين المظهر للأجهزة الصغيرة */
@@ -173,7 +173,7 @@ body {
             width: 100%;
             background-color: #24855c;
             color: #ffffff;
-            padding: 2px 0;
+            padding: 5px 0;
             font-size: 14px;
             font-weight: bold;
             text-align: center;
@@ -350,10 +350,10 @@ h1 {
 
 .footer {
         text-align: center;
-        padding: 1px;
-        background-color: #ffffff;
+        padding: 2px;
+        background-color: white;
         color: #fcfcfc;
-        font-size: 1px;
+        
     }
 
     .social-buttons {
@@ -366,11 +366,11 @@ h1 {
         justify-content: center;
         width: 40px;
         height: 40px;
-        margin: 5px;
+        margin: 4px;
         border-radius: 50%;
         color: white;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 22px;
         transition: 0.3s;
     }
 
