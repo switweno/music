@@ -216,7 +216,7 @@ body.shifted {
     z-index: 1000; /* لضمان ظهوره فوق العناصر الأخرى */
      background-image: url('your-image.jpg');
     padding: 10px;
-     margin-top: 37px; /* تجنب تداخل مع الشريط */
+     margin-top: 29px; /* تجنب تداخل مع الشريط */
 }
 
 #audio-player-container.shifted {
