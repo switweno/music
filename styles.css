@@ -111,13 +111,13 @@ body {
 
 /* أزرار التمرير */
 .scroll-arrow {
-    background: #ff4d4d;
-    color: white;
+    background: #F3F4F6;
+    color: #ff4d4d;
     border: none;
     cursor: pointer;
     padding: 10px; /* تعديل قليل لتحسين المظهر */
-    font-size: 22px; /* تعديل الحجم قليلاً */
-    border-radius: 22%; /* لتحسين شكل الزر */
+    font-size: 40px; /* تعديل الحجم قليلاً */
+    border-radius: 25%; /* لتحسين شكل الزر */
     transition: 0.3s;
     position: absolute;
     top: 50%; /* تم تعديله ليكون في المنتصف بشكل دقيق */
@@ -126,7 +126,7 @@ body {
 
 /* تأثير عند تمرير الماوس */
 .scroll-arrow:hover {
-    background: #ea0707;
+   color: #333;
 }
 
 .scroll-left {
@@ -145,7 +145,7 @@ body {
 
     .scroll-arrow {
         padding: 10px;
-        font-size: 16px;
+        font-size: 23px;
     }
 }
 
