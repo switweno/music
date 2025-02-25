@@ -101,6 +101,7 @@ let currentTrackIndex = 0;
 let isRandomPlaying = false;
 let currentAlbum = "starchaabi"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
+
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
@@ -191,8 +192,6 @@ volumeControl.addEventListener("input", () => {
         : '<span class="material-icons">volume_up</span>';
 });
 
-
-
 // تشغيل/إيقاف الأغنية
 function togglePlayPause() {
     if (audioPlayer.paused) {
@@ -240,8 +239,6 @@ function restoreLastPlayed() {
     playPauseButton.innerHTML = '<span class="material-icons">play_arrow</span>';
 }
 
-
-
 // تشغيل الأغنية التالية تلقائيًا عند الانتهاء
 audioPlayer.addEventListener("ended", playNext);
 
@@ -259,7 +256,6 @@ window.addEventListener("load", () => {
 function toggleVolumeControl() {
     volumeControlContainer.classList.toggle("hidden");
 }
-
 
 function scrollAlbums(direction) {
     const scrollContainer = document.querySelector('.album-scroll-container');
@@ -292,46 +288,45 @@ function toggleSongs(button) {
     }, 1000); // مدة الدوران (يمكنك تعديلها)
 }
 
-  document.addEventListener("DOMContentLoaded", function () {
-        let audioPlayer = document.getElementById("audio-player"); // افترض أن لديك مشغل صوت رئيسي
-        let currentPlaying = null;
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPlaying = null;
 
-        document.querySelectorAll(".song").forEach(song => {
-            song.addEventListener("click", function () {
-                let icon = this.querySelector("i");
+    document.querySelectorAll(".song").forEach(song => {
+        song.addEventListener("click", function () {
+            let icon = this.querySelector("i");
 
-                // إذا كان نفس العنصر مضغوطًا مرة أخرى
-                if (currentPlaying === this) {
-                    if (audioPlayer.paused) {
-                        audioPlayer.play();
-                        icon.innerText = "graphic_eq"; // 🔊 تشغيل
-                    } else {
-                        audioPlayer.pause();
-                        icon.innerText = "volume_up"; // 🔈 إيقاف مؤقت
-                    }
-                } else {
-                    // إذا كانت هناك أغنية تعمل، إعادة الأيقونة القديمة
-                    if (currentPlaying) {
-                        currentPlaying.querySelector("i").innerText = "volume_up";
-                    }
-
-                    // تحديث العنصر الحالي
-                    currentPlaying = this;
+            // إذا كان نفس العنصر مضغوطًا مرة أخرى
+            if (currentPlaying === this) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
                     icon.innerText = "graphic_eq"; // 🔊 تشغيل
-
-                    // لا نغير `src` أو `play()` هنا حتى لا يتعارض مع سكريبتاتك الأصلية
+                } else {
+                    audioPlayer.pause();
+                    icon.innerText = "volume_up"; // 🔈 إيقاف مؤقت
                 }
-            });
-        });
+            } else {
+                // إذا كانت هناك أغنية تعمل، إعادة الأيقونة القديمة
+                if (currentPlaying) {
+                    currentPlaying.querySelector("i").innerText = "volume_up";
+                }
 
-        // التحقق من حالة التشغيل عند التوقف التلقائي
-        audioPlayer.addEventListener("ended", function () {
-            if (currentPlaying) {
-                currentPlaying.querySelector("i").innerText = "volume_up"; // 🔈 عند انتهاء الأغنية
-                currentPlaying = null;
+                // تحديث العنصر الحالي
+                currentPlaying = this;
+                icon.innerText = "graphic_eq"; // 🔊 تشغيل
+
+                // لا نغير `src` أو `play()` هنا حتى لا يتعارض مع سكريبتاتك الأصلية
             }
         });
     });
+
+    // التحقق من حالة التشغيل عند التوقف التلقائي
+    audioPlayer.addEventListener("ended", function () {
+        if (currentPlaying) {
+            currentPlaying.querySelector("i").innerText = "volume_up"; // 🔈 عند انتهاء الأغنية
+            currentPlaying = null;
+        }
+    });
+});
 
 function playRandom() {
     const activeSongs = songs.filter(song => song.album === currentAlbum);

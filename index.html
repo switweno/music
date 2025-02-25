@@ -602,11 +602,11 @@
     });
 
     function scrollToAlbums(albumId) {
-        const albumSection = document.querySelector('.album-list-music');
-        if (albumSection) {
-            albumSection.scrollIntoView({ behavior: 'smooth' });
-            showAlbum(albumId);
-        }
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        showAlbum(albumId);
     }
 
     function showAlbum(album) {
