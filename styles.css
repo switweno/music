@@ -166,19 +166,20 @@ body {
     display: none;
 }
 /* شريط إخباري ثابت */
-        .news-ticker {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #24855c;
-            color: #ffffff;
-            padding: 5px 0;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            z-index: 1000;
-        }
+       .news-ticker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #24855c;
+    color: #ffffff;
+    padding: 5px 0; /* زيادة التباعد العلوي والسفلي */
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+}
+
 
         /* تأثير التمرير للنص */
         .news-content {
@@ -187,6 +188,9 @@ body {
             overflow: hidden;
             position: relative;
             animation: marquee 10s linear infinite;
+            
+    line-height: 19px; /* يجعل النص يتوسط الحاوية عموديًا */
+
         }
 
         @keyframes marquee {
