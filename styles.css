@@ -50,10 +50,27 @@ body.shifted {
     padding: 10px;
     white-space: nowrap;
 }
+.album-list-msc {
+    font-size: 15px; /* تحديد حجم الخط */
+    font-weight: bold; /* جعل الخط عريض */
+    text-align: center; /* محاذاة النص في المنتصف */
+    padding: 10px; /* إضافة حواف داخلية حول النص */
+    margin: 20px 0; /* إضافة هامش علوي وسفلي */
+    border-top: 3px solid #ff6347; /* إضافة خط فوق النص (يمكنك تغيير اللون) */
+    color: #333; /* لون النص */
+    background-color: #f0f0f0; /* خلفية خفيفة */
+    border-radius: 5px; /* زوايا مدورة */
+    letter-spacing: 1px; /* إضافة مسافة بين الحروف */
+}
+
+.album-list-msc::before {
+    content: "📀"; /* إضافة أيقونة قبل النص (اختياري) */
+    margin-right: 8px; /* إضافة مساحة بين الأيقونة والنص */
+}
 
 /* تنسيق الألبومات */
 .album-list-music {
-    font-size: 12px;
+    font-size: 15px;
     color: #2c2828;
     background-color: #ffffff;
     padding: 12px;
@@ -75,8 +92,8 @@ body.shifted {
 
 /* زر الألبوم */
 .album-btn {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     background-size: cover;
     background-position: center;
     border: none;
