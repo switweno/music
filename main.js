@@ -339,4 +339,55 @@ function playRandom() {
     changeTrack(activeSongs[randomIndex].file, activeSongs[randomIndex].name);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const albums = document.querySelectorAll('.album-btn');
+    const songsContainers = document.querySelectorAll('.songs-container');
+
+    albums.forEach(album => {
+        album.addEventListener('click', function() {
+            const albumId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            if (this.closest('.albums-grid-wrapper')) {
+                // إذا كان الألبوم في الألبومات المكررة أسفل الأغاني
+                scrollToAlbum(albumId);
+            } else {
+                // إذا كان الألبوم في الألبومات الأصلية
+                showAlbum(albumId);
+            }
+        });
+    });
+
+    function showAlbum(albumId) {
+        const albumElement = document.getElementById(albumId + '-songs');
+        const allSongContainers = document.querySelectorAll('.songs-container');
+
+        // إخفاء جميع قوائم الأغاني
+        songsContainers.forEach(container => {
+            container.style.display = 'none';
+        });
+
+        // إظهار قائمة الأغاني الخاصة بالألبوم المحدد
+        if (albumElement) {
+            albumElement.style.display = 'flex';
+        }
+    }
+
+    function scrollToAlbum(albumId) {
+        const albumElement = document.getElementById(albumId + '-songs');
+        if (albumElement) {
+            albumElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function changeTrack(src, title) {
+        const audioPlayer = document.getElementById('audio-player');
+        const audioSource = document.getElementById('audio-source');
+        const trackName = document.getElementById('track-name');
+
+        audioSource.src = src;
+        audioPlayer.load();
+        audioPlayer.play();
+        trackName.textContent = title;
+    }
+});
+
 
