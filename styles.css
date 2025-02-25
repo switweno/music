@@ -9,6 +9,10 @@ body {
      padding-top: 235px; /* يمنع المحتوى من الاختباء خلف المشغل */
 }
 
+body.shifted {
+    padding-top: 200px; /* تعديل المسافة العلوية عند اختفاء الشريط الإخباري */
+}
+
 /* أيقونات المواد */
 .material-icons {
     font-size: 20px;
@@ -178,8 +182,14 @@ body {
     font-weight: bold;
     text-align: center;
     z-index: 1000;
+    display: flex;
+    align-items: center; /* لضمان توسيط النص عموديًا */
+    justify-content: center; /* لضمان توسيط النص أفقيًا */
 }
 
+.news-ticker.hidden {
+    display: none;
+}
 
         /* تأثير التمرير للنص */
         .news-content {
@@ -209,7 +219,10 @@ body {
      margin-top: 37px; /* تجنب تداخل مع الشريط */
 }
 
-
+#audio-player-container.shifted {
+    top: 0; /* يصبح أعلى الصفحة */
+    margin-top: 0; /* إزالة الهامش العلوي */
+}
 
 /* إذا كان الزر داخل حاوية، تأكد من توسيط الحاوية */
 .container {

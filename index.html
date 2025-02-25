@@ -526,5 +526,27 @@
     </div>
 </footer>
     <script src="main.js" defer></script>
+    <script>
+    let lastScrollTop = 0;
+    const newsTicker = document.querySelector('.news-ticker');
+    const body = document.body;
+    const audioPlayerContainer = document.getElementById('audio-player-container');
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            // عند الهبوط بالصفحة
+            newsTicker.classList.add('hidden');
+            body.classList.add('shifted');
+            audioPlayerContainer.classList.add('shifted');
+        } else {
+            // عند الطلوع بالصفحة
+            newsTicker.classList.remove('hidden');
+            body.classList.remove('shifted');
+            audioPlayerContainer.classList.remove('shifted');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // تجنب القيم السالبة
+    });
+</script>
 </body>
 </html>
