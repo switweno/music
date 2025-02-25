@@ -129,7 +129,7 @@ body {
 
     .scroll-arrow {
         padding: 10px;
-        font-size: 23px;
+        font-size: 27px;
     }
 }
 
@@ -221,10 +221,10 @@ body {
     background-color: #fefeff; /* خلفية بيضاء */
     color: #ee082e; /* لون النص */
     padding: 8px 24px; /* مساحة داخلية */
-    border: 2px solid #f25353; /* إطار أحمر */
+    border: 1px solid #f25353; /* إطار أحمر */
     cursor: pointer; /* تغيير شكل المؤشر عند التمرير فوق الزر */
     font-size: 14px; /* حجم الخط */
-    border-radius: 12px; /* حواف دائرية */
+    border-radius: 10px; /* حواف دائرية */
     display: flex; /* استخدام flex لتوسيط العناصر */
     justify-content: center; /* محاذاة العناصر عموديا */
     align-items: center; /* محاذاة العناصر أفقيا */
