@@ -333,4 +333,10 @@ function toggleSongs(button) {
         });
     });
 
+function playRandom() {
+    const activeSongs = songs.filter(song => song.album === currentAlbum);
+    const randomIndex = Math.floor(Math.random() * activeSongs.length);
+    changeTrack(activeSongs[randomIndex].file, activeSongs[randomIndex].name);
+}
+
 
