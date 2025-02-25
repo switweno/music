@@ -50,6 +50,7 @@ body.shifted {
     padding: 10px;
     white-space: nowrap;
 }
+
 .album-list-msc {
     font-size: 15px; /* تحديد حجم الخط */
     font-weight: bold; /* جعل الخط عريض */
@@ -61,7 +62,6 @@ body.shifted {
     background-color: #f0f0f0; /* خلفية خفيفة */
     border-radius: 5px; /* زوايا مدورة */
     letter-spacing: 1px; /* إضافة مسافة بين الحروف */
-     margin-top: 5px;
 }
 
 .album-list-msc::before {
@@ -186,7 +186,9 @@ body.shifted {
 .hidden {
     display: none;
 }
-
+.news-ticker.hidden {
+    display: none;
+}
 /* شريط إخباري ثابت */
 .news-ticker {
     position: fixed;
@@ -205,27 +207,25 @@ body.shifted {
     justify-content: center; /* لضمان توسيط النص أفقيًا */
 }
 
-.news-ticker.hidden {
-    display: none;
-}
+
 
 /* تأثير التمرير للنص */
 .news-content {
     display: inline-block;
     white-space: nowrap;
     width: max-content;
-    animation: marquee 20s linear infinite;
+    animation: marquee 40s linear infinite;
     padding-left: 100%;
-    margin-right: 25px; /* يضيف مسافة بعد كل أيقونة */
+   
 }
 
-
+.news-content span {
+    padding: 0 30px; /* يضيف تباعدًا بين العناصر */
+}
 @keyframes marquee {
     from { transform: translateX(50%); } /* يبدأ من أول الشاشة */
-    to { transform: translateX(-50%); }
+    to { transform: translateX(-100%); }
 }
-
-
 
 #audio-player-container {
     position: fixed; /* يثبت العنصر */
@@ -433,5 +433,3 @@ h1 {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* ظل أحمر خفيف حول الصورة */
     border: 2px solid #ff4d4d; /* إضافة خط أحمر فاتح بسمك 2px حول الصورة */
 }
-
-
