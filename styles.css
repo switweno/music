@@ -195,7 +195,7 @@ body.shifted {
     width: 100%;
     background-color: #24855c;
     color: #ffffff;
-    padding: 5px 0; /* زيادة التباعد العلوي والسفلي */
+    padding: 6px 0; /* زيادة التباعد العلوي والسفلي */
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -210,19 +210,22 @@ body.shifted {
 }
 
 /* تأثير التمرير للنص */
-/* تأثير التمرير للنص */
 .news-content {
     display: inline-block;
     white-space: nowrap;
-    width: max-content; /* يسمح للنص بأخذ حجمه الطبيعي دون أن يُقطع */
-    animation: marquee 10s linear infinite;
-    padding-left: 100%; /* يبدأ خارج الشاشة */
+    width: max-content;
+    animation: marquee 20s linear infinite;
+    padding-left: 100%;
+    margin-right: 25px; /* يضيف مسافة بعد كل أيقونة */
 }
 
+
 @keyframes marquee {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+    from { transform: translateX(50%); } /* يبدأ من أول الشاشة */
+    to { transform: translateX(-50%); }
 }
+
+
 
 #audio-player-container {
     position: fixed; /* يثبت العنصر */
