@@ -210,13 +210,13 @@ body.shifted {
 }
 
 /* تأثير التمرير للنص */
+/* تأثير التمرير للنص */
 .news-content {
     display: inline-block;
     white-space: nowrap;
-    overflow: hidden;
-    position: relative;
+    width: max-content; /* يسمح للنص بأخذ حجمه الطبيعي دون أن يُقطع */
     animation: marquee 10s linear infinite;
-    line-height: 19px; /* يجعل النص يتوسط الحاوية عموديًا */
+    padding-left: 100%; /* يبدأ خارج الشاشة */
 }
 
 @keyframes marquee {
