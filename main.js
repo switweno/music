@@ -1,7 +1,7 @@
 // قائمة الأغاني
 const songs = [
-    { file: '01 star cha3bi.mp3', name: 'star chaabi 1', album: 'starchaabi' },
-    { file: '02 star cha3bi.mp3', name: 'star chaabi 2 ', album:'starchaabi' },
+    { file: '01 star chaabi.mp3', name: 'star chaabi 1', album: 'starchaabi' },
+    { file: '02 star chaabi.mp3', name: 'star chaabi 2 ', album:'starchaabi' },
     { file: '03 star cha3bi.mp3', name: 'star chaabi 3', album: 'starchaabi' },
     { file: '04 star cha3bi.mp3', name: 'star chaabi 4', album: 'starchaabi' },
 	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi' },
