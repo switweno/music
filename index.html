@@ -118,16 +118,16 @@
         <div class="album-scroll-container">
             <div class="album-list">
                 <div class="album-item">
-                    <button onclick="showAlbum('starchaabi')" class="album-btn" style="background-image: url('starchaabi.png');" 
-                aria-label="مشاهدة ألبوم star chaabi">
-                </button>
-                    <span class="album-name">star chaabi</span>
-                </div>
-                <div class="album-item">
                     <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('naydanouda.webp');" 
                 aria-label="مشاهدة ألبوم Naydanouda">
                 </button>
                     <span class="album-name">nayda nouda</span>
+                </div>
+                <div class="album-item">
+                    <button onclick="showAlbum('starchaabi')" class="album-btn" style="background-image: url('starchaabi.png');" 
+                aria-label="مشاهدة ألبوم star chaabi">
+                </button>
+                    <span class="album-name">star chaabi</span>
                 </div>
                  <div class="album-item">
                     <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('shabloutar.png');"
@@ -135,12 +135,7 @@
                     </button>
                     <span class="album-name">shab loutar</span>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('casastar.png');"
-                    aria-label="مشاهدة ألبوم casa star">
-                    </button>
-                    <span class="album-name">casa star</span>
-                </div>
+                
                 <div class="album-item">
                     <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');"
                     aria-label="مشاهدة ألبوم khaliji">
@@ -539,30 +534,34 @@
     <div class="album-list-msc">Autres albums </div>
     <!-- الألبومات الجديدة -->
     <div class="new-albums-container" style="margin: 5px 10px;">
-        <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
-            <img src="starchaabi.png" alt="star chaabi">
-            <span>star chaabi</span>
+        <div class="new-album-item" onclick="scrollToAlbums('khalij')">
+            <img src="khalij.webp" alt="khaliji">
+            <span>خليجية</span>
         </div>
-        <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
-            <img src="naydanouda.webp" alt="nayda nouda">
-            <span>nayda nouda</span>
+         <div class="new-album-item" onclick="scrollToAlbums('kamalnew')">
+            <img src="kamalnews.png" alt="kamal new">
+            <span>kamal new</span>
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('popular')">
             <img src="shabloutar.png" alt="shab loutar">
             <span>shab loutar</span>
         </div>
+        <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
+            <img src="naydanouda.webp" alt="nayda nouda">
+            <span>nayda nouda</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
+            <img src="starchaabi.png" alt="star chaabi">
+            <span>star chaabi</span>
+        </div>
+        
+        
         <div class="new-album-item" onclick="scrollToAlbums('casastar')">
             <img src="casastar.png" alt="casa star">
             <span>casa star</span>
         </div>
-        <div class="new-album-item" onclick="scrollToAlbums('khalij')">
-            <img src="khalij.webp" alt="khaliji">
-            <span>خليجية</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('kamalnew')">
-            <img src="kamalnews.png" alt="kamal new">
-            <span>kamal new</span>
-        </div>
+        
+       
     </div>
 
 <footer class="footer">
