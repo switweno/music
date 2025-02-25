@@ -419,16 +419,15 @@ h1 {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
     margin: 8px 10px; /* تعديل الهامش العلوي والسفلي مع ترك هامش من الجوانب */
-   
 }
 
 .new-album-item img {
     width: 100%; /* زيادة العرض بنسبة 50% */
-    height: 150px; /* التحكم في ارتفاع الصورة 
+    height: 150px; /* التحكم في ارتفاع الصورة */
     object-fit: cover; /* لتغطية المساحة المتاحة بشكل مناسب */
     border-radius: 9px; /* زوايا مدورة لإضفاء لمسة جمالية */
-    box-shadow: 0 0 2px 5px #ff4d4d;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* ظل أحمر خفيف حول الصورة */
+    border: 2px solid #ff4d4d; /* إضافة خط أحمر فاتح بسمك 2px حول الصورة */
 }
-
 
 
