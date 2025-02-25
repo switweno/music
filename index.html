@@ -20,6 +20,31 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <title>khalid music Zik</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .new-albums-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .new-album-item {
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+        }
+        .new-album-item img {
+            width: 100%;
+            height: auto;
+        }
+        .new-album-item span {
+            display: block;
+            padding: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
     <!-- مشغل الصوت -->
@@ -504,6 +529,34 @@
         </div> 
       </div>
     
+    <!-- الألبومات الجديدة -->
+    <div class="new-albums-container">
+        <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
+            <img src="starchaabi.png" alt="star chaabi">
+            <span>star chaabi</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
+            <img src="naydanouda.webp" alt="nayda nouda">
+            <span>nayda nouda</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('popular')">
+            <img src="shabloutar.png" alt="shab loutar">
+            <span>shab loutar</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('casastar')">
+            <img src="casastar.png" alt="casa star">
+            <span>casa star</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('khalij')">
+            <img src="khalij.webp" alt="khaliji">
+            <span>خليجية</span>
+        </div>
+        <div class="new-album-item" onclick="scrollToAlbums('kamalnew')">
+            <img src="kamalnews.png" alt="kamal new">
+            <span>kamal new</span>
+        </div>
+    </div>
+
 <footer class="footer">
     
     <div class="social-buttons">
@@ -547,6 +600,24 @@
         }
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // تجنب القيم السالبة
     });
+
+    function scrollToAlbums(albumId) {
+        const albumSection = document.querySelector('.album-list-music');
+        if (albumSection) {
+            albumSection.scrollIntoView({ behavior: 'smooth' });
+            showAlbum(albumId);
+        }
+    }
+
+    function showAlbum(album) {
+        const albums = document.querySelectorAll('.songs-container');
+        albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+
+        document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
+
+        currentAlbum = album; // تحديث الألبوم الحالي
+        currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+    }
 </script>
 </body>
 </html>
