@@ -6,7 +6,7 @@ body {
     box-sizing: border-box;
     background-color: #f5f5f5; /* لون كري */
     color: #333;
-     padding-top: 235px; /* يمنع المحتوى من الاختباء خلف المشغل */
+    padding-top: 235px; /* يمنع المحتوى من الاختباء خلف المشغل */
 }
 
 body.shifted {
@@ -17,9 +17,7 @@ body.shifted {
 .material-icons {
     font-size: 20px;
     vertical-align: middle;
-    
 }
-
 
 /* الحاوية الرئيسية */
 .albums-wrapper {
@@ -28,6 +26,7 @@ body.shifted {
     justify-content: center;
     position: relative;
     width: 100%;
+    margin: 5px 0; /* تعديل الهامش العلوي والسفلي */
 }
 
 /* شريط التمرير للألبومات */
@@ -85,7 +84,6 @@ body.shifted {
     cursor: pointer;
     box-shadow: 0 0 2px 2px #ff4d4d;
     margin-top: 4px;
-    
 }
 
 /* أسماء الألبومات */
@@ -114,7 +112,7 @@ body.shifted {
 
 /* تأثير عند تمرير الماوس */
 .scroll-arrow:hover {
-   color: #333;
+    color: #333;
 }
 
 .scroll-left {
@@ -169,8 +167,9 @@ body.shifted {
 .hidden {
     display: none;
 }
+
 /* شريط إخباري ثابت */
-       .news-ticker {
+.news-ticker {
     position: fixed;
     top: 0;
     left: 0;
@@ -191,22 +190,21 @@ body.shifted {
     display: none;
 }
 
-        /* تأثير التمرير للنص */
-        .news-content {
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-            animation: marquee 10s linear infinite;
-            
+/* تأثير التمرير للنص */
+.news-content {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    animation: marquee 10s linear infinite;
     line-height: 19px; /* يجعل النص يتوسط الحاوية عموديًا */
+}
 
-        }
+@keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
 
-        @keyframes marquee {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
 #audio-player-container {
     position: fixed; /* يثبت العنصر */
     top: 0; /* يبقى في أعلى الصفحة */
@@ -214,9 +212,9 @@ body.shifted {
     width: 100%; /* يجعله يغطي العرض بالكامل */
     background: rgb(255, 255, 255); /* لون الخلفية */
     z-index: 1000; /* لضمان ظهوره فوق العناصر الأخرى */
-     background-image: url('your-image.jpg');
+    background-image: url('your-image.jpg');
     padding: 10px;
-     margin-top: 29px; /* تجنب تداخل مع الشريط */
+    margin-top: 29px; /* تجنب تداخل مع الشريط */
 }
 
 #audio-player-container.shifted {
@@ -290,10 +288,8 @@ body.shifted {
     box-shadow: 0 0 2px rgba(144, 142, 142, 0.3);
 }
 
-
 .track-name {
     border: 1px solid #9a9898;
-    
     padding: 7px;
     border-radius: 5px;
     margin-top: 8px;
@@ -337,10 +333,6 @@ body.shifted {
     border-radius: 50%;
 }
 
-
-
-
-
 /* تأكد من أن الصور والفيديوهات لا تتجاوز عرض الشاشة */
 img, video {
     max-width: 100%;
@@ -358,52 +350,58 @@ h1 {
     font-size: clamp(24px, 5vw, 48px);
 }
 
-
 .footer {
-        text-align: center;
-        padding: 2px;
-        background-color: white;
-        color: #fcfcfc;
-        
-    }
+    text-align: center;
+    padding: 2px;
+    background-color: white;
+    color: #fcfcfc;
+}
 
-    .social-buttons {
-        margin-top: 1px;
-    }
+.social-buttons {
+    margin-top: 1px;
+}
 
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.3s;
+}
+
+.facebook { background: #3b5998; }
+.twitter { background: #1DA1F2; }
+.whatsapp { background: #25D366; }
+.linkedin { background: #E4405F; }
+
+.social-btn:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+
+/* اجعل الفوتر متجاوب */
+@media (max-width: 600px) {
     .social-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
         width: 40px;
         height: 40px;
-        margin: 4px;
-        border-radius: 50%;
-        color: white;
-        text-decoration: none;
-        font-size: 22px;
-        transition: 0.3s;
+        font-size: 20px;
     }
+}
 
-    .facebook { background: #3b5998; }
-    .twitter { background: #1DA1F2; }
-    .whatsapp { background: #25D366; }
-    .linkedin { background: #E4405F; }
-
-    .social-btn:hover {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-
-
-    /* اجعل الفوتر متجاوب */
-    @media (max-width: 600px) {
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-        }
-    }
+/* الألبومات الجديدة */
+.new-albums-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 5px; /* تعديل الهامش العلوي */
+    margin-bottom: 5px; /* تعديل الهامش السفلي */
+}
 
 
 
