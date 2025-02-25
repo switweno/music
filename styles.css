@@ -178,7 +178,6 @@ body {
             font-weight: bold;
             text-align: center;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(92, 91, 91, 0.7);
         }
 
         /* تأثير التمرير للنص */
@@ -323,12 +322,7 @@ body {
 
 
 
-/* اجعل جميع العناصر تتناسب مع الشاشات المختلفة */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
 
 /* تأكد من أن الصور والفيديوهات لا تتجاوز عرض الشاشة */
 img, video {
