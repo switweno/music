@@ -76,8 +76,8 @@ body {
 }
 
 .album-btn {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
     background-size: cover;
     background-position: center;
     border: none;
@@ -382,14 +382,15 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 /* الفوتر */
 .footer {
     text-align: center;
-    padding: 20px;
+    padding: 1px;
     background-color: var(--dark-bg);
     color: white;
     margin-top: 1px;
 }
 
+/* أيقونات التواصل الاجتماعي */
 .social-buttons {
-    margin: 15px 1;
+    margin: 15px 1px;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -407,6 +408,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     font-size: 18px;
     transition: all 0.3s;
     background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
 }
 
 .social-btn:hover {
@@ -419,27 +421,36 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 .whatsapp:hover { background: #25D366; }
 .linkedin:hover { background: #E4405F; }
 
+/* تصحيح تعارض زر المفضلة */
+.favorite-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.2);
+}
+
+/* تأكيد عدم تأثر المفضلة ببقية الأزرار */
+.favorite-btn:focus {
+    outline: none;
+}
+
 /* للأجهزة المحمولة */
 @media (max-width: 768px) {
-    .album-btn {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .album-name {
-        font-size: 12px;
-    }
-    
-    .song {
-        padding: 10px;
-        font-size: 14px;
-    }
-    
-    .favorite-btn {
-        right: 8px;
+    .social-btn {
+        width: 35px;
+        height: 35px;
         font-size: 16px;
     }
 }
+
 .news-ticker.hidden {
     display: none;
 }
@@ -449,9 +460,9 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #24855c;
+    background-color: #333;
     color: #ffffff;
-    padding: 6px 0;
+    padding: 10px 0;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
