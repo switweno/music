@@ -44,17 +44,36 @@ body {
 
 /* تحسين تصميم التمرير للألبومات */
 .album-scroll-container {
-    width: 87%;
+    width: 100%;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     padding: 10px 0;
 }
-
-.album-scroll-container::-webkit-scrollbar {
-    display: none;
+.scroll-arrow {
+    display: none !important;
 }
+
+/* إزالة الأسطر التي كانت تخفي شريط التمرير */
+/* scrollbar-width: none;
+-ms-overflow-style: none; */
+
+/* إظهار شريط التمرير للمتصفحات التي تعتمد على WebKit */
+.album-scroll-container::-webkit-scrollbar {
+    display: block; 
+    height: 8px; /* يمكنك تعديل حجم الشريط */
+}
+
+.album-scroll-container::-webkit-scrollbar-thumb {
+    background: #1bceb4; /* لون شريط التمرير */
+    border-radius: 10px;
+}
+
+.album-scroll-container::-webkit-scrollbar-track {
+    background: #eee; /* لون خلفية الشريط */
+}
+
+/* تم حذف .scroll-arrow, .scroll-left, .scroll-right */
+
 
 .album-list {
     display: flex;
@@ -565,37 +584,4 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     text-align: center;
 }
 
-/* أزرار التمرير */
-.scroll-arrow {
-    background: rgba(221, 45, 51, 0);
-    color: #ff0000;
-    border: none;
-    cursor: pointer;
-    padding: 10px; /* تعديل قليل لتحسين المظهر */
-    font-size: 40px; /* تعديل الحجم قليلاً */
-    border-radius: 25%; /* لتحسين شكل الزر */
-    transition: 0.3s;
-    position: absolute;
-    top: 50%; /* تم تعديله ليكون في المنتصف بشكل دقيق */
-    transform: translateY(-50%); /* تعديل المركز عموديًا */
-}
 
-/* تأثير عند تمرير الماوس */
-.scroll-arrow:hover {
-    color: #ff0000;
-}
-
-.scroll-left {
-    left: 1px; /* تعديل المسافة من اليسار */
-}
-
-.scroll-right {
-    right: 1px; /* تعديل المسافة من اليمين */
-}
-
-
-
-    .scroll-arrow {
-        padding: 10px;
-        font-size: 37px;
-    }
