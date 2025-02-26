@@ -1,14 +1,14 @@
 // قائمة الأغاني
 const songs = [
-    { file: '01 star chaabi.mp3', name: 'star chaabi 1', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:45' },
-    { file: '02 star chaabi.mp3', name: 'star chaabi 2 ', album:'starchaabi', artist: 'Star Chaabi', duration: '4:12' },
-    { file: '03 star cha3bi.mp3', name: 'star chaabi 3', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:58' },
-    { file: '04 star cha3bi.mp3', name: 'star chaabi 4', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:25' },
-	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:35' },
-	{ file: '06 star cha3bi.mp3', name: 'star chaabi 6', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:05' },
-    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:30' },
-    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:30' },
-    { file: '08 star cha3bi.mp3', name: 'star chaabi 8', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:20' },
+   { file: '01 star chaabi.mp3', name: 'star chaabi 1', album: 'starchaabi' },
+    { file: '02 star chaabi.mp3', name: 'star chaabi 2 ', album:'starchaabi' },
+    { file: '03 star cha3bi.mp3', name: 'star chaabi 3', album: 'starchaabi' },
+    { file: '04 star cha3bi.mp3', name: 'star chaabi 4', album: 'starchaabi' },
+	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi' },
+	{ file: '06 star cha3bi.mp3', name: 'star chaabi 6', album: 'starchaabi' },
+    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
+    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
+    { file: '08 star cha3bi.mp3', name: 'star chaabi 8', album: 'starchaabi' },
     
     { file: '02 casa star.mp3', name: 'casa star 1', album: 'casastar' },
     { file: '03 casa star.mp3', name: 'casa star 2 ', album: 'casastar' },
