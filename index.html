@@ -92,62 +92,48 @@
 
     </div>
 
-    <!-- حاوية الألبومات مع التمرير -->
+   <!-- حاوية الألبومات مع التمرير -->
     <div class="albums-wrapper" style="margin: 5px 0;">
+        <button class="scroll-arrow scroll-left absolute left-2" onclick="scrollAlbums(-1)">❮</button>
         <div class="album-scroll-container">
             <div class="album-list">
                 <div class="album-item">
-                    <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('naydanouda.webp');" 
-                aria-label="مشاهدة ألبوم Nayda nouda">
-                </button>
+                    <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('naydanouda.webp');" aria-label="مشاهدة ألبوم Nayda nouda"></button>
                     <span class="album-name">nayda nouda</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('sentralchaabi')" class="album-btn" style="background-image: url('sentralchaabi.png');" 
-                aria-label="مشاهدة ألبوم sentral chaabi">
-                </button>
+                    <button onclick="showAlbum('sentralchaabi')" class="album-btn" style="background-image: url('sentralchaabi.png');" aria-label="مشاهدة ألبوم sentral chaabi"></button>
                     <span class="album-name">sentral chaabi</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('starchaabi')" class="album-btn" style="background-image: url('starchaabi.png');" 
-                aria-label="مشاهدة ألبوم star chaabi">
-                </button>
+                    <button onclick="showAlbum('starchaabi')" class="album-btn" style="background-image: url('starchaabi.png');" aria-label="مشاهدة ألبوم star chaabi"></button>
                     <span class="album-name">star chaabi</span>
                 </div>
-                 <div class="album-item">
-                    <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('shabloutar.png');"
-                    aria-label="مشاهدة ألبوم popular">
-                    </button>
+                <div class="album-item">
+                    <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('shabloutar.png');" aria-label="مشاهدة ألبوم popular"></button>
                     <span class="album-name">shab loutar</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('casastar.png');"
-                    aria-label="مشاهدة ألبوم casa star">
-                    </button>
+                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('casastar.png');" aria-label="مشاهدة ألبوم casa star"></button>
                     <span class="album-name">casa star</span>
                 </div>
                 <div class="album-item">
-                    <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');"
-                    aria-label="مشاهدة ألبوم khaliji">
-                    </button>
-                    <span class="album-name">خليجية </span>
+                    <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');" aria-label="مشاهدة ألبوم khaliji"></button>
+                    <span class="album-name">خليجية</span>
                 </div>
-                 <div class="album-item">
-                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('kamalnews.png');"
-                    aria-label="مشاهدة ألبوم kamal new">
-                    </button>
+                <div class="album-item">
+                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('kamalnews.png');" aria-label="مشاهدة ألبوم kamal new"></button>
                     <span class="album-name">kamal new</span>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- حاوية الكاروسيل المحسنة لتكون relative -->
-    <div class="relative flex items-center justify-center">
-        <button class="scroll-arrow scroll-left absolute left-2" onclick="scrollAlbums(-1)">❮</button>
-        <div class="album-list-music px-8">← Autres albums →</div>
         <button class="scroll-arrow scroll-right absolute right-2" onclick="scrollAlbums(1)">❯</button>
     </div>
+    <!-- حاوية الكاروسيل المحسنة لتكون relative -->
+    <div class="relative flex items-center justify-center">
+        <div class="album-list-music px-8">← Autres albums →</div>
+    </div>
+   
     
 
     <!-- قسم الأغاني -->
@@ -283,10 +269,7 @@
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">nayda nouda 23</div>
     </div>
-       <button class="show-more-btn" onclick="toggleSongs(this)">
-                <span class="spinner"></span>
-                Afficher plus
-            </button>
+       
         </div>     
             
         
@@ -344,26 +327,23 @@
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 13</div>
     </div>
-    <div class="song hidden" onclick="changeTrack('14 sentral cha3bi.mp3', 'sentral chaabi 14')" style="border-color: #8e1a4f;">
+    <div class="song " onclick="changeTrack('14 sentral cha3bi.mp3', 'sentral chaabi 14')" style="border-color: #8e1a4f;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 14</div>
     </div>
-    <div class="song hidden" onclick="changeTrack('15 sentral cha3bi.mp3', 'sentral chaabi 15')" style="border-color: #8e1a4f;">
+    <div class="song" onclick="changeTrack('15 sentral cha3bi.mp3', 'sentral chaabi 15')" style="border-color: #8e1a4f;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 15</div>
     </div>
-    <div class="song hidden" onclick="changeTrack('16 sentral cha3bi.mp3', 'sentral chaabi 16')" style="border-color: #8e1a4f;">
+    <div class="song" onclick="changeTrack('16 sentral cha3bi.mp3', 'sentral chaabi 16')" style="border-color: #8e1a4f;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 16</div>
     </div>
-    <div class="song hidden" onclick="changeTrack('17 sentral cha3bi.mp3', 'sentral chaabi 17')" style="border-color: #8e1a4f;">
+    <div class="song" onclick="changeTrack('17 sentral cha3bi.mp3', 'sentral chaabi 17')" style="border-color: #8e1a4f;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 17</div>
     </div>
-       <button class="show-more-btn" onclick="toggleSongs(this)">
-                <span class="spinner"></span>
-                Afficher plus
-            </button>
+      
         </div>         
         
         <!-- casastar -->
@@ -408,18 +388,15 @@
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">casa star 10</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('12 casa star.mp3', 'casa star 11')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('12 casa star.mp3', 'casa star 11')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">casa star 11</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('13 casa star.mp3', 'casa star 12')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('13 casa star.mp3', 'casa star 12')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">casa star 12</div>
             </div>
-            <button class="show-more-btn" onclick="toggleSongs(this)">
-                <span class="spinner"></span>
-                Afficher plus
-            </button>
+            
         </div>
         
         
@@ -465,7 +442,7 @@
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 10</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('11 cha3biat shab loutar.mp3.mp3', 'shab loutar 11')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('11 cha3biat shab loutar.mp3.mp3', 'shab loutar 11')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 11</div>
             </div>
@@ -473,18 +450,14 @@
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 12</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('13 cha3biat shab loutar.mp3.mp3', 'shab loutar 13')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('13 cha3biat shab loutar.mp3.mp3', 'shab loutar 13')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 13</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('14 cha3biat shab loutar.mp3.mp3', 'shab loutar 14')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('14 cha3biat shab loutar.mp3.mp3', 'shab loutar 14')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 14</div>
             </div>
-            <button class="show-more-btn" onclick="toggleSongs(this)">
-                <span class="spinner"></span>
-                Afficher plus
-            </button>
         </div>
         
         
@@ -532,39 +505,34 @@
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 10</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('11 khalij.mp3', 'أغنية خليجية 11')" style="border-color: #8e1a4f;">
+            <div class="song " onclick="changeTrack('11 khalij.mp3', 'أغنية خليجية 11')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 11</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('12 khalij.mp3', 'أغنية خليجية 12')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('12 khalij.mp3', 'أغنية خليجية 12')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 12</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('13 khalij.mp3', 'أغنية خليجية 13')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('13 khalij.mp3', 'أغنية خليجية 13')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 13</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('14 khalij.mp3', 'أغنية خليجية 14')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('14 khalij.mp3', 'أغنية خليجية 14')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 14</div>
             </div>
-             <div class="song hidden" onclick="changeTrack('15 khalij.mp3', 'أغنية خليجية 15')" style="border-color: #8e1a4f;">
+             <div class="song" onclick="changeTrack('15 khalij.mp3', 'أغنية خليجية 15')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 15</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('16 khalij.mp3', 'أغنية خليجية 16')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('16 khalij.mp3', 'أغنية خليجية 16')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 16</div>
             </div>
-            <div class="song hidden" onclick="changeTrack('17 khalij.mp3', 'أغنية خليجية 17')" style="border-color: #8e1a4f;">
+            <div class="song" onclick="changeTrack('17 khalij.mp3', 'أغنية خليجية 17')" style="border-color: #8e1a4f;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">أغنية خليجية 17</div>
             </div>
-            <!-- زر عرض المزيد -->
-    <button class="show-more-btn" onclick="toggleSongs(this)">
-        <span class="spinner"></span>
-        Afficher plus
-    </button>
         </div>
         
         
@@ -597,7 +565,8 @@
             </div>
         </div> 
       </div>
-    <div class="album-list-msc">Autres albums </div>
+    
+   <div class="album-list-msc">Autres albums </div>
     <!-- الألبومات الجديدة -->
     <div class="new-albums-container" style="margin: 5px 10px;">
         <div class="new-album-item" onclick="scrollToAlbums('khalij')">

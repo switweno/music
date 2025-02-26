@@ -450,26 +450,7 @@ function scrollAlbums(direction) {
     });
 }
 
-function toggleSongs(button) {
-    const album = button.closest('.songs-container'); // الحصول على الألبوم المرتبط بالزر
-    const hiddenSongs = album.querySelectorAll('.song.hidden'); // العثور على الأغاني المخفية
-    const spinner = button.querySelector('.spinner'); // العثور على الدائرة الدوارة داخل الزر
-    
-    // إظهار الدائرة الدوارة
-    spinner.style.display = "inline-block";
-    
-    setTimeout(() => {
-        hiddenSongs.forEach(song => {
-            song.classList.remove('hidden'); // إزالة الـ "hidden" لإظهار الأغاني المخفية
-        });
 
-        // إخفاء الدائرة الدوارة
-        spinner.style.display = "none";
-        
-        // إخفاء الزر بعد ظهور الأغاني المخفية
-        button.style.display = "none";
-    }, 1000); // مدة الدوران (يمكنك تعديلها)
-}
 
 document.addEventListener("DOMContentLoaded", function () {
     let currentPlaying = null;
