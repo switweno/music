@@ -6,7 +6,7 @@ body {
     box-sizing: border-box;
     background-color: #f5f5f5; /* لون كري */
     color: #333;
-    padding-top: 219px; /* يمنع المحتوى من الاختباء خلف المشغل */
+    padding-top: 222px; /* يمنع المحتوى من الاختباء خلف المشغل */
 }
 
 body.shifted {
@@ -99,7 +99,7 @@ body.shifted {
     background-size: cover;
     background-position: center;
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 2px 2px #ff4d4d;
     margin-top: 5px;
