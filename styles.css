@@ -500,7 +500,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #333;
+    background-color: #b71212;
     color: #ffffff;
     padding: 10px 0;
     font-size: 14px;
@@ -525,7 +525,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 }
 
 @keyframes marquee {
-    from { transform: translateX(50%); }
+    from { transform: translateX(40%); }
     to { transform: translateX(-100%); }
 }
 
