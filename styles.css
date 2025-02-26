@@ -434,6 +434,8 @@ h1 {
         .new-album-item img {
             width: 100%;
             height: auto;
+			 box-shadow: 0 0 5px rgb(255, 0, 58); /* ظل أحمر خفيف حول الصورة */
+            border: 2px solid rgb(255, 77, 77); /* إضافة خط أحمر فاتح بسمك 2px حول الصورة */
         }
         .new-album-item span {
             display: block;
