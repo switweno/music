@@ -64,7 +64,7 @@ body {
 }
 
 .album-scroll-container::-webkit-scrollbar-thumb {
-    background: #1bceb4; /* لون شريط التمرير */
+    background: rgba(255, 204, 0, 0.98); /* لون شريط التمرير */
     border-radius: 10px;
 }
 
