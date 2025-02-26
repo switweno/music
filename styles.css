@@ -124,13 +124,38 @@ body {
     opacity: 1;
 }
 
-.album-name {
-    margin-top: 8px;
-    font-size: 14px;
-    color: var(--primary-color);
+#track-name {
+    font-size: 15px;
+    margin-top: 5px;
+    background: #ffffff;
+    color: #ff4d4d; 
     font-weight: bold;
-    text-align: center;
+    box-shadow: 0 0 2px rgba(144, 142, 142, 0.3);
 }
+
+.track-name {
+    border: 1px solid #9a9898;
+    padding: 7px;
+    border-radius: 5px;
+    margin-top: 8px;
+}
+
+/* أسماء الألبومات */
+.album-name {
+    margin-top: 2px; /* المسافة العلوية */
+    font-size: 13px; /* حجم الخط */
+    color: #e40d0d; /* اللون الأحمر */
+    font-weight: bold; /* جعل النص عريضًا */
+    text-align: center; /* محاذاة النص في المنتصف */
+    background: #ffffff; /* خلفية بيضاء */
+    box-shadow: 0 0 2px rgba(144, 142, 142, 0); /* تأثير الظل */
+    border: 1px solid rgba(154, 152, 152, 0.01); /* حد رفيع حول العنصر */
+    padding: 7px; /* المسافة الداخلية حول النص */
+    border-radius: 5px; /* زوايا مدورة */
+    display: inline-block; /* تأكد من أن العنصر لا يتداخل مع عناصر أخرى */
+}
+
+
 
 /* تنسيق الأقسام الرئيسية */
 .section-title {
@@ -318,21 +343,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     margin-top: 0; /* إزالة الهامش العلوي */
 }
 
-#track-name {
-    font-size: 15px;
-    margin-top: 5px;
-    background: #ffffff;
-    color: #ff4d4d; 
-    font-weight: bold;
-    box-shadow: 0 0 2px rgba(144, 142, 142, 0.3);
-}
 
-.track-name {
-    border: 1px solid #9a9898;
-    padding: 7px;
-    border-radius: 5px;
-    margin-top: 8px;
-}
 
 .player-controls {
     display: flex;
@@ -419,7 +430,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 
 /* أيقونات التواصل الاجتماعي */
 .social-buttons {
-    margin: 15px 1px;
+    margin: 6px 1px;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -527,7 +538,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
         }
         .new-album-item {
             background-color: #f3f3f3;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
             text-align: center;
@@ -535,7 +546,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
         .new-album-item img {
             width: 100%;
             height: auto;
-			 box-shadow: 0 0 5px rgb(255, 0, 58); /* ظل أحمر خفيف حول الصورة */
+			 box-shadow: 0 0 5px rgba(92, 88, 89, 0.52); /* ظل أحمر خفيف حول الصورة */
             border: 2px solid rgb(255, 77, 77); /* إضافة خط أحمر فاتح بسمك 2px حول الصورة */
         }
         .new-album-item span {
@@ -585,13 +596,6 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     width: 175px;
     height: 43px;
 }
-/* أسماء الألبومات */
-.album-name {
-    margin-top: 2px;
-    font-size: 13px;
-    color: #4d4a4a;
-    font-weight: bold;
-    text-align: center;
-}
+
 
 
