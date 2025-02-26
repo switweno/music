@@ -1,6 +1,6 @@
 /* تصميم عام */
 :root {
-    --primary-color: #19ea4a;
+    --primary-color: #4de83a;
     --secondary-color: #8e1a4f;
     --dark-bg: #1F2937;
     --light-bg: #f5f5f5;
@@ -421,7 +421,7 @@ body {
     padding: 20px;
     background-color: var(--dark-bg);
     color: white;
-    margin-top: 40px;
+    margin-top: 1px;
 }
 
 .social-buttons {
@@ -510,7 +510,7 @@ body {
     font-weight: bold; /* جعل الخط عريض */
     text-align: center; /* محاذاة النص في المنتصف */
     padding: 10px; /* إضافة حواف داخلية حول النص */
-    margin: 5px 0; /* إضافة هامش علوي وسفلي */
+    margin: 1px 0; /* إضافة هامش علوي وسفلي */
     border-top: 3px solid #ff6347; /* إضافة خط فوق النص (يمكنك تغيير اللون) */
     color: #333; /* لون النص */
     background-color: #f0f0f0; /* خلفية خفيفة */
@@ -531,7 +531,7 @@ body {
     background-color: rgba(255, 255, 255, 0);
     padding: 12px;
     border-radius: 50px;
-    border: 5px solid #ffffff; /* إطار أحمر */
+    border: 5px solid rgba(231, 231, 231, 0); /* إطار أحمر */
     display: flex;
     justify-content: center;
     align-items: center;
