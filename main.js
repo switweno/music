@@ -1,14 +1,14 @@
 // قائمة الأغاني
 const songs = [
-    { file: '01 star chaabi.mp3', name: 'star chaabi 1', album: 'starchaabi' },
-    { file: '02 star chaabi.mp3', name: 'star chaabi 2 ', album:'starchaabi' },
-    { file: '03 star cha3bi.mp3', name: 'star chaabi 3', album: 'starchaabi' },
-    { file: '04 star cha3bi.mp3', name: 'star chaabi 4', album: 'starchaabi' },
-	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi' },
-	{ file: '06 star cha3bi.mp3', name: 'star chaabi 6', album: 'starchaabi' },
-    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
-    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
-    { file: '08 star cha3bi.mp3', name: 'star chaabi 8', album: 'starchaabi' },
+    { file: '01 star chaabi.mp3', name: 'star chaabi 1', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:45' },
+    { file: '02 star chaabi.mp3', name: 'star chaabi 2 ', album:'starchaabi', artist: 'Star Chaabi', duration: '4:12' },
+    { file: '03 star cha3bi.mp3', name: 'star chaabi 3', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:58' },
+    { file: '04 star cha3bi.mp3', name: 'star chaabi 4', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:25' },
+	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:35' },
+	{ file: '06 star cha3bi.mp3', name: 'star chaabi 6', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:05' },
+    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:30' },
+    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi', artist: 'Star Chaabi', duration: '3:30' },
+    { file: '08 star cha3bi.mp3', name: 'star chaabi 8', album: 'starchaabi', artist: 'Star Chaabi', duration: '4:20' },
     
     { file: '02 casa star.mp3', name: 'casa star 1', album: 'casastar' },
     { file: '03 casa star.mp3', name: 'casa star 2 ', album: 'casastar' },
@@ -120,6 +120,156 @@ let isRandomPlaying = false;
 let currentAlbum = "starchaabi"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
 
+// متغيرات للمفضلة
+let favorites = [];
+
+// استدعاء المفضلة عند تحميل الصفحة
+function loadFavorites() {
+    const storedFavorites = localStorage.getItem('musicFavorites');
+    if (storedFavorites) {
+        favorites = JSON.parse(storedFavorites);
+        updateFavoritesUI();
+    }
+}
+
+// حفظ المفضلة في التخزين المحلي
+function saveFavorites() {
+    localStorage.setItem('musicFavorites', JSON.stringify(favorites));
+}
+
+// إضافة أو إزالة أغنية من المفضلة
+function toggleFavorite(event, songId, audioFile, songName, artistName) {
+    // منع انتشار الحدث لتجنب تشغيل الأغنية عند النقر على زر المفضلة
+    event.stopPropagation();
+    
+    const songIndex = favorites.findIndex(song => song.id === songId);
+    const button = event.currentTarget;
+    const icon = button.querySelector('i');
+    
+    if (songIndex === -1) {
+        // إضافة الأغنية إلى المفضلة
+        favorites.push({
+            id: songId,
+            file: audioFile,
+            name: songName,
+            artist: artistName || '',
+            album: currentAlbum
+        });
+        
+        // تغيير الأيقونة وإضافة تنشيط
+        icon.textContent = 'favorite';
+        button.classList.add('active');
+        
+        // إظهار رسالة تأكيد
+        showNotification(`تمت إضافة "${songName}" إلى المفضلة`);
+    } else {
+        // إزالة الأغنية من المفضلة
+        favorites.splice(songIndex, 1);
+        
+        // تغيير الأيقونة وإزالة التنشيط
+        icon.textContent = 'favorite_border';
+        button.classList.remove('active');
+        
+        // إظهار رسالة تأكيد
+        showNotification(`تمت إزالة "${songName}" من المفضلة`);
+    }
+    
+    // حفظ التغييرات وتحديث واجهة المستخدم
+    saveFavorites();
+    updateFavoritesUI();
+}
+
+// تحديث واجهة المستخدم للمفضلة
+function updateFavoritesUI() {
+    const favoritesList = document.getElementById('favorites-list');
+    
+    // إفراغ قائمة المفضلة
+    favoritesList.innerHTML = '';
+    
+    if (favorites.length === 0) {
+        // إذا لم تكن هناك أغاني مفضلة، عرض رسالة
+        favoritesList.innerHTML = '<div class="no-favorites">لا توجد أغاني مفضلة حالياً</div>';
+        return;
+    }
+    
+    // إنشاء عنصر لكل أغنية مفضلة
+    favorites.forEach(song => {
+        const songElement = document.createElement('div');
+        songElement.className = 'song';
+        songElement.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
+        songElement.style.borderColor = '#8e1a4f';
+        songElement.dataset.songId = song.id;
+        
+        songElement.innerHTML = `
+            <i class="material-symbols-outlined">volume_up</i>
+            <div class="song-title">${song.name}</div>
+            <button class="favorite-btn active" onclick="toggleFavorite(event, '${song.id}', '${song.file}', '${song.name}', '')">
+                <i class="material-icons">favorite</i>
+            </button>
+        `;
+        
+        favoritesList.appendChild(songElement);
+    });
+    
+    // تحديث حالة أزرار المفضلة في جميع الأغاني
+    updateFavoriteButtons();
+}
+
+// تحديث حالة أزرار المفضلة
+function updateFavoriteButtons() {
+    document.querySelectorAll('.song').forEach(songElement => {
+        const songId = songElement.dataset.songId;
+        if (!songId) return;
+        
+        const isFavorite = favorites.some(song => song.id === songId);
+        const favoriteBtn = songElement.querySelector('.favorite-btn');
+        if (!favoriteBtn) return;
+        
+        const icon = favoriteBtn.querySelector('i');
+        if (isFavorite) {
+            icon.textContent = 'favorite';
+            favoriteBtn.classList.add('active');
+        } else {
+            icon.textContent = 'favorite_border';
+            favoriteBtn.classList.remove('active');
+        }
+    });
+}
+
+// عرض إشعار
+function showNotification(message) {
+    // إنشاء عنصر الإشعار إذا لم يكن موجوداً بالفعل
+    let notification = document.getElementById('notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    // عرض الرسالة
+    notification.textContent = message;
+    notification.style.opacity = '1';
+    
+    // إخفاء الإشعار بعد 3 ثوان
+    setTimeout(() => {
+        notification.style.opacity = '0';
+    }, 3000);
+}
+
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
@@ -138,10 +288,14 @@ function formatTime(seconds) {
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// دالة تغيير الأغنية
+// تحسين دالة تغيير الأغنية لاسترداد المدة تلقائيًا إذا لم تكن متاحة
 function changeTrack(audioFile, trackName) {
     if (isRandomPlaying) isRandomPlaying = false;
 
+    // البحث عن معلومات الأغنية الحالية
+    const currentSong = songs.find(song => song.file === audioFile);
+    const artistName = currentSong ? currentSong.artist : '';
+    
     document.getElementById("track-name").textContent = trackName;
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
@@ -150,6 +304,12 @@ function changeTrack(audioFile, trackName) {
     audioPlayer.play();
 
     playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
+
+    // تحديث عرض اسم الفنان إذا كان هناك عنصر له
+    const artistDisplayElement = document.getElementById("current-artist");
+    if (artistDisplayElement && artistName) {
+        artistDisplayElement.textContent = artistName;
+    }
 
     saveLastPlayed(audioFile, trackName, currentAlbum);
 }
@@ -264,6 +424,11 @@ audioPlayer.addEventListener("ended", playNext);
 window.addEventListener("load", () => {
     showAlbum("starchaabi");
     restoreLastPlayed();
+    initializeSongInfo();
+    loadFavorites();
+    
+    // تهيئة أزرار المفضلة لجميع الأغاني
+    initializeFavoriteButtons();
 
     // تعيين التوقيت الافتراضي
     currentTimeElement.textContent = "00:00";
@@ -402,5 +567,47 @@ document.addEventListener('DOMContentLoaded', function() {
         trackName.textContent = title;
     }
 });
+
+// دالة جديدة مبسطة لتهيئة معلومات الأغاني عند تحميل الصفحة - فقط لإنشاء أزرار المفضلة
+function initializeSongInfo() {
+    // تهيئة أزرار المفضلة لجميع الأغاني
+    setTimeout(() => {
+        initializeFavoriteButtons();
+    }, 500);
+}
+
+// تهيئة أزرار المفضلة لجميع الأغاني
+function initializeFavoriteButtons() {
+    document.querySelectorAll('.song').forEach(songElement => {
+        const audioFileMatch = songElement.getAttribute('onclick')?.match(/'([^']+\.mp3)'/);
+        const nameMatch = songElement.getAttribute('onclick')?.match(/, ?'([^']+)'/);
+        
+        if (audioFileMatch && nameMatch) {
+            const audioFile = audioFileMatch[1];
+            const songName = nameMatch[1];
+            
+            // إنشاء معرف فريد للأغنية
+            const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+            songElement.dataset.songId = songId;
+            
+            // إذا لم يكن زر المفضلة موجوداً، قم بإضافته
+            if (!songElement.querySelector('.favorite-btn')) {
+                const favoriteBtn = document.createElement('button');
+                favoriteBtn.className = 'favorite-btn';
+                favoriteBtn.setAttribute('onclick', `toggleFavorite(event, '${songId}', '${audioFile}', '${songName}', '')`);
+                
+                const icon = document.createElement('i');
+                icon.className = 'material-icons';
+                icon.textContent = 'favorite_border';
+                
+                favoriteBtn.appendChild(icon);
+                songElement.appendChild(favoriteBtn);
+            }
+        }
+    });
+    
+    // تحديث حالة الأزرار
+    updateFavoriteButtons();
+}
 
 
