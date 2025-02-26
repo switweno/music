@@ -44,7 +44,7 @@ body {
 
 /* تحسين تصميم التمرير للألبومات */
 .album-scroll-container {
-    width: 80%;
+    width: 87%;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -582,15 +582,15 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 
 /* تأثير عند تمرير الماوس */
 .scroll-arrow:hover {
-    color: #333;
+    color: #ff0000;
 }
 
 .scroll-left {
-    left: 3px; /* تعديل المسافة من اليسار */
+    left: 1px; /* تعديل المسافة من اليسار */
 }
 
 .scroll-right {
-    right: 3px; /* تعديل المسافة من اليمين */
+    right: 1px; /* تعديل المسافة من اليمين */
 }
 
 
