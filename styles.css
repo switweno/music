@@ -430,7 +430,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 
 /* أيقونات التواصل الاجتماعي */
 .social-buttons {
-    margin: 6px 1px;
+    margin: 10px 1px;
     display: flex;
     justify-content: center;
     gap: 10px;
