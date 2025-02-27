@@ -593,3 +593,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+document.addEventListener('mousedown', function(event) {
+    if (event.detail > 1) {
+        event.preventDefault(); // منع البحث التلقائي عند الضغط المطول
+    }
+}, false);
