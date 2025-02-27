@@ -675,5 +675,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     height: 43px;
 }
 
-
+ #comments-container { max-width: 500px; margin: auto; text-align: left; }
+        .comment { border-bottom: 1px solid #ddd; padding: 10px; margin: 5px 0; }
+        input, button { padding: 10px; margin: 5px; }
 
