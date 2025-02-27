@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fr" dir="ltr">
+
+
 <head>
       <meta charset="UTF-8">
     <meta name="google" content="notranslate">
@@ -137,7 +139,7 @@
     </div>
     <!-- حاوية الكاروسيل المحسنة لتكون relative -->
     <div class="relative flex items-center justify-center">
-        <div class="album-list-music px-8">← Autres albums →</div>
+        <div class="album-list-music">← Autres albums →</div>
     </div>
    
     
@@ -621,32 +623,32 @@
 </div>
 
 <!-- قسم التعليقات -->
-<div class="comments-section">
-    <div class="comments-header">
-        <i class="material-icons">comment</i>
-        <h2>التعليقات</h2>
-    </div>
-    
-    <div class="comments-form">
-        <div class="user-info">
-            <input type="text" id="comment-name" placeholder="اسمك" required>
-            <input type="text" id="comment-email" placeholder="البريد الإلكتروني (اختياري)">
+    <div class="comments-section" lang="ar" dir="rtl">
+        <div class="comments-header">
+            <i class="material-icons">comment</i>
+            <h2>التعليقات</h2>
         </div>
-        <div class="comment-textarea-container">
-            <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
-            <button id="emoji-button" type="button" class="emoji-toggle-btn">
-                <i class="material-icons">sentiment_satisfied_alt</i>
-            </button>
+        
+        <div class="comments-form">
+            <div class="user-info">
+                <input type="text" id="comment-name" placeholder="اسمك" required>
+                <input type="text" id="comment-email" placeholder="البريد الإلكتروني (اختياري)">
+            </div>
+            <div class="comment-textarea-container">
+                <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
+                <button id="emoji-button" type="button" class="emoji-toggle-btn">
+                    <i class="material-icons">sentiment_satisfied_alt</i>
+                </button>
+            </div>
+            <div id="emoji-picker-container" class="hidden"></div>
+            <button id="submit-comment" type="button">إرسال التعليق</button>
         </div>
-        <div id="emoji-picker-container" class="hidden"></div>
-        <button id="submit-comment" type="button">إرسال التعليق</button>
+        
+        <div id="comments-container">
+            <!-- سيتم إضافة التعليقات هنا عبر JavaScript -->
+            <div class="loading-comments">جاري تحميل التعليقات...</div>
+        </div>
     </div>
-    
-    <div id="comments-container">
-        <!-- سيتم إضافة التعليقات هنا عبر JavaScript -->
-        <div class="loading-comments">جاري تحميل التعليقات...</div>
-    </div>
-</div>
 
 <footer class="footer">
     
