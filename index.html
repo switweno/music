@@ -19,6 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="logozik.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <!-- Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js"></script>
     <title>khalid music Zik</title>
     <link rel="stylesheet" href="styles.css">
     
@@ -613,94 +616,29 @@
         <div class="no-favorites-message">لم يتم إضافة أي أغاني للمفضلة بعد</div>
     </div>
 </div>
-<div class="comments-section">
-    <h2 class="comments-title">
-        <i class="fas fa-comments"></i>
-        Commentaires des utilisateurs
-    </h2>
-    
-    <div class="comment-form">
-        <div class="form-header">
-            <input type="text" id="nameInput" placeholder="Votre nom *" required>
-            <div class="rating">
-                <i class="fas fa-star" data-rating="1"></i>
-                <i class="fas fa-star" data-rating="2"></i>
-                <i class="fas fa-star" data-rating="3"></i>
-                <i class="fas fa-star" data-rating="4"></i>
-                <i class="fas fa-star" data-rating="5"></i>
-            </div>
-        </div>
-        <div class="emoji-picker">
-            <button type="button" class="emoji-button">
-                <i class="far fa-smile"></i> Ajouter emoji
-            </button>
-            <div class="emoji-list">
-                <!-- سيتم إضافة الإيموجي ديناميكياً -->
-            </div>
-        </div>
-        <textarea id="commentInput" placeholder="Partagez votre avis..."></textarea>
-        <div class="comment-actions">
-            <span id="charCount">0/500</span>
-            <button id="submitComment" class="submit-btn">
-                <i class="fas fa-paper-plane"></i> Envoyer
-            </button>
-        </div>
-    </div>
 
-    <div class="comments-container">
-        <div class="comments-filter">
-            <select id="sortComments">
-                <option value="newest">Plus récents</option>
-                <option value="highest">Meilleures notes</option>
-                <option value="lowest">Notes les plus basses</option>
-            </select>
+<!-- قسم التعليقات -->
+<div class="comments-section">
+    <div class="comments-header">
+        <i class="material-icons">comment</i>
+        <h2>التعليقات</h2>
+    </div>
+    
+    <div class="comments-form">
+        <div class="user-info">
+            <input type="text" id="comment-name" placeholder="اسمك" required>
+            <input type="text" id="comment-email" placeholder="البريد الإلكتروني (اختياري)">
         </div>
-        <div id="commentsList" class="comments-list"></div>
+        <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
+        <button id="submit-comment" type="button">إرسال التعليق</button>
+    </div>
+    
+    <div id="comments-container">
+        <!-- سيتم إضافة التعليقات هنا عبر JavaScript -->
+        <div class="loading-comments">جاري تحميل التعليقات...</div>
     </div>
 </div>
 
-    <script type="module">
-        // Importer Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
-
-        // Configuration Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_yt3bd0eYEReqwrWewe7QYDHotwOTUl0",
-            authDomain: "my-comments-system.firebaseapp.com",
-            projectId: "my-comments-system",
-            storageBucket: "my-comments-system.firebasestorage.app",
-            messagingSenderId: "342793879714",
-            appId: "1:342793879714:web:b753725911373aa0ab97fb"
-        };
-
-        // Initialisation de Firebase et Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Référence à la collection "comments"
-        const commentsRef = collection(db, "comments");
-
-        // Fonction pour ajouter un commentaire
-        document.getElementById("submitComment").addEventListener("click", async () => {
-            const commentText = document.getElementById("commentInput").value;
-            if (commentText.trim() !== "") {
-                await addDoc(commentsRef, { text: commentText, timestamp: new Date() });
-                document.getElementById("commentInput").value = "";
-            }
-        });
-
-        // Fonction pour afficher les commentaires en temps réel
-        onSnapshot(commentsRef, (snapshot) => {
-            const commentsList = document.getElementById("commentsList");
-            commentsList.innerHTML = "";
-            snapshot.docs.forEach((doc) => {
-                const comment = document.createElement("li");
-                comment.textContent = doc.data().text;
-                commentsList.appendChild(comment);
-            });
-        });
-    </script>
 <footer class="footer">
     
     <div class="social-buttons">
@@ -724,6 +662,115 @@
 </footer>
     <script src="main.js" defer></script>
     
-</script>
+    <!-- إضافة Firebase -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+      import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyC_yt3bd0eYEReqwrWewe7QYDHotwOTUl0",
+        authDomain: "my-comments-system.firebaseapp.com",
+        projectId: "my-comments-system",
+        storageBucket: "my-comments-system.firebasestorage.app",
+        messagingSenderId: "342793879714",
+        appId: "1:342793879714:web:b753725911373aa0ab97fb"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      
+      // جلب التعليقات
+      async function getComments() {
+        const commentsContainer = document.getElementById('comments-container');
+        commentsContainer.innerHTML = '<div class="loading-comments">جاري تحميل التعليقات...</div>';
+        
+        try {
+          const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
+          const querySnapshot = await getDocs(q);
+          
+          commentsContainer.innerHTML = '';
+          
+          if (querySnapshot.empty) {
+              commentsContainer.innerHTML = '<div class="no-comments">لا توجد تعليقات بعد. كن أول من يعلق!</div>';
+              return;
+          }
+          
+          querySnapshot.forEach((doc) => {
+              const comment = doc.data();
+              const date = comment.createdAt ? new Date(comment.createdAt.toDate()).toLocaleString() : 'الآن';
+              
+              const commentElement = document.createElement('div');
+              commentElement.className = 'comment-item';
+              commentElement.innerHTML = `
+                  <div class="comment-header">
+                      <div class="comment-author">${comment.name}</div>
+                      <div class="comment-date">${date}</div>
+                  </div>
+                  <div class="comment-content">${comment.text}</div>
+              `;
+              
+              commentsContainer.appendChild(commentElement);
+          });
+        } catch (error) {
+          console.error("Error getting comments: ", error);
+          commentsContainer.innerHTML = '<div class="no-comments">حدث خطأ أثناء تحميل التعليقات. يرجى المحاولة مرة أخرى.</div>';
+        }
+      }
+      
+      // إضافة تعليق جديد
+      async function addComment() {
+        const nameInput = document.getElementById('comment-name');
+        const textInput = document.getElementById('comment-text');
+        const emailInput = document.getElementById('comment-email');
+        
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        const email = emailInput.value.trim();
+        
+        if (!name || !text) {
+          alert('يرجى ملء الحقول المطلوبة');
+          return;
+        }
+        
+        const submitBtn = document.getElementById('submit-comment');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'جاري الإرسال...';
+        
+        try {
+          await addDoc(collection(db, "comments"), {
+            name: name,
+            text: text,
+            email: email || null,
+            createdAt: serverTimestamp()
+          });
+          
+          // تفريغ الحقول
+          nameInput.value = '';
+          textInput.value = '';
+          emailInput.value = '';
+          
+          // إعادة تحميل التعليقات
+          getComments();
+          
+          alert('تم إضافة تعليقك بنجاح!');
+        } catch (error) {
+          console.error("Error adding comment: ", error);
+          alert('حدث خطأ أثناء إضافة التعليق. يرجى المحاولة مرة أخرى.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'إرسال التعليق';
+        }
+      }
+      
+      // إضافة مستمع الحدث لزر إرسال التعليق
+      document.getElementById('submit-comment').addEventListener('click', addComment);
+      
+      // تحميل التعليقات عند تحميل الصفحة
+      document.addEventListener('DOMContentLoaded', getComments);
+    </script>
+  
 </body>
 </html>
