@@ -613,12 +613,51 @@
         <div class="no-favorites-message">لم يتم إضافة أي أغاني للمفضلة بعد</div>
     </div>
 </div>
- <h2>Ajoutez votre commentaire</h2>
-    <textarea id="commentInput" placeholder="Écrivez un commentaire..." rows="4" cols="50"></textarea>
-    <button id="submitComment">Envoyer</button>
+<div class="comments-section">
+    <h2 class="comments-title">
+        <i class="fas fa-comments"></i>
+        Commentaires des utilisateurs
+    </h2>
+    
+    <div class="comment-form">
+        <div class="form-header">
+            <input type="text" id="nameInput" placeholder="Votre nom *" required>
+            <div class="rating">
+                <i class="fas fa-star" data-rating="1"></i>
+                <i class="fas fa-star" data-rating="2"></i>
+                <i class="fas fa-star" data-rating="3"></i>
+                <i class="fas fa-star" data-rating="4"></i>
+                <i class="fas fa-star" data-rating="5"></i>
+            </div>
+        </div>
+        <div class="emoji-picker">
+            <button type="button" class="emoji-button">
+                <i class="far fa-smile"></i> Ajouter emoji
+            </button>
+            <div class="emoji-list">
+                <!-- سيتم إضافة الإيموجي ديناميكياً -->
+            </div>
+        </div>
+        <textarea id="commentInput" placeholder="Partagez votre avis..."></textarea>
+        <div class="comment-actions">
+            <span id="charCount">0/500</span>
+            <button id="submitComment" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Envoyer
+            </button>
+        </div>
+    </div>
 
-    <h3>Commentaires:</h3>
-    <ul id="commentsList"></ul>
+    <div class="comments-container">
+        <div class="comments-filter">
+            <select id="sortComments">
+                <option value="newest">Plus récents</option>
+                <option value="highest">Meilleures notes</option>
+                <option value="lowest">Notes les plus basses</option>
+            </select>
+        </div>
+        <div id="commentsList" class="comments-list"></div>
+    </div>
+</div>
 
     <script type="module">
         // Importer Firebase
@@ -684,45 +723,7 @@
     </div>
 </footer>
     <script src="main.js" defer></script>
-    <script>
-    let lastScrollTop = 0;
-    const newsTicker = document.querySelector('.news-ticker');
-    const body = document.body;
-    const audioPlayerContainer = document.getElementById('audio-player-container');
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            // عند الهبوط بالصفحة
-            newsTicker.classList.add('hidden');
-            body.classList.add('shifted');
-            audioPlayerContainer.classList.add('shifted');
-        } else {
-            // عند الطلوع بالصفحة
-            newsTicker.classList.remove('hidden');
-            body.classList.remove('shifted');
-            audioPlayerContainer.classList.remove('shifted');
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // تجنب القيم السالبة
-    });
-
-    function scrollToAlbums(albumId) {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        showAlbum(albumId);
-    }
-
-    function showAlbum(album) {
-        const albums = document.querySelectorAll('.songs-container');
-        albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
-
-        document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
-
-        currentAlbum = album; // تحديث الألبوم الحالي
-        currentTrackIndex = 0; // إعادة المؤشر إلى البداية
-    }
+    
 </script>
 </body>
 </html>

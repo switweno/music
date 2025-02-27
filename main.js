@@ -583,6 +583,45 @@ function initializeFavoriteButtons() {
 }
 
 
+ let lastScrollTop = 0;
+    const newsTicker = document.querySelector('.news-ticker');
+    const body = document.body;
+    const audioPlayerContainer = document.getElementById('audio-player-container');
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+            // عند الهبوط بالصفحة
+            newsTicker.classList.add('hidden');
+            body.classList.add('shifted');
+            audioPlayerContainer.classList.add('shifted');
+        } else {
+            // عند الطلوع بالصفحة
+            newsTicker.classList.remove('hidden');
+            body.classList.remove('shifted');
+            audioPlayerContainer.classList.remove('shifted');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // تجنب القيم السالبة
+    });
+
+    function scrollToAlbums(albumId) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        showAlbum(albumId);
+    }
+
+    function showAlbum(album) {
+        const albums = document.querySelectorAll('.songs-container');
+        albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+
+        document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
+
+        currentAlbum = album; // تحديث الألبوم الحالي
+        currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+    }
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.noselect').forEach(function (element) {
         element.addEventListener('mousedown', function (event) {
@@ -600,3 +639,361 @@ document.addEventListener('mousedown', function(event) {
         event.preventDefault(); // منع البحث التلقائي عند الضغط المطول
     }
 }, false);
+
+// نظام التعليقات المحسن
+document.addEventListener('DOMContentLoaded', () => {
+    const ratingStars = document.querySelectorAll('.rating .fa-star');
+    const commentInput = document.getElementById('commentInput');
+    const nameInput = document.getElementById('nameInput');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitComment');
+    const commentsList = document.getElementById('commentsList');
+    const sortComments = document.getElementById('sortComments');
+    
+    let currentRating = 0;
+
+    // تحديث عداد الأحرف
+    commentInput.addEventListener('input', () => {
+        const length = commentInput.value.length;
+        charCount.textContent = `${length}/500`;
+        if (length > 500) {
+            charCount.style.color = 'red';
+        } else {
+            charCount.style.color = '#666';
+        }
+    });
+
+    // نظام التقييم بالنجوم
+    ratingStars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const rating = star.dataset.rating;
+            highlightStars(rating);
+        });
+
+        star.addEventListener('mouseout', () => {
+            highlightStars(currentRating);
+        });
+
+        star.addEventListener('click', () => {
+            currentRating = star.dataset.rating;
+            highlightStars(currentRating);
+        });
+    });
+
+    function highlightStars(rating) {
+        ratingStars.forEach(star => {
+            const starRating = star.dataset.rating;
+            if (starRating <= rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    // إرسال التعليق
+    submitBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        const comment = commentInput.value.trim();
+        
+        // التحقق من إدخال الاسم
+        if (!name) {
+            nameInput.classList.add('error');
+            alert('Le nom est obligatoire');
+            return;
+        }
+        
+        // التحقق من إدخال التعليق
+        if (!comment) {
+            alert('Veuillez écrire un commentaire');
+            return;
+        }
+        
+        // التحقق من التقييم
+        if (!currentRating) {
+            alert('Veuillez donner une note');
+            return;
+        }
+
+        // إضافة التعليق
+        const newComment = {
+            author: name,
+            text: comment,
+            rating: currentRating,
+            date: new Date(),
+            id: Date.now()
+        };
+
+        saveComment(newComment);
+        addCommentToList(newComment);
+        resetForm();
+    });
+
+    function saveComment(comment) {
+        let comments = JSON.parse(localStorage.getItem('comments') || '[]');
+        
+        // إضافة الإيموجي تلقائياً للكلمات الإيجابية
+        const positiveWords = {
+            'جميل': '😊',
+            'رائع': '🌟',
+            'حلو': '💖',
+            'جيد': '👍',
+            'مرحبا': '👋',
+            'ممتاز': '🎉'
+        };
+        
+        // إضافة الإيموجي للتعليق
+        for (let word in positiveWords) {
+            if (comment.text.includes(word)) {
+                comment.text += ` ${positiveWords[word]}`;
+            }
+        }
+        
+        comments.push(comment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    function addCommentToList(comment) {
+        const commentElement = createCommentElement(comment);
+        commentsList.insertBefore(commentElement, commentsList.firstChild);
+    }
+
+    function createCommentElement(comment) {
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        
+        const formattedDate = new Date(comment.date).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        // تحويل النص إلى HTML مع الإيموجي
+        const commentText = formatCommentText(comment.text);
+        
+        div.innerHTML = `
+            <div class="comment-header">
+                <span class="comment-author">
+                    <i class="fas fa-user-circle"></i>
+                    ${comment.author || 'Utilisateur'}
+                </span>
+                <div class="comment-rating">
+                    ${Array(5).fill('').map((_, i) => 
+                        `<i class="fas fa-star ${i < comment.rating ? 'active' : ''}"></i>`
+                    ).join('')}
+                </div>
+            </div>
+            <div class="comment-bubble">
+                <div class="comment-text">${commentText}</div>
+            </div>
+            <div class="comment-metadata">
+                <div class="comment-date">
+                    <i class="far fa-clock"></i> ${formattedDate}
+                </div>
+            </div>
+        `;
+        
+        return div;
+    }
+
+    // دالة لتنسيق نص التعليق وإضافة الإيموجي
+    function formatCommentText(text) {
+        // تحويل الإيموجي النصية إلى رموز
+        const emojiMap = {
+            ':)': '😊',
+            ':D': '😃',
+            '<3': '❤️',
+            ':music:': '🎵',
+            ':party:': '🎊',
+            ':heart_eyes:': '😍',
+            ':star:': '⭐',
+            ':fire:': '🔥'
+        };
+        
+        // استبدال الإيموجي النصية برموزها
+        let formattedText = text;
+        for (let emoji in emojiMap) {
+            formattedText = formattedText.replace(
+                new RegExp(emoji.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g'),
+                `<span class="comment-emoji">${emojiMap[emoji]}</span>`
+            );
+        }
+        
+        // تحويل السطور الجديدة إلى <br>
+        return formattedText.replace(/\n/g, '<br>');
+    }
+
+    // إزالة الفئة error عند الكتابة في حقل الاسم
+    nameInput.addEventListener('input', () => {
+        nameInput.classList.remove('error');
+    });
+
+    // ترتيب التعليقات
+    sortComments.addEventListener('change', () => {
+        const comments = Array.from(commentsList.children);
+        comments.sort((a, b) => {
+            const aRating = a.querySelector('.comment-rating').textContent.match(/★/g)?.length || 0;
+            const bRating = b.querySelector('.comment-rating').textContent.match(/★/g)?.length || 0;
+            
+            if (sortComments.value === 'highest') {
+                return bRating - aRating;
+            } else if (sortComments.value === 'lowest') {
+                return aRating - bRating;
+            } else {
+                const aDate = new Date(a.querySelector('.comment-date').textContent);
+                const bDate = new Date(b.querySelector('.comment-date').textContent);
+                return bDate - aDate;
+            }
+        });
+        
+        commentsList.innerHTML = '';
+        comments.forEach(comment => commentsList.appendChild(comment));
+    });
+
+    // تحميل التعليقات المحفوظة
+    function loadComments() {
+        const comments = JSON.parse(localStorage.getItem('comments') || '[]');
+        comments.forEach(comment => addCommentToList(comment));
+    }
+
+    loadComments();
+});
+
+// إضافة قائمة الإيموجي الشائعة
+const commonEmojis = [
+    '😊', '😄', '😍', '🎵', '🎶', '👍', '❤️', '💖',
+    '🎸', '🎼', '🎧', '🎤', '🎹', '👏', '🌟', '✨',
+    '💃', '🕺', '🎉', '🎊', '💫', '🔥', '⭐', '💯'
+];
+
+// تهيئة قائمة الإيموجي
+function initializeEmojiPicker() {
+    const emojiList = document.querySelector('.emoji-list');
+    const emojiButton = document.querySelector('.emoji-button');
+    const commentInput = document.getElementById('commentInput');
+
+    // إضافة الإيموجي إلى القائمة
+    commonEmojis.forEach(emoji => {
+        const emojiItem = document.createElement('div');
+        emojiItem.className = 'emoji-item';
+        emojiItem.textContent = emoji;
+        emojiItem.addEventListener('click', () => {
+            commentInput.value += emoji;
+            emojiList.classList.remove('active');
+        });
+        emojiList.appendChild(emojiItem);
+    });
+
+    // تفعيل/تعطيل قائمة الإيموجي
+    emojiButton.addEventListener('click', () => {
+        emojiList.classList.toggle('active');
+    });
+
+    // إغلاق قائمة الإيموجي عند النقر خارجها
+    document.addEventListener('click', (e) => {
+        if (!emojiButton.contains(e.target) && !emojiList.contains(e.target)) {
+            emojiList.classList.remove('active');
+        }
+    });
+}
+
+// تحديث دالة إنشاء عنصر التعليق
+function createCommentElement(comment) {
+    const div = document.createElement('div');
+    div.className = 'comment-item';
+    
+    const formattedDate = new Date(comment.date).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    // تحويل النص إلى HTML مع الإيموجي
+    const commentText = formatCommentText(comment.text);
+    
+    div.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-author">
+                <i class="fas fa-user-circle"></i>
+                ${comment.author || 'Utilisateur'}
+            </span>
+            <div class="comment-rating">
+                ${Array(5).fill('').map((_, i) => 
+                    `<i class="fas fa-star ${i < comment.rating ? 'active' : ''}"></i>`
+                ).join('')}
+            </div>
+        </div>
+        <div class="comment-bubble">
+            <div class="comment-text">${commentText}</div>
+        </div>
+        <div class="comment-metadata">
+            <div class="comment-date">
+                <i class="far fa-clock"></i> ${formattedDate}
+            </div>
+        </div>
+    `;
+    
+    return div;
+}
+
+// دالة لتنسيق نص التعليق وإضافة الإيموجي
+function formatCommentText(text) {
+    // تحويل الإيموجي النصية إلى رموز
+    const emojiMap = {
+        ':)': '😊',
+        ':D': '😃',
+        '<3': '❤️',
+        ':music:': '🎵',
+        ':party:': '🎊',
+        ':heart_eyes: '😍',
+        ':star:': '⭐',
+        ':fire:': '🔥'
+    };
+    
+    // استبدال الإيموجي النصية برموزها
+    let formattedText = text;
+    for (let emoji in emojiMap) {
+        formattedText = formattedText.replace(
+            new RegExp(emoji.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g'),
+            `<span class="comment-emoji">${emojiMap[emoji]}</span>`
+        );
+    }
+    
+    // تحويل السطور الجديدة إلى <br>
+    return formattedText.replace(/\n/g, '<br>');
+}
+
+// تحديث دالة حفظ التعليق
+function saveComment(comment) {
+    let comments = JSON.parse(localStorage.getItem('comments') || '[]');
+    
+    // إضافة الإيموجي تلقائياً للكلمات الإيجابية
+    const positiveWords = {
+        'جميل': '😊',
+        'رائع': '🌟',
+        'حلو': '💖',
+        'جيد': '👍',
+        'مرحبا': '👋',
+        'ممتاز': '🎉'
+    };
+    
+    // إضافة الإيموجي للتعليق
+    for (let word in positiveWords) {
+        if (comment.text.includes(word)) {
+            comment.text += ` ${positiveWords[word]}`;
+        }
+    }
+    
+    comments.push(comment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// إضافة الاستدعاء عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    initializeEmojiPicker();
+    // ... باقي التهيئة
+});
