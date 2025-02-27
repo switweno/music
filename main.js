@@ -583,3 +583,13 @@ function initializeFavoriteButtons() {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.noselect').forEach(function (element) {
+        element.addEventListener('mousedown', function (event) {
+            event.preventDefault(); // يمنع تحديد النص
+        });
+        element.addEventListener('contextmenu', function (event) {
+            event.preventDefault(); // يمنع القائمة السياقية (البحث في Google)
+        });
+    });
+});
