@@ -181,38 +181,29 @@ function toggleFavorite(event, songId, audioFile, songName, artistName) {
 
 // تحديث واجهة المستخدم للمفضلة
 function updateFavoritesUI() {
-    const favoritesList = document.getElementById('favorites-list');
-    
-    // إفراغ قائمة المفضلة
-    favoritesList.innerHTML = '';
-    
+    const favoritesContainer = document.getElementById('favorites-container');
+    favoritesContainer.innerHTML = '';
+
     if (favorites.length === 0) {
-        // إذا لم تكن هناك أغاني مفضلة، عرض رسالة
-        favoritesList.innerHTML = '<div class="no-favorites">لا توجد أغاني مفضلة حالياً</div>';
+        favoritesContainer.innerHTML = '<div class="no-favorites-message">لم يتم إضافة أي أغاني للمفضلة بعد</div>';
         return;
     }
-    
-    // إنشاء عنصر لكل أغنية مفضلة
+
     favorites.forEach(song => {
-        const songElement = document.createElement('div');
-        songElement.className = 'song';
-        songElement.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
-        songElement.style.borderColor = '#8e1a4f';
-        songElement.dataset.songId = song.id;
+        const favoriteItem = document.createElement('div');
+        favoriteItem.className = 'favorite-item';
+        favoriteItem.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
         
-        songElement.innerHTML = `
-            <i class="material-symbols-outlined">volume_up</i>
+        favoriteItem.innerHTML = `
+            <i class="material-symbols-outlined">music_note</i>
             <div class="song-title">${song.name}</div>
             <button class="favorite-btn active" onclick="toggleFavorite(event, '${song.id}', '${song.file}', '${song.name}', '')">
                 <i class="material-icons">favorite</i>
             </button>
         `;
         
-        favoritesList.appendChild(songElement);
+        favoritesContainer.appendChild(favoriteItem);
     });
-    
-    // تحديث حالة أزرار المفضلة في جميع الأغاني
-    updateFavoriteButtons();
 }
 
 // تحديث حالة أزرار المفضلة
