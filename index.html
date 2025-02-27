@@ -613,7 +613,55 @@
         <div class="no-favorites-message">لم يتم إضافة أي أغاني للمفضلة بعد</div>
     </div>
 </div>
+ <h2>Ajoutez votre commentaire</h2>
+    <textarea id="commentInput" placeholder="Écrivez un commentaire..." rows="4" cols="50"></textarea>
+    <button id="submitComment">Envoyer</button>
 
+    <h3>Commentaires:</h3>
+    <ul id="commentsList"></ul>
+
+    <script type="module">
+        // Importer Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_yt3bd0eYEReqwrWewe7QYDHotwOTUl0",
+            authDomain: "my-comments-system.firebaseapp.com",
+            projectId: "my-comments-system",
+            storageBucket: "my-comments-system.firebasestorage.app",
+            messagingSenderId: "342793879714",
+            appId: "1:342793879714:web:b753725911373aa0ab97fb"
+        };
+
+        // Initialisation de Firebase et Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Référence à la collection "comments"
+        const commentsRef = collection(db, "comments");
+
+        // Fonction pour ajouter un commentaire
+        document.getElementById("submitComment").addEventListener("click", async () => {
+            const commentText = document.getElementById("commentInput").value;
+            if (commentText.trim() !== "") {
+                await addDoc(commentsRef, { text: commentText, timestamp: new Date() });
+                document.getElementById("commentInput").value = "";
+            }
+        });
+
+        // Fonction pour afficher les commentaires en temps réel
+        onSnapshot(commentsRef, (snapshot) => {
+            const commentsList = document.getElementById("commentsList");
+            commentsList.innerHTML = "";
+            snapshot.docs.forEach((doc) => {
+                const comment = document.createElement("li");
+                comment.textContent = doc.data().text;
+                commentsList.appendChild(comment);
+            });
+        });
+    </script>
 <footer class="footer">
     
     <div class="social-buttons">
