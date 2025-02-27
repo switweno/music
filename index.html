@@ -49,7 +49,7 @@
 
 
     <audio id="audio-player" class="hidden">
-        <source id="audio-source" src="" type="audio/mpeg">
+        <source id="audio-source" src="./music/" type="audio/mpeg">
         المتصفح لا يدعم تشغيل الصوت.
     </audio>
 
@@ -614,16 +614,62 @@
         <div class="no-favorites-message">لم يتم إضافة أي أغاني للمفضلة بعد</div>
     </div>
 </div>
-<h2>نظام التعليقات</h2>
 
-    <div>
-        <input type="text" id="name" placeholder="اسمك">
-        <input type="text" id="comment" placeholder="اكتب تعليقك">
-        <button onclick="addComment()">إضافة تعليق</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h2>التعليقات</h2>
+        <div class="comment-form">
+            <input type="text" id="name-input" placeholder="اسمك" />
+            <textarea id="comment-input" placeholder="اكتب تعليقك هنا"></textarea>
+            <button id="submit-comment">إرسال</button>
+        </div>
+        <div id="comments-container"></div>
     </div>
 
-    <div id="comments-container"></div>
-<footer class="footer">
+    <!-- Firebase Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_yt3bd0eYEReqwrWewe7QYDHotwOTUl0",
+            authDomain: "my-comments-system.firebaseapp.com",
+            projectId: "my-comments-system",
+            storageBucket: "my-comments-system.firebasestorage.app",
+            messagingSenderId: "342793879714",
+            appId: "1:342793879714:web:73f2e8549ff16938ab97fb"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Make db accessible globally
+        window.db = db;
+    </script>
+    <footer class="footer">
     
     <div class="social-buttons">
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://switweno.github.io/music/" 
@@ -644,71 +690,5 @@
         </a>
     </div>
 </footer>
-    <script src="main.js" defer></script>
-    <!-- Firebase SDK -->
-    <script type="module">
-        // استيراد Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
-
-        // إعداد Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyC_yt3bd0eYEReqwrWewe7QYDHotwOTUl0",
-            authDomain: "my-comments-system.firebaseapp.com",
-            projectId: "my-comments-system",
-            storageBucket: "my-comments-system.appspot.com",
-            messagingSenderId: "342793879714",
-            appId: "1:342793879714:web:73f2e8549ff16938ab97fb"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // دالة إضافة تعليق
-        async function addComment() {
-            const name = document.getElementById("name").value;
-            const comment = document.getElementById("comment").value;
-
-            if (name.trim() === "" || comment.trim() === "") {
-                alert("الرجاء إدخال الاسم والتعليق!");
-                return;
-            }
-
-            try {
-                await addDoc(collection(db, "comments"), {
-                    name: name,
-                    comment: comment,
-                    timestamp: new Date()
-                });
-                document.getElementById("comment").value = ""; // تفريغ الحقل بعد الإرسال
-            } catch (error) {
-                console.error("خطأ في إرسال التعليق:", error);
-            }
-        }
-
-        // دالة عرض التعليقات تلقائيًا
-        function loadComments() {
-            const commentsContainer = document.getElementById("comments-container");
-            const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
-
-            onSnapshot(q, (snapshot) => {
-                commentsContainer.innerHTML = "";
-                snapshot.forEach((doc) => {
-                    const commentData = doc.data();
-                    const commentElement = document.createElement("div");
-                    commentElement.classList.add("comment");
-                    commentElement.innerHTML = `<strong>${commentData.name}:</strong> ${commentData.comment}`;
-                    commentsContainer.appendChild(commentElement);
-                });
-            });
-        }
-
-        loadComments(); //         تحميل التعليقات عند فتح الصفحة
-
-         import { getFirestore } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
-
-    
-    </script>
 </body>
 </html>

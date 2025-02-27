@@ -35,7 +35,7 @@ const songs = [
     { file: '11 sentral cha3bi.mp3', name: 'sentral chaabi 11', album: 'sentralchaabi' },
     { file: '12 sentral cha3bi.mp3', name: 'sentral chaabi 12', album: 'sentralchaabi' },
     { file: '13 sentral cha3bi.mp3', name: 'sentral chaabi 13', album: 'sentralchaabi' },
-    { file: '14 sentral cha3bi.mp3', name: 'sentral chaabi 14', album: 'sentralchaabi' },
+    { file: '14 sentral cha3bi.mp3', name: 'sentral chaabi 14', album: 'sentralchaabi' }, 
     { file: '15 sentral cha3bi.mp3', name: 'sentral chaabi 15 ',album: 'sentralchaabi' },
     { file: '16 sentral cha3bi.mp3', name: 'sentral chaabi 16', album: 'sentralchaabi' },
     { file: '17 sentral cha3bi.mp3', name: 'sentral chaabi 17', album: 'sentralchaabi' },
@@ -289,12 +289,24 @@ function changeTrack(audioFile, trackName) {
     
     document.getElementById("track-name").textContent = trackName;
     const audioSource = document.getElementById("audio-source");
-    audioSource.src = audioFile;
-
+    audioSource.src = audioFile;ات الصوتية
+    audioSource.src = './music/' + audioFile;
     audioPlayer.load();
-    audioPlayer.play();
-
+    audioPlayer.play();وتشغيل الملف الصوتي
+    audioPlayer.load();
     playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
+    
+    // تحديث عرض اسم الفنان إذا كان هناك عنصر له
+    const artistDisplayElement = document.getElementById("current-artist");
+    if (artistDisplayElement && artistName) {
+        artistDisplayElement.textContent = artistName;material-icons">pause</span>';
+    }   })
+        .catch(error => {
+    saveLastPlayed(audioFile, trackName, currentAlbum);
+}           console.error("Error playing audio:", error);
+            alert("حدث خطأ في تشغيل الملف الصوتي");
+        });
+    }
 
     // تحديث عرض اسم الفنان إذا كان هناك عنصر له
     const artistDisplayElement = document.getElementById("current-artist");
@@ -445,115 +457,140 @@ function scrollAlbums(direction) {
 
 document.addEventListener("DOMContentLoaded", function () {
     let currentPlaying = null;
-
-    document.querySelectorAll(".song").forEach(song => {
-        song.addEventListener("click", function () {
-            let icon = this.querySelector("i");
-
-            // إذا كان نفس العنصر مضغوطًا مرة أخرى
-            if (currentPlaying === this) {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    icon.innerText = "graphic_eq"; // 🔊 تشغيل
-                } else {
-                    audioPlayer.pause();
                     icon.innerText = "volume_up"; // 🔈 إيقاف مؤقت
-                }
-            } else {
+                }ySelectorAll(".song").forEach(song => {
+            } else {tListener("click", function () {
                 // إذا كانت هناك أغنية تعمل، إعادة الأيقونة القديمة
                 if (currentPlaying) {
                     currentPlaying.querySelector("i").innerText = "volume_up";
-                }
-
-                // تحديث العنصر الحالي
-                currentPlaying = this;
+                }urrentPlaying === this) {
+                if (audioPlayer.paused) {
+                // تحديث العنصر الحالي;
+                currentPlaying = this;graphic_eq"; // 🔊 تشغيل
                 icon.innerText = "graphic_eq"; // 🔊 تشغيل
-
+                    audioPlayer.pause();
                 // لا نغير `src` أو `play()` هنا حتى لا يتعارض مع سكريبتاتك الأصلية
-            }
-        });
-    });
-
-    // التحقق من حالة التشغيل عند التوقف التلقائي
+            }   }
+        }); } else {
+    });         // إذا كانت هناك أغنية تعمل، إعادة الأيقونة القديمة
+                if (currentPlaying) {
+    // التحقق من حالة التشغيل عند التوقف التلقائي"i").innerText = "volume_up";
     audioPlayer.addEventListener("ended", function () {
         if (currentPlaying) {
             currentPlaying.querySelector("i").innerText = "volume_up"; // 🔈 عند انتهاء الأغنية
-            currentPlaying = null;
-        }
+            currentPlaying = null;his;
+        }       icon.innerText = "graphic_eq"; // 🔊 تشغيل
     });
-});
-
+});             // لا نغير `src` أو `play()` هنا حتى لا يتعارض مع سكريبتاتك الأصلية
+            }
 function playRandom() {
     const activeSongs = songs.filter(song => song.album === currentAlbum);
     const randomIndex = Math.floor(Math.random() * activeSongs.length);
     changeTrack(activeSongs[randomIndex].file, activeSongs[randomIndex].name);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
+}   audioPlayer.addEventListener("ended", function () {
+        if (currentPlaying) {
+document.addEventListener('DOMContentLoaded', function() {"volume_up"; // 🔈 عند انتهاء الأغنية
     const albums = document.querySelectorAll('.album-btn');
     const songsContainers = document.querySelectorAll('.songs-container');
-
+    });
     albums.forEach(album => {
         album.addEventListener('click', function() {
             const albumId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-            if (this.closest('.albums-grid-wrapper')) {
-                // إذا كان الألبوم في الألبومات المكررة أسفل الأغاني
-                scrollToAlbum(albumId);
+            if (this.closest('.albums-grid-wrapper')) { === currentAlbum);
+                // إذا كان الألبوم في الألبومات المكررة أسفل الأغانيh);
+                scrollToAlbum(albumId);].file, activeSongs[randomIndex].name);
             } else {
                 // إذا كان الألبوم في الألبومات الأصلية
-                showAlbum(albumId);
-            }
-        });
+                showAlbum(albumId);ntLoaded', function() {
+            }ums = document.querySelectorAll('.album-btn');
+        });ongsContainers = document.querySelectorAll('.songs-container');
     });
-
-    function showAlbum(albumId) {
-        const albumElement = document.getElementById(albumId + '-songs');
+    albums.forEach(album => {
+    function showAlbum(albumId) {lick', function() {
+        const albumElement = document.getElementById(albumId + '-songs');/)[1];
         const allSongContainers = document.querySelectorAll('.songs-container');
-
-        // إخفاء جميع قوائم الأغاني
+                // إذا كان الألبوم في الألبومات المكررة أسفل الأغاني
+        // إخفاء جميع قوائم الأغانيId);
         songsContainers.forEach(container => {
-            container.style.display = 'none';
-        });
-
+            container.style.display = 'none';ات الأصلية
+        });     showAlbum(albumId);
+            }
         // إظهار قائمة الأغاني الخاصة بالألبوم المحدد
         if (albumElement) {
             albumElement.style.display = 'flex';
-        }
-    }
-
+        }ion showAlbum(albumId) {
+    }   const albumElement = document.getElementById(albumId + '-songs');
+        const allSongContainers = document.querySelectorAll('.songs-container');
     function scrollToAlbum(albumId) {
         const albumElement = document.getElementById(albumId + '-songs');
-        if (albumElement) {
+        if (albumElement) {Each(container => {
             albumElement.scrollIntoView({ behavior: 'smooth' });
-        }
+        });
     }
-
+        // إظهار قائمة الأغاني الخاصة بالألبوم المحدد
     function changeTrack(src, title) {
         const audioPlayer = document.getElementById('audio-player');
         const audioSource = document.getElementById('audio-source');
         const trackName = document.getElementById('track-name');
 
-        audioSource.src = src;
-        audioPlayer.load();
+        audioSource.src = src;umId) {
+        audioPlayer.load();= document.getElementById(albumId + '-songs');
         audioPlayer.play();
-        trackName.textContent = title;
-    }
-});
+        trackName.textContent = title;w({ behavior: 'smooth' });
+    }   }
+}); }
 
+let lastScrollTop = 0;ck(src, title) {
+const newsTicker = document.querySelector('.news-ticker');-player');
+const body = document.body; document.getElementById('audio-source');
+const audioPlayerContainer = document.getElementById('audio-player-container');
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop) {
+        // عند الهبوط بالصفحة
+        newsTicker.classList.add('hidden');
+        body.classList.add('shifted');
+        audioPlayerContainer.classList.add('shifted');
+    } else {
+        // عند الطلوع بالصفحة
+        newsTicker.classList.remove('hidden');ws-ticker');
+        body.classList.remove('shifted');
+        audioPlayerContainer.classList.remove('shifted');io-player-container');
+    }w.addEventListener('scroll', function() {
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // تجنب القيم السالبةTop;
+}); if (scrollTop > lastScrollTop) {
+function scrollToAlbums(albumId) {
+    window.scrollTo({assList.add('hidden');
+        top: 0,assList.add('shifted');
+        behavior: 'smooth'er.classList.add('shifted');
+    });lse {
+    showAlbum(albumId);الصفحة
+}       newsTicker.classList.remove('hidden');
+function showAlbum(album) {ve('shifted');
+    const albums = document.querySelectorAll('.songs-container');
+    albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+    document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
+    currentAlbum = album; // تحديث الألبوم الحالي
+    currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+}   window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
 // دالة جديدة مبسطة لتهيئة معلومات الأغاني عند تحميل الصفحة - فقط لإنشاء أزرار المفضلة
 function initializeSongInfo() {
     // تهيئة أزرار المفضلة لجميع الأغاني
-    setTimeout(() => {
-        initializeFavoriteButtons();
-    }, 500);
+    setTimeout(() => {um) {
+        initializeFavoriteButtons();ectorAll('.songs-container');
+    }, 500);orEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+}   document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
+    currentAlbum = album; // تحديث الألبوم الحالي
+    currentTrackIndex = 0; // إعادة المؤشر إلى البداية
 }
-
 // تهيئة أزرار المفضلة لجميع الأغاني
 function initializeFavoriteButtons() {
-    document.querySelectorAll('.song').forEach(songElement => {
+    document.querySelectorAll('.song').forEach(songElement => {قط لإنشاء أزرار المفضلة
         const audioFileMatch = songElement.getAttribute('onclick')?.match(/'([^']+\.mp3)'/);
         const nameMatch = songElement.getAttribute('onclick')?.match(/, ?'([^']+)'/);
-        
+        imeout(() => {
         if (audioFileMatch && nameMatch) {
             const audioFile = audioFileMatch[1];
             const songName = nameMatch[1];
@@ -561,25 +598,105 @@ function initializeFavoriteButtons() {
             // إنشاء معرف فريد للأغنية
             const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
             songElement.dataset.songId = songId;
-            
-            // إذا لم يكن زر المفضلة موجوداً، قم بإضافته
-            if (!songElement.querySelector('.favorite-btn')) {
-                const favoriteBtn = document.createElement('button');
+            tializeFavoriteButtons() {
+            // إذا لم يكن زر المفضلة موجوداً، قم بإضافتهnt => {
+            if (!songElement.querySelector('.favorite-btn')) {ck')?.match(/'([^']+\.mp3)'/);
+                const favoriteBtn = document.createElement('button');/, ?'([^']+)'/);
                 favoriteBtn.className = 'favorite-btn';
                 favoriteBtn.setAttribute('onclick', `toggleFavorite(event, '${songId}', '${audioFile}', '${songName}', '')`);
-                
+                t audioFile = audioFileMatch[1];
                 const icon = document.createElement('i');
                 icon.className = 'material-icons';
                 icon.textContent = 'favorite_border';
-                
-                favoriteBtn.appendChild(icon);
+                t songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                favoriteBtn.appendChild(icon);d;
                 songElement.appendChild(favoriteBtn);
-            }
-        }
-    });
-    
-    // تحديث حالة الأزرار
+            }/ إذا لم يكن زر المفضلة موجوداً، قم بإضافته
+        }   if (!songElement.querySelector('.favorite-btn')) {
+    });         const favoriteBtn = document.createElement('button');
+                favoriteBtn.className = 'favorite-btn';
+    // تحديث حالة الأزرارtn.setAttribute('onclick', `toggleFavorite(event, '${songId}', '${audioFile}', '${songName}', '')`);
     updateFavoriteButtons();
-}
+}               const icon = document.createElement('i');
+                icon.className = 'material-icons';
+// Comments Systemon.textContent = 'favorite_border';
+document.addEventListener('DOMContentLoaded', () => {
+    const submitButton = document.getElementById('submit-comment');
+    const nameInput = document.getElementById('name-input');
+    const commentInput = document.getElementById('comment-input');
+    const commentsContainer = document.getElementById('comments-container');
+    });
+    // Load comments
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+    onSnapshot(q, (snapshot) => {
+        commentsContainer.innerHTML = '';
+        snapshot.forEach((doc) => {
+            const comment = doc.data();
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment';'submit-comment');
+            commentElement.innerHTML = `tById('name-input');
+                <div class="name">${comment.name}</div>nt-input');
+                <div class="date">${new Date(comment.timestamp).toLocaleString('ar-SA')}</div>
+                <div class="content">${comment.content}</div>
+            `;mments
+            commentsContainer.appendChild(commentElement);imestamp", "desc"));
+        });hot(q, (snapshot) => {
+    }); commentsContainer.innerHTML = '';
+        snapshot.forEach((doc) => {
+    // Submit new comment = doc.data();
+    submitButton.addEventListener('click', async () => {t('div');
+        const name = nameInput.value.trim();ent';
+        const content = commentInput.value.trim();
+                <div class="name">${comment.name}</div>
+        if (!name || !content) {">${new Date(comment.timestamp).toLocaleString('ar-SA')}</div>
+            alert('الرجاء ملء جميع الحقول');nt.content}</div>
+            return;
+        }   commentsContainer.appendChild(commentElement);
+        });
+        try {
+            await addDoc(collection(db, "comments"), {
+                name: name,
+                content: content,('click', async () => {
+                timestamp: new Date().getTime()
+            });ontent = commentInput.value.trim();
+
+            // Clear inputs after successful submission
+            nameInput.value = '';ع الحقول');
+            commentInput.value = '';
+        } catch (error) {
+            console.error("Error adding comment: ", error);
+            alert('حدث خطأ أثناء إرسال التعليق');
+        }   await addDoc(collection(db, "comments"), {
+    });         name: name,
+});             content: content,
+                timestamp: new Date().getTime()
+// إضافة دالة اختبار            });audioPlayer.addEventListener('error', (e) => {
+function testAudio() {    console.error('Audio Error:', e);
+
+
+
+
+
+
+
+
+
+
+
+
+window.testAudio = testAudio;// يمكنك تشغيلها من console في المتصفح}    });        console.error("Test audio error:", error);    audio.play().catch(error => {    const audio = new Audio(testTrack);    const testTrack = './music/01 star chaabi.mp3';
+
+
+
+
+
+
+
+
+
+
+
+});    });        }            alert('حدث خطأ أثناء إرسال التعليق');            console.error("Error adding comment: ", error);        } catch (error) {            commentInput.value = '';            nameInput.value = '';            // Clear inputs after successful submission    alert('حدث خطأ في تحميل الملف الصوتي');
+});
 
 
