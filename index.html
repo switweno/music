@@ -774,58 +774,72 @@
         }
       }
       
-      // إضافة مستمع الحدث لزر إرسال التعليق
-      document.getElementById('submit-comment').addEventListener('click', addComment);
-      
-      // تحميل التعليقات عند تحميل الصفحة
-      document.addEventListener('DOMContentLoaded', getComments);
+      // DOMContentLoaded - نفذ هذا الكود عند اكتمال تحميل الصفحة
+      document.addEventListener('DOMContentLoaded', function() {
+        // تحميل التعليقات
+        getComments();
+        
+        // إضافة مستمع الحدث لزر إرسال التعليق
+        document.getElementById('submit-comment').addEventListener('click', addComment);
+        
+        // تهيئة منتقي الإيموجي
+        initEmojiPicker();
+      });
       
       // تهيئة منتقي الإيموجي
-      const emojiPickerContainer = document.getElementById('emoji-picker-container');
-      const emojiButton = document.getElementById('emoji-button');
-      const commentText = document.getElementById('comment-text');
-      
-      // إنشاء منتقي الإيموجي
-      if (!customElements.get('emoji-picker')) {
-        // Wait for the custom element to be defined
-        customElements.whenDefined('emoji-picker').then(() => {
-          setupEmojiPicker();
-        });
-      } else {
-        setupEmojiPicker();
-      }
-      
-      function setupEmojiPicker() {
-        const picker = document.createElement('emoji-picker');
-        emojiPickerContainer.appendChild(picker);
+      function initEmojiPicker() {
+        const emojiPickerContainer = document.getElementById('emoji-picker-container');
+        const emojiButton = document.getElementById('emoji-button');
+        const commentText = document.getElementById('comment-text');
         
-        picker.addEventListener('emoji-click', event => {
-          const emoji = event.detail.unicode;
-          // إضافة الإيموجي في موضع المؤشر
-          const start = commentText.selectionStart;
-          const end = commentText.selectionEnd;
-          const textBefore = commentText.value.substring(0, start);
-          const textAfter = commentText.value.substring(end);
-          commentText.value = textBefore + emoji + textAfter;
-          
-          // تعيين موضع المؤشر بعد الإيموجي
-          commentText.selectionStart = start + emoji.length;
-          commentText.selectionEnd = start + emoji.length;
-          commentText.focus();
-        });
+        // إنشاء منتقي الإيموجي
+        setTimeout(() => {
+          try {
+            const picker = document.createElement('emoji-picker');
+            emojiPickerContainer.appendChild(picker);
+            console.log('Emoji picker created and appended');
+            
+            // إضافة مستمع الحدث للنقر على الإيموجي
+            picker.addEventListener('emoji-click', event => {
+              console.log('Emoji clicked:', event.detail.unicode);
+              // إدراج الإيموجي في منطقة التعليق
+              insertEmoji(commentText, event.detail.unicode);
+            });
+            
+            // تبديل عرض منتقي الإيموجي
+            emojiButton.addEventListener('click', (event) => {
+              console.log('Emoji button clicked');
+              event.stopPropagation();
+              emojiPickerContainer.classList.toggle('hidden');
+              if (!emojiPickerContainer.classList.contains('hidden')) {
+                console.log('Emoji picker is now visible');
+              }
+            });
+            
+            // إخفاء منتقي الإيموجي عند النقر في مكان آخر
+            document.addEventListener('click', (event) => {
+              if (!emojiPickerContainer.contains(event.target) && event.target !== emojiButton) {
+                emojiPickerContainer.classList.add('hidden');
+              }
+            });
+          } catch (error) {
+            console.error('Error initializing emoji picker:', error);
+          }
+        }, 1000); // انتظر ثانية واحدة للتأكد من تحميل المكتبة
       }
       
-      // إظهار/إخفاء منتقي الإيموجي
-      emojiButton.addEventListener('click', () => {
-        emojiPickerContainer.classList.toggle('hidden');
-      });
-      
-      // إخفاء منتقي الإيموجي عند النقر خارجه
-      document.addEventListener('click', (event) => {
-        if (!emojiPickerContainer.contains(event.target) && event.target !== emojiButton) {
-          emojiPickerContainer.classList.add('hidden');
-        }
-      });
+      // إدراج الإيموجي في موضع المؤشر
+      function insertEmoji(textarea, emoji) {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = textarea.value;
+        const before = text.substring(0, start);
+        const after = text.substring(end, text.length);
+        
+        textarea.value = before + emoji + after;
+        textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
+        textarea.focus();
+      }
     </script>
   
 </body>
