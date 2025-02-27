@@ -133,6 +133,10 @@
                     <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('kamalnews.png');" aria-label="مشاهدة ألبوم kamal new"></button>
                     <span class="album-name">kamal new</span>
                 </div>
+                <div class="album-item">
+                    <button onclick="showAlbum('ahyadihahan')" class="album-btn" style="background-image: url('ahyadihahan.png');" aria-label="مشاهدة ألبوم AAWAD IHAHAN"></button>
+                    <span class="album-name">AAWAD IHAHAN</span>
+                </div>
             </div>
         </div>
         <button class="scroll-arrow scroll-right absolute right-2" onclick="scrollAlbums(1)">❯</button>
@@ -543,14 +547,35 @@
             </div>
         </div>
         
-        
+         <!-- ahyad ihahan -->
+   <div class="songs-container AAWAD IHAHAN" id="ahyadihahan-songs" style="display: none;">
+            <div class="song" onclick="changeTrack('01 ahyad.mp3', 'AAWAD IHAHAN 1')" style="border-color: #ffffff;">
+                <i class="material-symbols-outlined">volume_up</i>
+                <div class="song-title">AAWAD IHAHAN 1</div>
+            </div>
+            <div class="song" onclick="changeTrack('02 ahyad.mp3', 'AAWAD IHAHAN 2')" style="border-color: #ffffff;">
+                <i class="material-symbols-outlined">volume_up</i>
+                <div class="song-title">AAWAD IHAHAN 2</div>
+            </div>
+            <div class="song" onclick="changeTrack('03 ahyad.mp3', 'AAWAD IHAHAN 3')" style="border-color: #ffffff;">
+                <i class="material-symbols-outlined">volume_up</i>
+                <div class="song-title">AAWAD IHAHAN 3</div>
+            </div>
+            <div class="song" onclick="changeTrack('04 ahyad.mp3', 'AAWAD IHAHAN 4')" style="border-color: #ffffff;">
+                <i class="material-symbols-outlined">volume_up</i>
+                <div class="song-title">AAWAD IHAHAN 4</div>
+            </div>
+            <div class="song" onclick="changeTrack('05 ahyad.mp3', 'AAWAD IHAHAN 5')" style="border-color: #ffffff;">
+                <i class="material-symbols-outlined">volume_up</i>
+                <div class="song-title">AAWAD IHAHAN 5</div>
+            </div>
+       </div>
         <!-- kamal el 3abdi -->
    <div class="songs-container kamal el 3abdi" id="kamalnew-songs" style="display: none;">
             <div class="song" onclick="changeTrack('01 kamal el 3abdi.mp3', 'kamal el 3abdi 1')" style="border-color: #ffffff;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">kamal el 3abdi 1</div>
             </div>
-	
             <div class="song" onclick="changeTrack('02 kamal el 3abdi.mp3', 'kamal el 3abdi 2')" style="border-color: #ffffff;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">kamal el 3abdi 2</div>
@@ -579,15 +604,15 @@
     <div class="new-albums-container" style="margin: 5px 10px;">
         <div class="new-album-item" onclick="scrollToAlbums('khalij')">
             <img src="khalij.webp" alt="khaliji">
-            <span>خليجية</span>
+            <span>أغاني خليجية</span>
         </div>
          <div class="new-album-item" onclick="scrollToAlbums('kamalnew')">
             <img src="kamalnews.png" alt="kamal new">
-            <span>kamal new</span>
+            <span>KAMAL NEW</span>
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('sentralchaabi')">
             <img src="sentralchaabi.png" alt="sentral chaabi">
-            <span>sentral chaabi</span>
+            <span>SENTRAL CHAABI</span>
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('popular')">
             <img src="shabloutar.png" alt="shab loutar">
@@ -595,17 +620,19 @@
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
             <img src="naydanouda.webp" alt="nayda nouda">
-            <span>nayda nouda</span>
+            <span>NAYDA NOUDA</span>
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
             <img src="starchaabi.png" alt="star chaabi">
-            <span>star chaabi</span>
+            <span>STAR CHAABI</span>
         </div>
-        
-        
+        <div class="new-album-item" onclick="scrollToAlbums('ahyadihahan')">
+            <img src="ahyadihahan.png" alt="ahyad ihahan">
+            <span>AAWAD IHAHAN</span>
+        </div>
         <div class="new-album-item" onclick="scrollToAlbums('casastar')">
             <img src="casastar.png" alt="casa star">
-            <span>casa star</span>
+            <span>CASA STAR</span>
         </div>
         
        

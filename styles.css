@@ -650,7 +650,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     padding: 10px; /* إضافة حواف داخلية حول النص */
     margin: 1px 0; /* إضافة هامش علوي وسفلي */
     border-top: 2px solid #ff6347; /* إضافة خط فوق النص (يمكنك تغيير اللون) */
-    color: #333; /* لون النص */
+    color: #f40808; /* لون النص */
     background-color: #f0f0f0; /* خلفية خفيفة */
     border-radius: 5px; /* زوايا مدورة */
     letter-spacing: 1px; /* إضافة مسافة بين الحروف */
@@ -665,12 +665,12 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 .album-list-music {
     font-size: 15px; /* تحديد حجم الخط */
     font-weight: bold; /* جعل الخط عريض */
-    color: #2c2828;
+    color: #f40808;
     background-color: rgba(255, 255, 255, 0);
     padding: 12px;
     padding-bottom: 10px;
     margin-bottom: 2px;
-    border-bottom: 2px solid var(--primary-color); /* إضافة خط أحمر أسفل النص */
+    border-bottom: 2px solid #ff6347; /* إضافة خط أحمر أسفل النص */
     border-radius: 20px 20px 0 0; /* زوايا مدورة للأعلى فقط */
     display: flex;
     justify-content: center;
