@@ -987,5 +987,83 @@ emoji-picker {
     }
 }
 
+/* تصميم نظام تقييم النجوم */
+.star-rating-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    flex-wrap: wrap;
+    direction: rtl;
+}
+
+.rating-label {
+    font-weight: bold;
+    margin-left: 10px;
+    color: var(--secondary-color);
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* لترتيب النجوم من اليمين لليسار */
+    unicode-bidi: bidi-override; /* للتحكم باتجاه النص */
+    margin: 0 10px;
+}
+
+.star {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin: 0 2px;
+}
+
+.star:hover,
+.star.active {
+    color: #FFD700; /* لون ذهبي للنجوم النشطة */
+}
+
+.star:hover ~ .star {
+    color: #FFD700;
+}
+
+.rating-value {
+    font-size: 14px;
+    color: #666;
+    min-width: 50px;
+}
+
+/* تنسيق تقييم النجوم في التعليقات */
+.comment-rating {
+    margin: 5px 0 10px;
+    direction: ltr;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-rating .star {
+    font-size: 18px;
+    cursor: default;
+    margin: 0 1px;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 576px) {
+    .star-rating-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .rating-label {
+        margin-bottom: 5px;
+    }
+    
+    .star {
+        font-size: 24px;
+    }
+}
+
 
 

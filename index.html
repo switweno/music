@@ -662,6 +662,18 @@
                 <input type="text" id="comment-name" placeholder="اسمك" required>
                 <input type="text" id="comment-email" placeholder="البريد الإلكتروني (اختياري)">
             </div>
+            <!-- إضافة مكون تقييم النجوم -->
+            <div class="star-rating-container">
+                <div class="rating-label">التقييم:</div>
+                <div class="star-rating" id="star-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <div class="rating-value">0 من 5</div>
+            </div>
             <div class="comment-textarea-container">
                 <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
                 <button id="emoji-button" type="button" class="emoji-toggle-btn">
@@ -722,6 +734,40 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       
+      // متغير لتخزين التقييم الحالي
+      let currentRating = 0;
+      
+      // تهيئة مكون تقييم النجوم
+      function initStarRating() {
+        const stars = document.querySelectorAll('.star');
+        const ratingValue = document.querySelector('.rating-value');
+        
+        stars.forEach(star => {
+          star.addEventListener('mouseover', function() {
+            const value = parseInt(this.dataset.value);
+            highlightStars(value);
+          });
+          
+          star.addEventListener('mouseout', function() {
+            highlightStars(currentRating);
+          });
+          
+          star.addEventListener('click', function() {
+            currentRating = parseInt(this.dataset.value);
+            ratingValue.textContent = `${currentRating} من 5`;
+            highlightStars(currentRating);
+          });
+        });
+        
+        // دالة لتمييز النجوم المحددة
+        function highlightStars(count) {
+          stars.forEach(star => {
+            const value = parseInt(star.dataset.value);
+            star.classList.toggle('active', value <= count);
+          });
+        }
+      }
+      
       // جلب التعليقات
       async function getComments() {
         const commentsContainer = document.getElementById('comments-container');
@@ -741,14 +787,28 @@
           querySnapshot.forEach((doc) => {
               const comment = doc.data();
               const date = comment.createdAt ? new Date(comment.createdAt.toDate()).toLocaleString() : 'الآن';
+              const rating = comment.rating || 0;
               
               const commentElement = document.createElement('div');
               commentElement.className = 'comment-item';
+              
+              // إنشاء نجوم التقييم للتعليق
+              let starsHTML = '';
+              if (rating > 0) {
+                  starsHTML = '<div class="comment-rating">';
+                  for (let i = 1; i <= 5; i++) {
+                      const starClass = i <= rating ? 'star active' : 'star';
+                      starsHTML += `<span class="${starClass}">★</span>`;
+                  }
+                  starsHTML += '</div>';
+              }
+              
               commentElement.innerHTML = `
                   <div class="comment-header">
                       <div class="comment-author">${comment.name}</div>
                       <div class="comment-date">${date}</div>
                   </div>
+                  ${starsHTML}
                   <div class="comment-content">${comment.text}</div>
               `;
               
@@ -784,6 +844,7 @@
             name: name,
             text: text,
             email: email || null,
+            rating: currentRating, // إضافة التقييم إلى التعليق
             createdAt: serverTimestamp()
           });
           
@@ -791,6 +852,11 @@
           nameInput.value = '';
           textInput.value = '';
           emailInput.value = '';
+          
+          // إعادة ضبط التقييم
+          currentRating = 0;
+          document.querySelector('.rating-value').textContent = '0 من 5';
+          document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
           
           // إعادة تحميل التعليقات
           getComments();
@@ -810,6 +876,9 @@
         // تحميل التعليقات
         getComments();
         
+        // تهيئة مكون تقييم النجوم
+        initStarRating();
+        
         // إضافة مستمع الحدث لزر إرسال التعليق
         document.getElementById('submit-comment').addEventListener('click', addComment);
         
@@ -817,7 +886,7 @@
         initEmojiPicker();
       });
       
-      // تهيئة منتقي الإيموجي
+      // تهيئة منتقي الإيموجي (الكود الموجود مسبقاً)
       function initEmojiPicker() {
         const emojiPickerContainer = document.getElementById('emoji-picker-container');
         const emojiButton = document.getElementById('emoji-button');
