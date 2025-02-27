@@ -22,6 +22,9 @@
     <!-- Firebase SDK -->
     <script type="module" src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js"></script>
+    <!-- Emoji Picker Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <title>khalid music Zik</title>
     <link rel="stylesheet" href="styles.css">
     
@@ -629,7 +632,13 @@
             <input type="text" id="comment-name" placeholder="اسمك" required>
             <input type="text" id="comment-email" placeholder="البريد الإلكتروني (اختياري)">
         </div>
-        <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
+        <div class="comment-textarea-container">
+            <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required></textarea>
+            <button id="emoji-button" type="button" class="emoji-toggle-btn">
+                <i class="material-icons">sentiment_satisfied_alt</i>
+            </button>
+        </div>
+        <div id="emoji-picker-container" class="hidden"></div>
         <button id="submit-comment" type="button">إرسال التعليق</button>
     </div>
     
@@ -770,6 +779,53 @@
       
       // تحميل التعليقات عند تحميل الصفحة
       document.addEventListener('DOMContentLoaded', getComments);
+      
+      // تهيئة منتقي الإيموجي
+      const emojiPickerContainer = document.getElementById('emoji-picker-container');
+      const emojiButton = document.getElementById('emoji-button');
+      const commentText = document.getElementById('comment-text');
+      
+      // إنشاء منتقي الإيموجي
+      if (!customElements.get('emoji-picker')) {
+        // Wait for the custom element to be defined
+        customElements.whenDefined('emoji-picker').then(() => {
+          setupEmojiPicker();
+        });
+      } else {
+        setupEmojiPicker();
+      }
+      
+      function setupEmojiPicker() {
+        const picker = document.createElement('emoji-picker');
+        emojiPickerContainer.appendChild(picker);
+        
+        picker.addEventListener('emoji-click', event => {
+          const emoji = event.detail.unicode;
+          // إضافة الإيموجي في موضع المؤشر
+          const start = commentText.selectionStart;
+          const end = commentText.selectionEnd;
+          const textBefore = commentText.value.substring(0, start);
+          const textAfter = commentText.value.substring(end);
+          commentText.value = textBefore + emoji + textAfter;
+          
+          // تعيين موضع المؤشر بعد الإيموجي
+          commentText.selectionStart = start + emoji.length;
+          commentText.selectionEnd = start + emoji.length;
+          commentText.focus();
+        });
+      }
+      
+      // إظهار/إخفاء منتقي الإيموجي
+      emojiButton.addEventListener('click', () => {
+        emojiPickerContainer.classList.toggle('hidden');
+      });
+      
+      // إخفاء منتقي الإيموجي عند النقر خارجه
+      document.addEventListener('click', (event) => {
+        if (!emojiPickerContainer.contains(event.target) && event.target !== emojiButton) {
+          emojiPickerContainer.classList.add('hidden');
+        }
+      });
     </script>
   
 </body>

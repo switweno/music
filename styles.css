@@ -837,5 +837,100 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     }
 }
 
+/* تعديلات على نظام التعليقات لدعم الإيموجي */
+.comment-textarea-container {
+    position: relative;
+    width: 100%;
+}
+
+#comment-text {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    padding: 10px;
+    padding-right: 40px; /* مساحة لزر الإيموجي */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+.emoji-toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emoji-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+#emoji-picker-container {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 15px;
+    z-index: 10;
+}
+
+#emoji-picker-container.hidden {
+    display: none;
+}
+
+emoji-picker {
+    --emoji-size: 1.4rem;
+    --emoji-padding: 0.4rem;
+    --border-radius: var(--border-radius);
+    --background: #fff;
+    --category-emoji-size: 1.1rem;
+    --emoji-font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    height: 300px;
+}
+
+@media (min-width: 768px) {
+    emoji-picker {
+        width: 350px;
+        position: absolute;
+        right: 0;
+    }
+}
+
+/* تنسيق المحتوى مع الإيموجي */
+.comment-content {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* تكبير الإيموجي قليلاً لتحسين الظهور */
+.comment-content emoji {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+/* تعديلات للوضع الداكن */
+@media (prefers-color-scheme: dark) {
+    emoji-picker {
+        --background: #222;
+        --border-color: #444;
+        --text-color: #eee;
+    }
+}
+
 
 
