@@ -675,8 +675,9 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
-    min-width: 277px;
+    width: 100%;
+min-width: 0; /* يمكن إزالته إذا كان غير ضروري */
+
     text-align: center;
 }
 
