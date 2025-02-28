@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     background-color: var(--light-bg);
     color: var(--text-dark);
-    padding-top: 237px;
+    padding-top: 244px;
     transition: all var(--transition-speed);
     overflow-x: hidden;
 }
@@ -741,8 +741,8 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     width: 100%;
     height: auto;
     border-radius: 8px 8px 0 0;
-    box-shadow: 0 0 5px rgba(77, 74, 75, 0.18);
-    border: 2px solid rgb(64, 60, 61);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fdfdfd;
     transition: all 0.3s ease;
     object-fit: cover;
     aspect-ratio: 1/1; /* جعل الصور مربعة */
@@ -775,8 +775,8 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     padding: 12px 8px;
     font-size: 15px;
     font-weight: bold;
-    color: #5d5454;
-    background-color: #fff;
+    color: #6e6b6b;
+    background-color: #fefaff;
     border-top: 2px solid rgba(108, 98, 98, 0.3);
     transition: all 0.3s ease;
 }
