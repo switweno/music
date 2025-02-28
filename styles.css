@@ -1195,5 +1195,63 @@ emoji-picker {
     }
 }
 
+/* نظام الإشعارات المحسن */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
+    opacity: 0;
+    transition: all 0.5s ease;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 200px;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.notification::before {
+    content: "✓";
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.notification.error::before {
+    content: "✕";
+}
+
+@media (max-width: 576px) {
+    .notification {
+        width: 90%;
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+}
+
 
 

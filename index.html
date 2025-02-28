@@ -820,6 +820,39 @@
         }
       }
       
+      // دالة لإظهار الإشعارات
+      function showNotification(message, isError = false) {
+        // البحث عن الإشعار الحالي إن وجد
+        let notification = document.querySelector('.notification');
+        
+        // إنشاء عنصر الإشعار إذا لم يكن موجوداً
+        if (!notification) {
+          notification = document.createElement('div');
+          notification.className = 'notification';
+          document.body.appendChild(notification);
+        }
+        
+        // إضافة فئة الخطأ إذا كان الإشعار للخطأ
+        if (isError) {
+          notification.classList.add('error');
+        } else {
+          notification.classList.remove('error');
+        }
+        
+        // تعيين نص الرسالة
+        notification.textContent = message;
+        
+        // إظهار الإشعار
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 100);
+        
+        // إخفاء الإشعار بعد 4 ثوانٍ
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 4000);
+      }
+      
       // إضافة تعليق جديد
       async function addComment() {
         const nameInput = document.getElementById('comment-name');
@@ -831,7 +864,7 @@
         const email = emailInput.value.trim();
         
         if (!name || !text) {
-          alert('يرجى ملء الحقول المطلوبة');
+          showNotification('يرجى ملء جميع الحقول المطلوبة', true);
           return;
         }
         
@@ -844,7 +877,7 @@
             name: name,
             text: text,
             email: email || null,
-            rating: currentRating, // إضافة التقييم إلى التعليق
+            rating: currentRating,
             createdAt: serverTimestamp()
           });
           
@@ -861,10 +894,12 @@
           // إعادة تحميل التعليقات
           getComments();
           
-          alert('تم إضافة تعليقك بنجاح!');
+          // إظهار رسالة نجاح
+          showNotification('تم إضافة تعليقك بنجاح!');
         } catch (error) {
           console.error("Error adding comment: ", error);
-          alert('حدث خطأ أثناء إضافة التعليق. يرجى المحاولة مرة أخرى.');
+          // إظهار رسالة خطأ
+          showNotification('حدث خطأ أثناء إضافة التعليق. يرجى المحاولة مرة أخرى.', true);
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'إرسال التعليق';
