@@ -734,15 +734,15 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 
 .new-album-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(255, 77, 77, 0.3);
+    box-shadow: 0 6px 15px rgba(113, 108, 108, 0.66);
 }
 
 .new-album-item img {
     width: 100%;
     height: auto;
     border-radius: 8px 8px 0 0;
-    box-shadow: 0 0 5px rgba(92, 88, 89, 0.2);
-    border: 3px solid rgb(255, 77, 77);
+    box-shadow: 0 0 5px rgba(77, 74, 75, 0.18);
+    border: 2px solid rgb(64, 60, 61);
     transition: all 0.3s ease;
     object-fit: cover;
     aspect-ratio: 1/1; /* جعل الصور مربعة */
@@ -775,14 +775,14 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     padding: 12px 8px;
     font-size: 15px;
     font-weight: bold;
-    color: #222;
+    color: #5d5454;
     background-color: #fff;
-    border-top: 2px solid rgba(255, 77, 77, 0.3);
+    border-top: 2px solid rgba(108, 98, 98, 0.3);
     transition: all 0.3s ease;
 }
 
 .new-album-item:hover span {
-    color: rgb(255, 77, 77);
+    color: rgba(236, 70, 70, 0.99);
     background-color: #f5f5f5;
 }
 
