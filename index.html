@@ -100,8 +100,6 @@
 
     </div>
 
-   <!-- حذف حاوية الألبومات مع التمرير -->
-   <!-- <div class="albums-wrapper" style="margin: 5px 0;"> ... </div> -->
     
     <!-- استبدال الحاوية القديمة بزر متكامل مع العنوان -->
    <div class="album-title-container">
@@ -130,6 +128,10 @@
                 <div class="album-showcase-item" data-album="naydanouda">
                     <img src="naydanouda.webp" alt="nayda nouda">
                     <h3>NAYDA NOUDA</h3>
+                </div>
+                <div class="album-showcase-item" data-album="i3yalnmassa">
+                    <img src="i3yalnmassa.png" alt="i3yalnmassa">
+                    <h3>I3YALN MASSA</h3>
                 </div>
                 <div class="album-showcase-item" data-album="sentralchaabi">
                     <img src="sentralchaabi.png" alt="sentral chaabi">
@@ -165,6 +167,7 @@
 
     <!-- قسم الأغاني -->
     <div class="songs-container-wrapper">
+        
         <!-- star chaabi -->
 <div class="songs-container star chaabi" id="starchaabi-songs">
     <div class="song" onclick="changeTrack('01 star chaabi.mp3', 'star chaabi 1')" style="border-color: #ffffff;">
@@ -201,7 +204,25 @@
     </div>
      </div>
         
-    
+     <!-- star chaabi -->
+<div class="songs-container I3YALN MASSA" id="i3yalnmassa-songs">
+    <div class="song" onclick="changeTrack('https://files.catbox.moe/9q3y1c.mp3', 'I3YALN MASSA 1')" style="border-color: #ffffff;">
+        <i class="material-symbols-outlined">volume_up</i>
+        <div class="song-title">I3YALN MASSA 1</div>
+    </div>
+    <div class="song" onclick="changeTrack('https://files.catbox.moe/81hrex.mp3', 'I3YALN MASSA 2')" style="border-color: #ffffff;">
+        <i class="material-symbols-outlined">volume_up</i>
+        <div class="song-title">I3YALN MASSA 2</div>
+    </div>
+    <div class="song" onclick="changeTrack('https://files.catbox.moe/5k9xls.mp3', 'AYT LKHMIS 3')" style="border-color: #ffffff;">
+        <i class="material-symbols-outlined">volume_up</i>
+        <div class="song-title">AYT LKHMIS 3</div>
+    </div>
+    <div class="song" onclick="changeTrack('https://files.catbox.moe/shogmk.mp3', 'AYT LKHMIS 4')" style="border-color: 0xe704b2;">
+        <i class="material-symbols-outlined">volume_up</i>
+        <div class="song-title">AYT LKHMIS 4</div>
+    </div>    
+    </div>
         <!-- nayda nouda -->
 <div class="songs-container naydanouda" id="naydanouda-songs">
     <div class="song" onclick="changeTrack('01 nayda nouda.mp3', 'nayda nouda 1')" style="border-color: #ffffff;">
@@ -629,7 +650,10 @@
             <img src="shabloutar.png" alt="shab loutar">
             <span>shab loutar</span>
         </div>
-        
+        <div class="new-album-item" onclick="scrollToAlbums('i3yalnmassa')">
+            <img src="i3yalnmassa.png" alt="I3YALN MASSA">
+            <span>I3YALN MASSA</span>
+        </div>
         <div class="new-album-item" onclick="scrollToAlbums('khalij')">
             <img src="khalij.webp" alt="khaliji">
             <span>أغاني خليجية</span>
@@ -637,10 +661,6 @@
         <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
             <img src="starchaabi.png" alt="star chaabi">
             <span>STAR CHAABI</span>
-        </div>
-         <div class="new-album-item" onclick="scrollToAlbums('kamalnew')">
-            <img src="kamalnews.png" alt="kamal new">
-            <span>KAMAL NEW</span>
         </div>
         <div class="new-album-item" onclick="scrollToAlbums('ahyadihahan')">
             <img src="ahyadihahan.png" alt="ahyad ihahan">
