@@ -100,53 +100,67 @@
 
     </div>
 
-   <!-- حاوية الألبومات مع التمرير -->
-    <div class="albums-wrapper" style="margin: 5px 0;">
-        <button class="scroll-arrow scroll-left absolute left-2" onclick="scrollAlbums(-1)">❮</button>
-        <div class="album-scroll-container">
-            <div class="album-list">
-                <div class="album-item">
-                    <button onclick="showAlbum('naydanouda')" class="album-btn" style="background-image: url('naydanouda.webp');" aria-label="مشاهدة ألبوم Nayda nouda"></button>
-                    <span class="album-name">nayda nouda</span>
+   <!-- حذف حاوية الألبومات مع التمرير -->
+   <!-- <div class="albums-wrapper" style="margin: 5px 0;"> ... </div> -->
+    
+    <!-- استبدال الحاوية القديمة بزر متكامل مع العنوان -->
+    <div class="album-title-container">
+        <button id="show-albums-btn" class="integrated-albums-button">
+            <i class="material-icons left-icon">library_music</i>
+            <span>← Autres albums →</span>
+            <div class="albums-icon">
+                <i class="material-icons">album</i>
+            </div>
+            <i class="material-icons right-icon">library_music</i>
+        </button>
+    </div>
+   
+    <!-- عارض الألبومات المنبثق -->
+    <div id="albums-showcase" class="albums-showcase">
+        <div class="albums-showcase-content">
+            <div class="showcase-header">
+                <h2><i class="material-icons">library_music</i> جميع الألبومات</h2>
+                <button id="close-albums-btn" class="showcase-close-btn">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="albums-grid">
+                <!-- سيتم إضافة الألبومات هنا عبر JavaScript -->
+                <div class="album-showcase-item" data-album="naydanouda">
+                    <img src="naydanouda.webp" alt="nayda nouda">
+                    <h3>NAYDA NOUDA</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('sentralchaabi')" class="album-btn" style="background-image: url('sentralchaabi.png');" aria-label="مشاهدة ألبوم sentral chaabi"></button>
-                    <span class="album-name">sentral chaabi</span>
+                <div class="album-showcase-item" data-album="sentralchaabi">
+                    <img src="sentralchaabi.png" alt="sentral chaabi">
+                    <h3>SENTRAL CHAABI</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('starchaabi')" class="album-btn" style="background-image: url('starchaabi.png');" aria-label="مشاهدة ألبوم star chaabi"></button>
-                    <span class="album-name">star chaabi</span>
+                <div class="album-showcase-item" data-album="starchaabi">
+                    <img src="starchaabi.png" alt="star chaabi">
+                    <h3>STAR CHAABI</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('popular')" class="album-btn" style="background-image: url('shabloutar.png');" aria-label="مشاهدة ألبوم popular"></button>
-                    <span class="album-name">shab loutar</span>
+                <div class="album-showcase-item" data-album="popular">
+                    <img src="shabloutar.png" alt="shab loutar">
+                    <h3>SHAB LOUTAR</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('casastar')" class="album-btn" style="background-image: url('casastar.png');" aria-label="مشاهدة ألبوم casa star"></button>
-                    <span class="album-name">casa star</span>
+                <div class="album-showcase-item" data-album="casastar">
+                    <img src="casastar.png" alt="casa star">
+                    <h3>CASA STAR</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('khalij')" class="album-btn" style="background-image: url('khalij.webp');" aria-label="مشاهدة ألبوم khaliji"></button>
-                    <span class="album-name">خليجية</span>
+                <div class="album-showcase-item" data-album="khalij">
+                    <img src="khalij.webp" alt="khaliji">
+                    <h3>أغاني خليجية</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('kamalnew')" class="album-btn" style="background-image: url('kamalnews.png');" aria-label="مشاهدة ألبوم kamal new"></button>
-                    <span class="album-name">kamal new</span>
+                <div class="album-showcase-item" data-album="kamalnew">
+                    <img src="kamalnews.png" alt="kamal new">
+                    <h3>KAMAL NEW</h3>
                 </div>
-                <div class="album-item">
-                    <button onclick="showAlbum('ahyadihahan')" class="album-btn" style="background-image: url('ahyadihahan.png');" aria-label="مشاهدة ألبوم AAWAD IHAHAN"></button>
-                    <span class="album-name">AAWAD IHAHAN</span>
+                <div class="album-showcase-item" data-album="ahyadihahan">
+                    <img src="ahyadihahan.png" alt="ahyad ihahan">
+                    <h3>AAWAD IHAHAN</h3>
                 </div>
             </div>
         </div>
-        <button class="scroll-arrow scroll-right absolute right-2" onclick="scrollAlbums(1)">❯</button>
     </div>
-    <!-- حاوية الكاروسيل المحسنة لتكون relative -->
-    <div class="relative flex items-center justify-center">
-        <div class="album-list-music">← Autres albums →</div>
-    </div>
-   
-    
 
     <!-- قسم الأغاني -->
     <div class="songs-container-wrapper">

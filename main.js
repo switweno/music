@@ -695,3 +695,53 @@ document.addEventListener('mousedown', function(event) {
         event.preventDefault(); // منع البحث التلقائي عند الضغط المطول
     }
 }, false);
+
+// إضافة وظائف للعارض المنبثق للألبومات
+document.addEventListener('DOMContentLoaded', function() {
+    const showAlbumsBtn = document.getElementById('show-albums-btn');
+    const closeAlbumsBtn = document.getElementById('close-albums-btn');
+    const albumsShowcase = document.getElementById('albums-showcase');
+    const albumItems = document.querySelectorAll('.album-showcase-item');
+
+    // فتح العارض
+    showAlbumsBtn.addEventListener('click', function() {
+        albumsShowcase.classList.add('show');
+        document.body.style.overflow = 'hidden'; // منع التمرير في الخلفية
+    });
+
+    // إغلاق العارض
+    closeAlbumsBtn.addEventListener('click', function() {
+        albumsShowcase.classList.remove('show');
+        document.body.style.overflow = ''; // استعادة التمرير
+    });
+
+    // عند النقر خارج المحتوى، يتم إغلاق العارض
+    albumsShowcase.addEventListener('click', function(e) {
+        if (e.target === albumsShowcase) {
+            albumsShowcase.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // وظيفة اختيار الألبوم
+    albumItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const albumId = this.getAttribute('data-album');
+            
+            // إخفاء العارض
+            albumsShowcase.classList.remove('show');
+            document.body.style.overflow = '';
+            
+            // عرض الألبوم المختار وتمرير الصفحة للمكان المناسب
+            scrollToAlbums(albumId);
+        });
+    });
+
+    // إضافة مستمع للمفتاح ESC لإغلاق العارض
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && albumsShowcase.classList.contains('show')) {
+            albumsShowcase.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
+});
