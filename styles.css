@@ -158,11 +158,11 @@ body {
 /* تحسين مظهر اسم الأغنية */
 #track-name {
     font-size: 16px;
-    margin: 10px auto 5px;
+    margin: 10px auto 10px;
     background: linear-gradient(to right, #ffffff, #f9f9f9);
     color: var(--primary-color);
     font-weight: bold;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 8px rgba(65, 127, 229, 0.87);
     border: 1px solid rgba(154, 152, 152, 0.2);
     padding: 10px 15px;
     border-radius: 30px;
@@ -187,7 +187,7 @@ body {
 
 #track-name:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.15);
+    box-shadow: 0 4px 10px rgba(126, 77, 255, 0.15);
     background: linear-gradient(to right, #ffffff, #fff5f5);
 }
 
