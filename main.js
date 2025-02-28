@@ -285,7 +285,7 @@ function formatTime(seconds) {
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// تحسين دالة تغيير الأغنية لاسترداد المدة تلقائيًا إذا لم تكن متاحة
+// تحسين دالة تغيير الأغنية مع تأثير بصري
 function changeTrack(audioFile, trackName) {
     if (isRandomPlaying) isRandomPlaying = false;
 
@@ -293,7 +293,17 @@ function changeTrack(audioFile, trackName) {
     const currentSong = songs.find(song => song.file === audioFile);
     const artistName = currentSong ? currentSong.artist : '';
     
-    document.getElementById("track-name").textContent = trackName;
+    const trackNameElement = document.getElementById("track-name");
+    
+    // إضافة تأثير بصري عند تغيير الأغنية
+    trackNameElement.classList.add('track-name-changed');
+    
+    // إزالة الفئة بعد انتهاء التنشيط
+    setTimeout(() => {
+        trackNameElement.classList.remove('track-name-changed');
+    }, 2000);
+    
+    trackNameElement.textContent = trackName;
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
 
