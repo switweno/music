@@ -753,7 +753,7 @@
     <script type="module">
       // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-      import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+      import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
       // Your web app's Firebase configuration
       const firebaseConfig = {
@@ -821,11 +821,18 @@
           
           querySnapshot.forEach((doc) => {
               const comment = doc.data();
+              const commentId = doc.id;
               const date = comment.createdAt ? new Date(comment.createdAt.toDate()).toLocaleString() : 'الآن';
               const rating = comment.rating || 0;
+              const likes = comment.likes || 0;
+              const dislikes = comment.dislikes || 0;
+              
+              // التحقق مما إذا كان المستخدم قد قام بالتصويت مسبقًا
+              const userVote = getUserVoteForComment(commentId);
               
               const commentElement = document.createElement('div');
               commentElement.className = 'comment-item';
+              commentElement.setAttribute('data-comment-id', commentId);
               
               // إنشاء نجوم التقييم للتعليق
               let starsHTML = '';
@@ -845,14 +852,107 @@
                   </div>
                   ${starsHTML}
                   <div class="comment-content">${comment.text}</div>
+                  <div class="comment-actions">
+                      <button class="vote-btn like-btn ${userVote === 'like' ? 'voted' : ''}" data-comment-id="${commentId}" data-vote-type="like">
+                          <i class="material-icons">thumb_up</i>
+                          <span class="vote-count likes-count">${likes}</span>
+                      </button>
+                      <button class="vote-btn dislike-btn ${userVote === 'dislike' ? 'voted' : ''}" data-comment-id="${commentId}" data-vote-type="dislike">
+                          <i class="material-icons">thumb_down</i>
+                          <span class="vote-count dislikes-count">${dislikes}</span>
+                      </button>
+                  </div>
               `;
               
               commentsContainer.appendChild(commentElement);
           });
+          
+          // إضافة مستمعي الأحداث لأزرار الإعجاب وعدم الإعجاب
+          addVoteEventListeners();
+          
         } catch (error) {
           console.error("Error getting comments: ", error);
           commentsContainer.innerHTML = '<div class="no-comments">حدث خطأ أثناء تحميل التعليقات. يرجى المحاولة مرة أخرى.</div>';
         }
+      }
+      
+      // إضافة مستمعي الأحداث لأزرار التصويت
+      function addVoteEventListeners() {
+        const voteButtons = document.querySelectorAll('.vote-btn');
+        voteButtons.forEach(button => {
+          button.addEventListener('click', handleVote);
+        });
+      }
+      
+      // معالجة التصويت (الإعجاب أو عدم الإعجاب)
+      async function handleVote(event) {
+        const button = event.currentTarget;
+        const commentId = button.getAttribute('data-comment-id');
+        const voteType = button.getAttribute('data-vote-type');
+        
+        // التحقق من تصويت المستخدم السابق
+        const userVote = getUserVoteForComment(commentId);
+        
+        // لا يمكن التصويت مرتين بنفس النوع
+        if (userVote === voteType) {
+          showNotification('لقد قمت بالتصويت مسبقًا', true);
+          return;
+        }
+        
+        try {
+          const commentRef = doc(db, "comments", commentId);
+          const commentDoc = await getDoc(commentRef);
+          
+          if (commentDoc.exists()) {
+            const commentData = commentDoc.data();
+            const updateData = {};
+            
+            // إذا كان المستخدم قد صوت سابقًا بشكل مختلف، قم بإلغاء التصويت السابق
+            if (userVote) {
+              updateData[userVote + 's'] = Math.max(0, (commentData[userVote + 's'] || 0) - 1);
+            }
+            
+            // قم بزيادة التصويت الجديد
+            updateData[voteType + 's'] = (commentData[voteType + 's'] || 0) + 1;
+            
+            await updateDoc(commentRef, updateData);
+            
+            // تحديث العداد في واجهة المستخدم
+            if (userVote) {
+              const oldCountElement = button.parentNode.querySelector(`.${userVote}s-count`);
+              if (oldCountElement) {
+                oldCountElement.textContent = Math.max(0, parseInt(oldCountElement.textContent) - 1);
+              }
+              button.parentNode.querySelector(`.${userVote}-btn`).classList.remove('voted');
+            }
+            
+            // تحديث العداد الجديد وإضافة فئة 'voted'
+            const countElement = button.querySelector('.vote-count');
+            countElement.textContent = parseInt(countElement.textContent) + 1;
+            button.classList.add('voted');
+            
+            // حفظ تصويت المستخدم في التخزين المحلي
+            saveUserVote(commentId, voteType);
+            
+            showNotification(voteType === 'like' ? 'شكرًا لإعجابك!' : 'تم تسجيل رأيك');
+          }
+        } catch (error) {
+          console.error('Error updating vote:', error);
+          showNotification('حدث خطأ أثناء التصويت. يرجى المحاولة مرة أخرى.', true);
+        }
+      }
+      
+      // حفظ تصويت المستخدم في التخزين المحلي
+      function saveUserVote(commentId, voteType) {
+        const votes = JSON.parse(localStorage.getItem('commentVotes') || '{}');
+        votes[commentId] = voteType;
+        localStorage.setItem('commentVotes', JSON.stringify(votes));
+      }
+      
+      // الحصول على تصويت المستخدم لتعليق معين
+      function getUserVoteForComment(commentId) {
+        const votes = JSON.parse(localStorage.getItem('commentVotes') || '{}');
+        return votes[commentId];
       }
       
       // دالة لإظهار الإشعارات
@@ -913,7 +1013,9 @@
             text: text,
             email: email || null,
             rating: currentRating,
-            createdAt: serverTimestamp()
+            createdAt: serverTimestamp(),
+            likes: 0,
+            dislikes: 0
           });
           
           // تفريغ الحقول
