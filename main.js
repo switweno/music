@@ -71,6 +71,12 @@ const songs = [
     { file: '05 kamal el 3abdi.mp3', name: 'kamal el 3abdi 5', album: 'kamalnew' },
     { file: '06 kamal el 3abdi.mp3', name: 'kamal el 3abdi 6', album: 'kamalnew' },
     
+    { file: '01 ahyad.mp3', name: 'AAWAD IHAHAN 1', album: 'ahyadihahan' },
+    { file: '02 ahyad.mp3', name: 'AAWAD IHAHAN 2', album: 'ahyadihahan' },
+    { file: '03 ahyad.mp3', name: 'AAWAD IHAHAN 3', album: 'ahyadihahan' },
+    { file: '04 ahyad.mp3', name: 'AAWAD IHAHAN 4', album: 'ahyadihahan' },
+    { file: '05 ahyad.mp3', name: 'AAWAD IHAHAN 5', album: 'ahyadihahan' },
+    
     { file: '01 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 1', album: 'popular' },
     { file: '02 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 2', album: 'popular' },
     { file: '03 cha3biat shab loutar.mp3.mp3', name: 'shab loutar 3', album: 'popular' },
