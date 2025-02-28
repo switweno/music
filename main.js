@@ -270,12 +270,27 @@ function showNotification(message) {
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
-    albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+    
+    // إخفاء جميع حاويات الأغاني
+    albums.forEach(a => a.style.display = 'none');
+    
+    // عرض حاوية الأغاني للألبوم المحدد
+    const targetContainer = document.getElementById(`${album}-songs`);
+    if (targetContainer) {
+        targetContainer.style.display = 'flex';
+    }
 
-    document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
-
-    currentAlbum = album; // تحديث الألبوم الحالي
+    // تحديث متغير الألبوم الحالي
+    currentAlbum = album; 
     currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+    
+    // تفعيل زر الألبوم المقابل في القائمة العلوية
+    document.querySelectorAll('.album-item').forEach(item => {
+        const albumButton = item.querySelector('.album-btn');
+        if (albumButton && albumButton.getAttribute('onclick').includes(`'${album}'`)) {
+            // يمكن إضافة تأثير تفعيل هنا إذا أردت
+        }
+    });
 }
 
 // دالة تنسيق الوقت
@@ -621,19 +636,44 @@ function initializeFavoriteButtons() {
     });
 
     function scrollToAlbums(albumId) {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        // عرض الألبوم المحدد أولاً
         showAlbum(albumId);
+        
+        // الحصول على موقع عنصر الفاصل الأحمر (أو قسم الأغاني)
+        const targetContainer = document.getElementById(`${albumId}-songs`);
+        
+        if (targetContainer) {
+            // الحصول على عنصر الفاصل فوق قائمة الأغاني (عنوان الألبوم)
+            const albumListMusic = document.querySelector('.album-list-music');
+            
+            // حساب الارتفاع الثابت للعناصر في الأعلى
+            const headerOffset = 250; // تقريبًا ارتفاع مشغل الصوت والشريط الإخباري
+            
+            // حساب الموقع النهائي للتمرير
+            let offsetPosition;
+            
+            if (albumListMusic) {
+                // الموقع النسبي للفاصل
+                offsetPosition = albumListMusic.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            } else {
+                // إذا لم يتم العثور على الفاصل، استخدم موقع حاوية الأغاني
+                offsetPosition = targetContainer.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            }
+            
+            // التمرير إلى الموقع المحسوب
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     }
 
     function showAlbum(album) {
         const albums = document.querySelectorAll('.songs-container');
         albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
-
+    
         document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
-
+    
         currentAlbum = album; // تحديث الألبوم الحالي
         currentTrackIndex = 0; // إعادة المؤشر إلى البداية
     }
