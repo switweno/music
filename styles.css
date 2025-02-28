@@ -162,7 +162,7 @@ body {
     background: linear-gradient(to right, #ffffff, #f9f9f9);
     color: var(--primary-color);
     font-weight: bold;
-    box-shadow: 0 3px 3px rgba(19, 22, 28, 0.46);
+    box-shadow: 0 2px 3px rgba(19, 22, 28, 0.46);
     border: 1px solid rgba(154, 152, 152, 0.2);
     padding: 10px 15px;
     border-radius: 30px;
@@ -912,8 +912,8 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
     border-bottom: 2px solid var(--primary-color);
 }
 
@@ -939,7 +939,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
 .user-info {
     display: flex;
     gap: 10px;
-    margin-bottom: 1px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 600px) {
