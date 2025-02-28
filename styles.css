@@ -825,10 +825,11 @@ min-width: 0; /* يمكن إزالته إذا كان غير ضروري */
 }
 
 .comments-form {
-    background: #f5f5f5;
+    background: #f7f7f7;
     padding: 15px;
     border-radius: var(--border-radius);
     margin-bottom: 20px;
+    border: 1px solid #eee;
 }
 
 .user-info {
@@ -864,23 +865,48 @@ min-width: 0; /* يمكن إزالته إذا كان غير ضروري */
 }
 
 #submit-comment {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(142, 26, 79, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    min-width: 100px;
+    max-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+#submit-comment::before {
+    content: "📤"; /* أيقونة إرسال */
+    margin-right: 6px;
+    font-size: 16px;
 }
 
 #submit-comment:hover {
-    background: #e60000;
+    background: linear-gradient(135deg, #e62828, #801845);
+    box-shadow: 0 4px 10px rgba(142, 26, 79, 0.3);
+    transform: translateY(-2px);
+}
+
+#submit-comment:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(142, 26, 79, 0.3);
 }
 
 #submit-comment:disabled {
-    background: #999;
+    background: linear-gradient(135deg, #aaa, #888);
     cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
 }
 
 #comments-container {
