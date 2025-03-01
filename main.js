@@ -234,18 +234,21 @@ function toggleFavorite(event, songId, audioFile, songName, artistName) {
     // منع انتشار الحدث لتجنب تشغيل الأغنية عند النقر على زر المفضلة
     event.stopPropagation();
     
+    // الحصول على الألبوم الصحيح للأغنية
+    const songAlbum = getSongAlbumById(audioFile);
+    
     const songIndex = favorites.findIndex(song => song.id === songId);
     const button = event.currentTarget;
     const icon = button.querySelector('i');
     
     if (songIndex === -1) {
-        // إضافة الأغنية إلى المفضلة
+        // إضافة الأغنية إلى المفضلة مع الألبوم الصحيح
         favorites.push({
             id: songId,
             file: audioFile,
             name: songName,
             artist: artistName || '',
-            album: currentAlbum
+            album: songAlbum // استخدام الألبوم المناسب للأغنية وليس الألبوم الحالي
         });
         
         // تغيير الأيقونة وإضافة تنشيط
@@ -384,7 +387,15 @@ function formatTime(seconds) {
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// تحسين دالة تغيير الأغنية مع تأثير بصري
+// إضافة دالة مساعدة للعثور على الألبوم الصحيح للأغنية من خلال اسم الملف
+function getSongAlbumById(audioFile) {
+    // البحث عن الأغنية في قائمة الأغاني
+    const songData = songs.find(song => song.file === audioFile);
+    // إذا وجدنا الأغنية، أعد مُعرّف الألبوم الخاص بها، وإلا أعد الألبوم الحالي
+    return songData ? songData.album : currentAlbum;
+}
+
+// تعديل دالة تغيير الأغنية لاستخدام ألبوم الأغنية الصحيح
 function changeTrack(audioFile, trackName) {
     if (isRandomPlaying) isRandomPlaying = false;
 
@@ -392,8 +403,11 @@ function changeTrack(audioFile, trackName) {
     const currentSong = songs.find(song => song.file === audioFile);
     const artistName = currentSong ? currentSong.artist : '';
     
+    // الحصول على مُعرّف الألبوم الصحيح للأغنية
+    const songAlbum = getSongAlbumById(audioFile);
+    
     // الحصول على اسم الألبوم المناسب للعرض
-    const albumDisplayName = getAlbumDisplayName(currentAlbum);
+    const albumDisplayName = getAlbumDisplayName(songAlbum);
     
     // تحديث معلومات الأغنية
     const trackNameElement = document.getElementById("track-name");
@@ -427,7 +441,7 @@ function changeTrack(audioFile, trackName) {
         artistDisplayElement.textContent = artistName;
     }
 
-    saveLastPlayed(audioFile, trackName, currentAlbum);
+    saveLastPlayed(audioFile, trackName, songAlbum);
 }
 
 // دالة للحصول على اسم الألبوم المناسب للعرض
