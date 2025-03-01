@@ -383,8 +383,8 @@ function showFavoriteNotification(message, isAdded = true) {
     
     document.body.appendChild(notification);
     
-    // Force reflow to ensure animation works
-    notification.offsetWidth;
+    // Force reflow to ensure animation works - fix JSHint warning
+    void notification.offsetWidth; // Using void operator to make it a statement
     
     // Show notification
     notification.classList.add('show');
@@ -567,9 +567,8 @@ progressBar.addEventListener("change", () => {
 volumeControl.addEventListener("input", () => {
     audioPlayer.volume = volumeControl.value / 100;
     audioPlayer.muted = (audioPlayer.volume === 0); // كتم الصوت إذا كان 0
-    volumeButton.innerHTML = audioPlayer.muted
-        ? '<span class="material-icons">volume_off</span>'
-        : '<span class="material-icons">volume_up</span>';
+    // Fix misleading line break warning by keeping ? on the same line
+    volumeButton.innerHTML = audioPlayer.muted ? '<span class="material-icons">volume_off</span>' : '<span class="material-icons">volume_up</span>';
 });
 
 // تشغيل/إيقاف الأغنية
