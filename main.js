@@ -364,6 +364,65 @@ function showNotification(message) {
     }, 3000);
 }
 
+// Function to show notification when a favorite is added/removed
+function showFavoriteNotification(message, isAdded = true) {
+    // Remove any existing notification
+    const existingNotification = document.querySelector('.favorite-notification');
+    if (existingNotification) {
+        document.body.removeChild(existingNotification);
+    }
+    
+    // Create new notification
+    const notification = document.createElement('div');
+    notification.className = 'favorite-notification';
+    notification.innerHTML = `
+        <i class="material-icons">${isAdded ? 'favorite' : 'favorite_border'}</i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Force reflow to ensure animation works
+    notification.offsetWidth;
+    
+    // Show notification
+    notification.classList.add('show');
+    
+    // Remove notification after animation completes
+    setTimeout(() => {
+        if (notification.parentNode) {
+            document.body.removeChild(notification);
+        }
+    }, 3000);
+}
+
+// Update your toggleFavorite function to use the new notification
+function toggleFavorite(event, songId, songFile, songName, albumName) {
+    event.stopPropagation(); // Prevent song from playing when clicking favorite button
+    
+    const favoritesArray = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favoriteIndex = favoritesArray.findIndex(fav => fav.id === songId);
+    
+    if (favoriteIndex === -1) {
+        // Add to favorites
+        favoritesArray.push({
+            id: songId,
+            file: songFile,
+            name: songName,
+            album: albumName
+        });
+        showFavoriteNotification('تمت إضافة الأغنية إلى المفضلة', true);
+    } else {
+        // Remove from favorites
+        favoritesArray.splice(favoriteIndex, 1);
+        showFavoriteNotification('تم إزالة الأغنية من المفضلة', false);
+    }
+    
+    localStorage.setItem('favorites', JSON.stringify(favoritesArray));
+    updateFavoriteButtons();
+    renderFavorites();
+}
+
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
