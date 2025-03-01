@@ -155,79 +155,7 @@ body {
     opacity: 1;
 }
 
-/* تحسين مظهر اسم الأغنية */
-#track-name {
-    font-size: 16px;
-    margin: 10px auto 10px;
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-    color: #ffffff;
-    font-weight: bold;
-    box-shadow: 0 2px 3px rgba(19, 22, 28, 0.46);
-    border: 1px solid rgba(154, 152, 152, 0.2);
-   padding: 6px 12px;
-    border-radius: 30px;
-    max-width: 90%;
-    text-align: center;
-    position: relative;
-    display: block;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: default;
-    animation: fadeIn 0.5s ease;
-}
 
-
-
-#track-name:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(126, 77, 255, 0.15);
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-}
-
-/* تنشيط الحركة عند تغيير الأغنية */
-@keyframes fadeIn {
-    from { 
-        opacity: 0.7;
-        transform: translateY(5px);
-    }
-    to { 
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.3); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
-}
-
-.track-name-changed {
-    animation: fadeIn 0.5s ease, pulse 1.5s infinite;
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة */
-@media (max-width: 576px) {
-    #track-name {
-        font-size: 14px;
-        padding: 8px 12px;
-        max-width: 95%;
-    }
-    
-    #track-name::before {
-        margin-right: 5px;
-        font-size: 12px;
-    }
-}
-
-.track-name {
-    border: 1px solid #9a9898;
-    padding: 7px;
-    border-radius: 5px;
-    margin-top: 8px;
-}
 
 /* أسماء الألبومات */
 .album-name {
@@ -978,42 +906,17 @@ body {
 }
 
 #track-info .album-info {
-    background: linear-gradient(135deg, #3f51b5, #2196F3);
-    border-color: rgba(33, 150, 243, 0.3) !important;
-}
-
-#track-info .track-name {
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+     background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
     border-color: rgba(142, 26, 79, 0.3) !important;
 }
 
-/* Reset any extra styling that might affect only track-name */
-#track-name {
-    margin: 0 !important;
-    padding: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    height: auto !important;
-    min-height: inherit !important;
+#track-info .track-name {
+    background: linear-gradient(135deg, #3f51b5, #2196F3);
+    border-color: rgba(33, 150, 243, 0.3) !important;
+    
 }
 
-/* Make sure the icons match */
-#track-info .album-info i,
-#track-info .track-name i {
-    font-size: 15px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-}
 
-/* Override any other selectors targeting .track-name alone */
-.track-name {
-    border: none !important;
-    margin-top: 0 !important;
-}
 
 /* تحسين استجابة العرض للشاشات الصغيرة مع الحفاظ على التناسق */
 @media (max-width: 576px) {
