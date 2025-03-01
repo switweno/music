@@ -37,24 +37,6 @@
      style=" background-size: cover; background-position: center;">
     
 
-    <!-- الشريط الإخباري -->
-  <div class="news-ticker">
-    <span class="news-content">
-        <i class="fas fa-music"></i> Écoutez les plus belles chansons marocaines sur votre site 🎵
-        &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
-        <i class="fas fa-music"></i> استمع لأجمل الأغاني العربية على منصتنا 🎶
-&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
-<i class="fas fa-play"></i> Découvrez les dernières nouveautés musicales en exclusivité! 🎵
-&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
-<i class="fas fa-star"></i> Profitez de la meilleure qualité sonore sur notre plateforme! 🔊
-&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
-<i class="fas fa-heart"></i> Nous vous souhaitons la bienvenue sur notre plateforme d'écoute musicale 🎧
-    </span>
-</div>
-
-
-
-
     <audio id="audio-player" class="hidden">
         <source id="audio-source" src="" type="audio/mpeg">
         المتصفح لا يدعم تشغيل الصوت.
@@ -98,71 +80,6 @@
     <input type="range" id="volume-control" class="w-32 accent-green-500" value="100" max="100">
 </div>
 
-    </div>
-
-    
-    <!-- استبدال الحاوية القديمة بزر متكامل مع العنوان -->
-   <div class="album-title-container">
-    <button id="show-albums-btn" class="integrated-albums-button">
-        <i class="material-icons left-icon">library_music</i>
-        <span> جميع الألبومات →</span>
-        <span class="albums-icon">
-            <i class="material-icons">album</i>
-        </span>
-        <i class="material-icons right-icon">library_music</i>
-    </button>
-</div>
-
-   
-    <!-- عارض الألبومات المنبثق -->
-    <div id="albums-showcase" class="albums-showcase">
-        <div class="albums-showcase-content">
-            <div class="showcase-header">
-                <h2><i class="material-icons">library_music</i> جميع الألبومات</h2>
-                <button id="close-albums-btn" class="showcase-close-btn">
-                    <i class="material-icons">close</i>
-                </button>
-            </div>
-            <div class="albums-grid">
-                <!-- سيتم إضافة الألبومات هنا عبر JavaScript -->
-                <div class="album-showcase-item" data-album="naydanouda">
-                    <img src="naydanouda.webp" alt="nayda nouda">
-                    <h3>NAYDA NOUDA</h3>
-                </div>
-                <div class="album-showcase-item" data-album="i3yalnmassa">
-                    <img src="i3yalnmassa.png" alt="i3yalnmassa">
-                    <h3>I3YALN MASSA</h3>
-                </div>
-                <div class="album-showcase-item" data-album="sentralchaabi">
-                    <img src="sentralchaabi.png" alt="sentral chaabi">
-                    <h3>SENTRAL CHAABI</h3>
-                </div>
-                <div class="album-showcase-item" data-album="starchaabi">
-                    <img src="starchaabi.png" alt="star chaabi">
-                    <h3>STAR CHAABI</h3>
-                </div>
-                <div class="album-showcase-item" data-album="popular">
-                    <img src="shabloutar.png" alt="shab loutar">
-                    <h3>SHAB LOUTAR</h3>
-                </div>
-                <div class="album-showcase-item" data-album="casastar">
-                    <img src="casastar.png" alt="casa star">
-                    <h3>CASA STAR</h3>
-                </div>
-                <div class="album-showcase-item" data-album="khalij">
-                    <img src="khalij.webp" alt="khaliji">
-                    <h3>أغاني خليجية</h3>
-                </div>
-                <div class="album-showcase-item" data-album="kamalnew">
-                    <img src="kamalnews.png" alt="kamal new">
-                    <h3>KAMAL NEW</h3>
-                </div>
-                <div class="album-showcase-item" data-album="ahyadihahan">
-                    <img src="ahyadihahan.png" alt="ahyad ihahan">
-                    <h3>AAWAD IHAHAN</h3>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- قسم الأغاني -->
@@ -636,42 +553,24 @@
       </div>
     
    <div class="album-list-msc"> Autres albums </div>
-    <!-- الألبومات الجديدة -->
-    <div class="new-albums-container" style="margin: 5px 10px;">
-        <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
-            <img src="naydanouda.webp" alt="nayda nouda">
-            <span>NAYDA NOUDA</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('sentralchaabi')">
-            <img src="sentralchaabi.png" alt="sentral chaabi">
-            <span>SENTRAL CHAABI</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('popular')">
-            <img src="shabloutar.png" alt="shab loutar">
-            <span>shab loutar</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('i3yalnmassa')">
-            <img src="i3yalnmassa.png" alt="I3YALN MASSA">
-            <span>I3YALN MASSA</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('khalij')">
-            <img src="khalij.webp" alt="khaliji">
-            <span>أغاني خليجية</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
-            <img src="starchaabi.png" alt="star chaabi">
-            <span>STAR CHAABI</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('ahyadihahan')">
-            <img src="ahyadihahan.png" alt="ahyad ihahan">
-            <span>AAWAD IHAHAN</span>
-        </div>
-        <div class="new-album-item" onclick="scrollToAlbums('casastar')">
-            <img src="casastar.png" alt="casa star">
-            <span>CASA STAR</span>
+    <!-- الألبومات مع الصفحات -->
+    <div class="albums-pagination-container">
+        <div id="albums-page-container" class="new-albums-container">
+            <!-- Albums will be loaded here by JavaScript -->
         </div>
         
-       
+        <!-- عناصر التنقل بين الصفحات -->
+        <div class="pagination-controls">
+            <button class="pagination-btn" id="prev-page" onclick="changePage(-1)">
+                <i class="material-icons">chevron_left</i>
+            </button>
+            <div id="pagination-numbers" class="pagination-numbers">
+                <!-- Page numbers will be generated here -->
+            </div>
+            <button class="pagination-btn" id="next-page" onclick="changePage(1)">
+                <i class="material-icons">chevron_right</i>
+            </button>
+        </div>
     </div>
 
 <div class="favorites-section">

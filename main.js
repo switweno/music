@@ -134,12 +134,89 @@ let isSeeking = false; // متغير للتحقق من السحب
 // متغيرات للمفضلة
 let favorites = [];
 
+// متغيرات للتنقل بين صفحات الألبومات
+const albumsPerPage = 8; // عدد الألبومات في كل صفحة
+let currentPage = 1; // الصفحة الحالية
+const allAlbums = [
+    { id: 'naydanouda', name: 'NAYDA NOUDA', image: 'naydanouda.webp' },
+    { id: 'sentralchaabi', name: 'SENTRAL CHAABI', image: 'sentralchaabi.png' },
+    { id: 'popular', name: 'SHAB LOUTAR', image: 'shabloutar.png' },
+    { id: 'i3yalnmassa', name: 'I3YALN MASSA', image: 'i3yalnmassa.png' },
+    { id: 'khalij', name: 'أغاني خليجية', image: 'khalij.webp' },
+    { id: 'starchaabi', name: 'STAR CHAABI', image: 'starchaabi.png' },
+    { id: 'ahyadihahan', name: 'AAWAD IHAHAN', image: 'ahyadihahan.png' },
+    { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
+    { id: 'kamalnew', name: 'KAMAL NEW', image: 'kamalnews.png' },
+    // يمكن إضافة المزيد من الألبومات هنا عند الحاجة
+];
+
 // استدعاء المفضلة عند تحميل الصفحة
 function loadFavorites() {
     const storedFavorites = localStorage.getItem('musicFavorites');
     if (storedFavorites) {
         favorites = JSON.parse(storedFavorites);
         updateFavoritesUI();
+    }
+}
+
+// دالة لتحميل صفحة محددة من الألبومات
+function loadAlbumsPage(page) {
+    const albumsContainer = document.getElementById('albums-page-container');
+    albumsContainer.innerHTML = '';
+    
+    // حساب نطاق الألبومات للصفحة المحددة
+    const startIndex = (page - 1) * albumsPerPage;
+    const endIndex = Math.min(startIndex + albumsPerPage, allAlbums.length);
+    
+    // عرض الألبومات للصفحة الحالية
+    for (let i = startIndex; i < endIndex; i++) {
+        const album = allAlbums[i];
+        const albumElement = document.createElement('div');
+        albumElement.className = 'new-album-item';
+        albumElement.setAttribute('onclick', `scrollToAlbums('${album.id}')`);
+        albumElement.innerHTML = `
+            <img src="${album.image}" alt="${album.name}">
+            <span>${album.name}</span>
+        `;
+        albumsContainer.appendChild(albumElement);
+    }
+    
+    // تحديث أزرار التنقل
+    updatePaginationControls(page);
+}
+
+// دالة لتحديث أزرار التنقل
+function updatePaginationControls(currentPage) {
+    const paginationContainer = document.getElementById('pagination-numbers');
+    paginationContainer.innerHTML = '';
+    
+    const totalPages = Math.ceil(allAlbums.length / albumsPerPage);
+    
+    // تعطيل أو تفعيل أزرار السابق والتالي
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    
+    // إنشاء أزرار أرقام الصفحات
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `page-number ${i === currentPage ? 'active' : ''}`;
+        pageBtn.textContent = i;
+        pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            loadAlbumsPage(i);
+        });
+        paginationContainer.appendChild(pageBtn);
+    }
+}
+
+// دالة لتغيير الصفحة (السابقة أو التالية)
+function changePage(direction) {
+    const totalPages = Math.ceil(allAlbums.length / albumsPerPage);
+    const newPage = currentPage + direction;
+    
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        loadAlbumsPage(currentPage);
     }
 }
 
@@ -460,6 +537,9 @@ window.addEventListener("load", () => {
     // تعيين التوقيت الافتراضي
     currentTimeElement.textContent = "00:00";
     durationTimeElement.textContent = "00:00";
+    
+    // تحميل الألبومات عند فتح الصفحة (إضافة هذا السطر)
+    loadAlbumsPage(1);
 });
 
 // تبديل عرض التحكم في الصوت
@@ -526,6 +606,9 @@ function playRandom() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // تأكد من تحميل الألبومات فوراً
+    loadAlbumsPage(1);
+    
     const albums = document.querySelectorAll('.album-btn');
     const songsContainers = document.querySelectorAll('.songs-container');
 
