@@ -131,8 +131,9 @@ let isRandomPlaying = false;
 let currentAlbum = "starchaabi"; // الألبوم الافتراضي
 let isSeeking = false; // متغير للتحقق من السحب
 
-// متغيرات للمفضلة
+// متغيرات للمفضلة - نستخدم مفتاح واحد فقط للتخزين المحلي
 let favorites = [];
+const FAVORITES_STORAGE_KEY = 'musicFavorites';
 
 // متغيرات للتنقل بين صفحات الألبومات
 const albumsPerPage = 6; // عدد الألبومات في كل صفحة
@@ -152,7 +153,7 @@ const allAlbums = [
 
 // استدعاء المفضلة عند تحميل الصفحة
 function loadFavorites() {
-    const storedFavorites = localStorage.getItem('musicFavorites');
+    const storedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
     if (storedFavorites) {
         favorites = JSON.parse(storedFavorites);
         updateFavoritesUI();
@@ -234,10 +235,10 @@ function changePage(direction) {
 
 // حفظ المفضلة في التخزين المحلي
 function saveFavorites() {
-    localStorage.setItem('musicFavorites', JSON.stringify(favorites));
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
 }
 
-// إضافة أو إزالة أغنية من المفضلة
+// إضافة أو إزالة أغنية من المفضلة - دالة موحدة
 function toggleFavorite(event, songId, audioFile, songName, artistName) {
     // منع انتشار الحدث لتجنب تشغيل الأغنية عند النقر على زر المفضلة
     event.stopPropagation();
@@ -264,7 +265,7 @@ function toggleFavorite(event, songId, audioFile, songName, artistName) {
         button.classList.add('active');
         
         // إظهار رسالة تأكيد
-        showNotification(`تمت إضافة "${songName}" إلى المفضلة`);
+        showFavoriteNotification(`تمت إضافة "${songName}" إلى المفضلة`, true);
     } else {
         // إزالة الأغنية من المفضلة
         favorites.splice(songIndex, 1);
@@ -274,7 +275,7 @@ function toggleFavorite(event, songId, audioFile, songName, artistName) {
         button.classList.remove('active');
         
         // إظهار رسالة تأكيد
-        showNotification(`تمت إزالة "${songName}" من المفضلة`);
+        showFavoriteNotification(`تم إزالة "${songName}" من المفضلة`, false);
     }
     
     // حفظ التغييرات وتحديث واجهة المستخدم
@@ -394,33 +395,6 @@ function showFavoriteNotification(message, isAdded = true) {
             document.body.removeChild(notification);
         }
     }, 3000);
-}
-
-// Update your toggleFavorite function to use the new notification
-function toggleFavorite(event, songId, songFile, songName, albumName) {
-    event.stopPropagation(); // Prevent song from playing when clicking favorite button
-    
-    const favoritesArray = JSON.parse(localStorage.getItem('favorites')) || [];
-    const favoriteIndex = favoritesArray.findIndex(fav => fav.id === songId);
-    
-    if (favoriteIndex === -1) {
-        // Add to favorites
-        favoritesArray.push({
-            id: songId,
-            file: songFile,
-            name: songName,
-            album: albumName
-        });
-        showFavoriteNotification('تمت إضافة الأغنية إلى المفضلة', true);
-    } else {
-        // Remove from favorites
-        favoritesArray.splice(favoriteIndex, 1);
-        showFavoriteNotification('تم إزالة الأغنية من المفضلة', false);
-    }
-    
-    localStorage.setItem('favorites', JSON.stringify(favoritesArray));
-    updateFavoriteButtons();
-    renderFavorites();
 }
 
 // دالة عرض الألبوم
@@ -623,6 +597,66 @@ function restoreLastPlayed() {
 // تشغيل الأغنية التالية تلقائيًا عند الانتهاء
 audioPlayer.addEventListener("ended", playNext);
 
+// Function to generate song containers dynamically
+function generateSongContainers() {
+    // Get unique album IDs from the songs array
+    const uniqueAlbums = [...new Set(songs.map(song => song.album))];
+    
+    // Container for all song containers
+    const songsContainerWrapper = document.querySelector('.songs-container-wrapper');
+    
+    // Clear existing static content
+    songsContainerWrapper.innerHTML = '';
+    
+    // Generate container for each album
+    uniqueAlbums.forEach(albumId => {
+        // Filter songs by album
+        const albumSongs = songs.filter(song => song.album === albumId);
+        
+        // Create container for this album's songs
+        const albumContainer = document.createElement('div');
+        albumContainer.className = `songs-container ${albumId}`;
+        albumContainer.id = `${albumId}-songs`;
+        
+        // Add data attribute for lazy loading
+        albumContainer.dataset.album = albumId;
+        
+        // Add all songs to the container
+        albumSongs.forEach(song => {
+            const songElement = createSongElement(song);
+            albumContainer.appendChild(songElement);
+        });
+        
+        // Add the album container to the wrapper
+        songsContainerWrapper.appendChild(albumContainer);
+    });
+    
+    // After generating all containers, show the default album
+    showAlbum(currentAlbum);
+}
+
+// Modify the window load event listener to call our new function
+window.addEventListener("load", () => {
+    // Generate song containers dynamically
+    generateSongContainers();
+    
+    // Continue with existing initialization
+    restoreLastPlayed();
+    initializeSongInfo();
+    loadFavorites();
+    initializeFavoriteButtons();
+    
+    // Default time display
+    currentTimeElement.textContent = "00:00";
+    durationTimeElement.textContent = "00:00";
+    
+    // Load albums page
+    loadAlbumsPage(1);
+});
+
+// تشغيل الأغنية التالية تلقائيًا عند الانتهاء
+audioPlayer.addEventListener("ended", playNext);
+
 // تحميل الصفحة
 window.addEventListener("load", () => {
     showAlbum("starchaabi");
@@ -786,9 +820,16 @@ function initializeFavoriteButtons() {
                 favoriteBtn.className = 'favorite-btn';
                 favoriteBtn.setAttribute('onclick', `toggleFavorite(event, '${songId}', '${audioFile}', '${songName}', '')`);
                 
+                // تحقق مما إذا كانت الأغنية في المفضلة بالفعل
+                const isFavorite = favorites.some(song => song.id === songId);
+                
                 const icon = document.createElement('i');
                 icon.className = 'material-icons';
-                icon.textContent = 'favorite_border';
+                icon.textContent = isFavorite ? 'favorite' : 'favorite_border';
+                
+                if (isFavorite) {
+                    favoriteBtn.classList.add('active');
+                }
                 
                 favoriteBtn.appendChild(icon);
                 songElement.appendChild(favoriteBtn);
