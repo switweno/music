@@ -159,8 +159,8 @@ body {
 #track-name {
     font-size: 16px;
     margin: 10px auto 10px;
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-    color: #ffffff;
+    background: linear-gradient(to right, #ffffff, #f9f9f9);
+    color: var(--primary-color);
     font-weight: bold;
     box-shadow: 0 2px 3px rgba(19, 22, 28, 0.46);
     border: 1px solid rgba(154, 152, 152, 0.2);
@@ -179,7 +179,7 @@ body {
 }
 
 #track-name::before {
-    content: '📀';
+    content: '🎵';
     margin-right: 8px;
     font-size: 14px;
     opacity: 0.8;
@@ -188,7 +188,7 @@ body {
 #track-name:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(126, 77, 255, 0.15);
-    background: linear-gradient(to right, #c61616, #bc0909);
+    background: linear-gradient(to right, #ffffff, #fff5f5);
 }
 
 /* تنشيط الحركة عند تغيير الأغنية */
@@ -683,7 +683,7 @@ background: linear-gradient(to right, #f7f7f7, #f9f9f9);
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(107, 139, 4);
+    background-color: #1F2937;
     color: #ffffff;
     padding: 10px 0;
     font-size: 14px;
