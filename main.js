@@ -390,17 +390,27 @@ function changeTrack(audioFile, trackName) {
     const currentSong = songs.find(song => song.file === audioFile);
     const artistName = currentSong ? currentSong.artist : '';
     
+    // الحصول على اسم الألبوم المناسب للعرض
+    const albumDisplayName = getAlbumDisplayName(currentAlbum);
+    
+    // تحديث معلومات الأغنية
     const trackNameElement = document.getElementById("track-name");
+    const albumNameElement = document.getElementById("album-name");
     
     // إضافة تأثير بصري عند تغيير الأغنية
     trackNameElement.classList.add('track-name-changed');
+    albumNameElement.classList.add('album-name-changed');
     
     // إزالة الفئة بعد انتهاء التنشيط
     setTimeout(() => {
         trackNameElement.classList.remove('track-name-changed');
+        albumNameElement.classList.remove('album-name-changed');
     }, 2000);
     
-    trackNameElement.textContent = trackName;
+    // تحديث نص اسم الألبوم واسم الأغنية
+    trackNameElement.querySelector('span').textContent = trackName;
+    albumNameElement.querySelector('span').textContent = albumDisplayName;
+    
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
 
@@ -416,6 +426,12 @@ function changeTrack(audioFile, trackName) {
     }
 
     saveLastPlayed(audioFile, trackName, currentAlbum);
+}
+
+// دالة للحصول على اسم الألبوم المناسب للعرض
+function getAlbumDisplayName(albumId) {
+    const album = allAlbums.find(a => a.id === albumId);
+    return album ? album.name : 'غير معروف';
 }
 
 // تحديث شريط التقدم عند تحميل بيانات الأغنية

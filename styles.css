@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     background-color: var(--light-bg);
     color: var(--text-dark);
-    padding-top: 216px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
+    padding-top: 226px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
     transition: all var(--transition-speed);
     overflow-x: hidden;
 }
@@ -164,7 +164,7 @@ body {
     font-weight: bold;
     box-shadow: 0 2px 3px rgba(19, 22, 28, 0.46);
     border: 1px solid rgba(154, 152, 152, 0.2);
-    padding: 10px 15px;
+   padding: 6px 12px;
     border-radius: 30px;
     max-width: 90%;
     text-align: center;
@@ -178,12 +178,7 @@ body {
     animation: fadeIn 0.5s ease;
 }
 
-#track-name::before {
-    content: '📀';
-    margin-right: 8px;
-    font-size: 14px;
-    opacity: 0.8;
-}
+
 
 #track-name:hover {
     transform: translateY(-2px);
@@ -1486,6 +1481,315 @@ emoji-picker {
 
 .notification.error {
     background-color: #F44336;
+}
+
+/* توحيد حجم وشكل الأزرار - إصلاح مشكلة عدم تطابق الحجم */
+#track-info .album-info,
+#track-info .track-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px !important;
+    padding: 7px 12px !important;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    min-width: 0;
+    flex: 1 1 auto;
+    min-height: 22px !important;
+    line-height: 22px !important;
+    height: auto;
+    margin: 0 !important;
+    text-align: center;
+    max-width: 45%;
+}
+
+#track-info .album-info {
+    background: linear-gradient(135deg, #3f51b5, #2196F3);
+    border-color: rgba(33, 150, 243, 0.3) !important;
+}
+
+#track-info .track-name {
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+    border-color: rgba(142, 26, 79, 0.3) !important;
+}
+
+/* Reset any extra styling that might affect only track-name */
+#track-name {
+    margin: 0 !important;
+    padding: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    height: auto !important;
+    min-height: inherit !important;
+}
+
+/* Make sure the icons match */
+#track-info .album-info i,
+#track-info .track-name i {
+    font-size: 15px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+/* Override any other selectors targeting .track-name alone */
+.track-name {
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+/* تحسين استجابة العرض للشاشات الصغيرة مع الحفاظ على التناسق */
+@media (max-width: 576px) {
+    #track-info .album-info,
+    #track-info .track-name {
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+        min-height: 20px !important;
+        line-height: 20px !important;
+    }
+    
+    #track-info .album-info i,
+    #track-info .track-name i {
+        font-size: 13px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* توحيد حجم وشكل أزرار اسم الأغنية واسم الألبوم */
+.album-info, .track-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;  /* توسيط المحتوى أفقيًا */
+    gap: 5px;
+    transition: all 0.2s ease;
+    min-width: 0;
+    max-width: 45%;
+    flex: 1 1 auto;
+    min-height: 22px; /* زيادة الارتفاع الأدنى للتأكد من التطابق */
+    line-height: 22px; /* توحيد ارتفاع السطر */
+    height: auto; /* السماح بارتفاع تلقائي */
+}
+
+.album-info {
+    background: linear-gradient(135deg, #3f51b5, #2196F3);
+}
+
+.track-name {
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+}
+
+/* تحسين تناسق حجم الأيقونات */
+.album-info i, .track-name i {
+    font-size: 15px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; /* توحيد عرض الأيقونات */
+    height: 18px; /* توحيد ارتفاع الأيقونات */
+}
+
+/* إزالة تنسيق إضافي لزر track-name يمكن أن يؤثر على التناسق */
+.track-name {
+    border: none !important; /* إزالة أي حدود إضافية */
+    margin-top: 0 !important; /* إزالة أي هوامش إضافية */
+}
+
+/* تحسين استجابة العرض للشاشات الصغيرة مع الحفاظ على التناسق */
+@media (max-width: 576px) {
+    .album-info, .track-name {
+        font-size: 12px;
+        padding: 5px 10px;
+        min-height: 20px;
+        line-height: 20px;
+    }
+    
+    .album-info i, .track-name i {
+        font-size: 13px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* تبسيط تنسيق معلومات الأغنية والألبوم */
+.track-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 8px auto;
+    padding: 0;
+    width: 100%;
+    max-width: 90%;
+}
+
+.album-info, .track-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px; /* توحيد حجم الخط */
+    padding: 7px 12px;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    min-width: 0;
+    max-width: 45%;
+    flex: 1 1 auto;
+    min-height: 18px;
+    line-height: normal;
+}
+
+.album-info {
+    background: linear-gradient(135deg, #3f51b5, #2196F3);
+}
+
+.track-name {
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+}
+
+.album-info i, .track-name i {
+    font-size: 15px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* تحسين استجابة العرض للشاشات الصغيرة */
+@media (max-width: 576px) {
+    .track-info {
+        gap: 8px;
+    }
+    
+    .album-info, .track-name {
+        font-size: 12px;
+        padding: 5px 10px;
+        min-height: 16px;
+    }
+    
+    .album-info i, .track-name i {
+        font-size: 13px;
+    }
+}
+
+/* للشاشات الصغيرة جداً */
+@media (max-width: 360px) {
+    .track-info {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .album-info, .track-name {
+        max-width: 85%;
+    }
+}
+
+/* تحسين استجابة العرض للشاشات الصغيرة */
+@media (max-width: 576px) {
+    .track-info {
+        gap: 8px;
+    }
+    
+    .album-info, .track-name {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .album-info i, .track-name i {
+        font-size: 13px;
+    }
+}
+
+/* للشاشات الصغيرة جداً */
+@media (max-width: 360px) {
+    .track-info {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .album-info, .track-name {
+        max-width: 85%;
+    }
+}
+
+/* تحسين استجابة العرض للشاشات المتوسطة */
+@media (max-width: 768px) {
+    .track-info {
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .album-info, .track-name {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 0;
+    }
+}
+
+/* تحسين استجابة العرض للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+    .track-info {
+        flex-direction: row !important;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .album-info {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+    
+    .track-name {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+    
+    .album-info i, .track-name i {
+        font-size: 12px;
+    }
+}
+
+/* للشاشات الصغيرة جداً فقط نستخدم ترتيب عمودي */
+@media (max-width: 360px) {
+    .track-info {
+        flex-direction: column !important;
+        gap: 6px;
+    }
+    
+    .album-info, .track-name {
+        max-width: 90%;
+    }
 }
 
 
