@@ -29,51 +29,31 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <title>khalid music Zik</title>
     <link rel="stylesheet" href="styles.css">
-  
- 
-  
+    
 </head>
 <body class="bg-gray-100 text-gray-900">
-    <!-- نافبار جديد يحل محل الشريط الإخباري -->
-    <nav id="main-nav" class="main-nav">
-        <div class="nav-content">
-            <div class="site-logo">
-                <a href="#">MarocZik</a>
-            </div>
-            <div class="nav-menu">
-                <ul class="menu-items">
-                    <li>
-                        <a href="#" class="menu-link" data-album="all">
-                            <i class="material-icons">library_music</i>
-                            جميع الألبومات
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-link" data-album="starchaabi">
-                            <i class="material-icons">trending_up</i>
-                            الأكثر استماعاً
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="menu-link" data-album="new">
-                            <i class="material-icons">fiber_new</i>
-                            أحدث الإضافات
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="nav-actions">
-                <button id="menu-toggle" class="menu-toggle-btn">
-                    <i class="material-icons">menu</i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
     <!-- مشغل الصوت -->
     <div id="audio-player-container" class="p-4 rounded-lg bg-gray-900 text-center text-white shadow-lg" 
      style=" background-size: cover; background-position: center;">
     
+
+    <!-- الشريط الإخباري -->
+  <div class="news-ticker">
+    <span class="news-content">
+        <i class="fas fa-music"></i> Écoutez les plus belles chansons marocaines sur votre site 🎵
+        &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+        <i class="fas fa-music"></i> استمع لأجمل الأغاني العربية على منصتنا 🎶
+&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+<i class="fas fa-play"></i> Découvrez les dernières nouveautés musicales en exclusivité! 🎵
+&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+<i class="fas fa-star"></i> Profitez de la meilleure qualité sonore sur notre plateforme! 🔊
+&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+<i class="fas fa-heart"></i> Nous vous souhaitons la bienvenue sur notre plateforme d'écoute musicale 🎧
+    </span>
+</div>
+
+
+
 
     <audio id="audio-player" class="hidden">
         <source id="audio-source" src="" type="audio/mpeg">
@@ -121,14 +101,24 @@
     </div>
 
     
-    <!-- حذف الزر المتكامل العنوان مع الألبومات -->
-    <!-- <div class="album-title-container">...</div> -->
+    <!-- استبدال الحاوية القديمة بزر متكامل مع العنوان -->
+   <div class="album-title-container">
+    <button id="show-albums-btn" class="integrated-albums-button">
+        <i class="material-icons left-icon">library_music</i>
+        <span> جميع الألبومات →</span>
+        <span class="albums-icon">
+            <i class="material-icons">album</i>
+        </span>
+        <i class="material-icons right-icon">library_music</i>
+    </button>
+</div>
 
+   
     <!-- عارض الألبومات المنبثق -->
     <div id="albums-showcase" class="albums-showcase">
         <div class="albums-showcase-content">
             <div class="showcase-header">
-                <h2><i class="material-icons">library_music</i> <span id="showcase-title">جميع الألبومات</span></h2>
+                <h2><i class="material-icons">library_music</i> جميع الألبومات</h2>
                 <button id="close-albums-btn" class="showcase-close-btn">
                     <i class="material-icons">close</i>
                 </button>
@@ -175,43 +165,11 @@
         </div>
     </div>
 
-    <!-- نافذة منبثقة للقائمة الجانبية على الهواتف المحمولة -->
-    <div id="mobile-menu" class="mobile-menu">
-        <div class="mobile-menu-content">
-            <div class="mobile-menu-header">
-                <div class="site-logo">MarocZik</div>
-                <button id="close-mobile-menu" class="close-mobile-menu">
-                    <i class="material-icons">close</i>
-                </button>
-            </div>
-            <ul class="mobile-menu-items">
-                <li>
-                    <a href="#" class="menu-link" data-album="all">
-                        <i class="material-icons">library_music</i>
-                        جميع الألبومات
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-link" data-album="starchaabi">
-                        <i class="material-icons">trending_up</i>
-                        الأكثر استماعاً
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-link" data-album="new">
-                        <i class="material-icons">fiber_new</i>
-                        أحدث الإضافات
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
     <!-- قسم الأغاني -->
     <div class="songs-container-wrapper">
         
         <!-- star chaabi -->
-<div class="songs-container star chaabi" id="starchaabi-songs" style="display: flex;">
+<div class="songs-container star chaabi" id="starchaabi-songs">
     <div class="song" onclick="changeTrack('01 star chaabi.mp3', 'star chaabi 1')" style="border-color: #ffffff;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">star chaabi 1</div>
@@ -247,7 +205,7 @@
      </div>
         
      <!-- star chaabi -->
-<div class="songs-container I3YALN MASSA" id="i3yalnmassa-songs" style="display: none;">
+<div class="songs-container I3YALN MASSA" id="i3yalnmassa-songs">
     <div class="song" onclick="changeTrack('https://files.catbox.moe/9q3y1c.mp3', 'I3YALN MASSA 1')" style="border-color: #ffffff;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">I3YALN MASSA 1</div>
@@ -266,7 +224,7 @@
     </div>    
     </div>
         <!-- nayda nouda -->
-<div class="songs-container naydanouda" id="naydanouda-songs" style="display: none;">
+<div class="songs-container naydanouda" id="naydanouda-songs">
     <div class="song" onclick="changeTrack('01 nayda nouda.mp3', 'nayda nouda 1')" style="border-color: #ffffff;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">nayda nouda 1</div>
@@ -364,7 +322,7 @@
             
         
     <!-- sentral chaabi -->
-<div class="songs-container sentralchaabi" id="sentralchaabi-songs" style="display: none;">
+<div class="songs-container sentralchaabi" id="sentralchaabi-songs">
     <div class="song" onclick="changeTrack('01 sentral cha3bi.mp3', 'sentral chaabi 1')" style="border-color: #ffffff;">
         <i class="material-symbols-outlined">volume_up</i>
         <div class="song-title">sentral chaabi 1</div>
@@ -437,7 +395,7 @@
         </div>         
         
         <!-- casastar -->
-        <div class="songs-container popular" id="casastar-songs" style="display: none;">
+        <div class="songs-container popular" id="casastar-songs">
             <div class="song" onclick="changeTrack('02 casa star.mp3', 'casa star 1')" style="border-color: #ffffff;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">casa star 1</div>
@@ -491,7 +449,7 @@
         
         
         <!-- shab loutar -->
-        <div class="songs-container popular" id="popular-songs" style="display: none;">
+        <div class="songs-container popular" id="popular-songs">
             <div class="song" onclick="changeTrack('01 cha3biat shab loutar.mp3.mp3', 'shab loutar 1')" style="border-color: #ffffff;">
                 <i class="material-symbols-outlined">volume_up</i>
                 <div class="song-title">shab loutar 1</div>
@@ -680,35 +638,35 @@
    <div class="album-list-msc"> Autres albums </div>
     <!-- الألبومات الجديدة -->
     <div class="new-albums-container" style="margin: 5px 10px;">
-        <div class="new-album-item" onclick="redirectAlbumClick('naydanouda')" data-album="naydanouda">
+        <div class="new-album-item" onclick="scrollToAlbums('naydanouda')">
             <img src="naydanouda.webp" alt="nayda nouda">
             <span>NAYDA NOUDA</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('sentralchaabi')" data-album="sentralchaabi">
+        <div class="new-album-item" onclick="scrollToAlbums('sentralchaabi')">
             <img src="sentralchaabi.png" alt="sentral chaabi">
             <span>SENTRAL CHAABI</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('popular')" data-album="popular">
+        <div class="new-album-item" onclick="scrollToAlbums('popular')">
             <img src="shabloutar.png" alt="shab loutar">
             <span>shab loutar</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('i3yalnmassa')" data-album="i3yalnmassa">
+        <div class="new-album-item" onclick="scrollToAlbums('i3yalnmassa')">
             <img src="i3yalnmassa.png" alt="I3YALN MASSA">
             <span>I3YALN MASSA</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('khalij')" data-album="khalij">
+        <div class="new-album-item" onclick="scrollToAlbums('khalij')">
             <img src="khalij.webp" alt="khaliji">
             <span>أغاني خليجية</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('starchaabi')" data-album="starchaabi">
+        <div class="new-album-item" onclick="scrollToAlbums('starchaabi')">
             <img src="starchaabi.png" alt="star chaabi">
             <span>STAR CHAABI</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('ahyadihahan')" data-album="ahyadihahan">
+        <div class="new-album-item" onclick="scrollToAlbums('ahyadihahan')">
             <img src="ahyadihahan.png" alt="ahyad ihahan">
             <span>AAWAD IHAHAN</span>
         </div>
-        <div class="new-album-item" onclick="redirectAlbumClick('casastar')" data-album="casastar">
+        <div class="new-album-item" onclick="scrollToAlbums('casastar')">
             <img src="casastar.png" alt="casa star">
             <span>CASA STAR</span>
         </div>
@@ -788,12 +746,8 @@
         </a>
     </div>
 </footer>
-    <script src="ultimatefix.js"></script>
-    <script src="fixnav.js"></script>
-    <script src="ixnavbar.js"></script>
     <script src="main.js" defer></script>
-    <script src="debug.js" defer></script>
-    <script src="https://unpkg.com/emoji-picker-element" defer></script>
+    <script src="https://unpkg.com/emoji-picker-element"></script>
 
     <!-- إضافة Firebase -->
     <script type="module">
@@ -1159,169 +1113,6 @@
         textarea.focus();
       }
     </script>
-    <!-- إضافة سكريبت للتحكم في شريط التنقل -->
-    <script>
-        // استعداد لـ DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // التحكم في ظهور شريط التنقل عند التمرير
-            let prevScrollPos = window.pageYOffset;
-            const mainNav = document.getElementById('main-nav');
-            const audioPlayer = document.getElementById('audio-player-container');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuToggle = document.getElementById('menu-toggle');
-            const closeMenuBtn = document.getElementById('close-mobile-menu');
-            const showcaseTitle = document.getElementById('showcase-title');
-            const albumsShowcase = document.getElementById('albums-showcase');
-
-            // جعل شريط التنقل مرئي عند تحميل الصفحة
-            mainNav.classList.add('show');
-
-            // تعديل موضع مشغل الصوت حسب ارتفاع النافبار
-            function adjustAudioPlayerPosition() {
-                const navHeight = mainNav.offsetHeight;
-                
-                // التأكد من أن النافبار مرئي قبل تعديل الموضع
-                if (mainNav.classList.contains('show')) {
-                    audioPlayer.style.marginTop = navHeight + 'px';
-                } else {
-                    audioPlayer.style.marginTop = '0';
-                }
-            }
-            
-            // تعديل الموضع عند التحميل
-            adjustAudioPlayerPosition();
-            
-            // التحكم في ظهور واختفاء شريط التنقل عند التمرير
-            window.addEventListener('scroll', function() {
-                const currentScrollPos = window.pageYOffset;
-                
-                if (prevScrollPos > currentScrollPos || currentScrollPos <= 10) {
-                    // التمرير لأعلى أو في القمة - إظهار شريط التنقل
-                    mainNav.classList.add('show');
-                } else {
-                    // التمرير لأسفل - إخفاء شريط التنقل
-                    mainNav.classList.remove('show');
-                }
-                
-                prevScrollPos = currentScrollPos;
-                adjustAudioPlayerPosition();
-            });
-            
-            // التعامل مع القائمة المتنقلة
-            menuToggle.addEventListener('click', function() {
-                mobileMenu.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.remove('show');
-                document.body.style.overflow = '';
-            });
-            
-            // إغلاق القائمة عند النقر خارجها
-            mobileMenu.addEventListener('click', function(e) {
-                if (e.target === mobileMenu) {
-                    mobileMenu.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-            
-            // إضافة وظيفة عرض الألبومات من خلال القائمة
-            const menuLinks = document.querySelectorAll('.menu-link');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const albumType = this.getAttribute('data-album');
-                    
-                    // إذا كان الزر هو "جميع الألبومات" أو "أحدث الإضافات"
-                    if (albumType === 'all' || albumType === 'new') {
-                        // تغيير عنوان النافذة المنبثقة
-                        showcaseTitle.textContent = albumType === 'all' ? 'جميع الألبومات' : 'أحدث الإضافات';
-                        
-                        // إظهار نافذة الألبومات المنبثقة
-                        albumsShowcase.classList.add('show');
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        // لو كان ألبوم محدد، عرض الأغاني مباشرة
-                        showAlbum(albumType);
-                    }
-                    
-                    // إغلاق القائمة المتنقلة إذا كانت مفتوحة
-                    mobileMenu.classList.remove('show');
-                });
-            });
-            
-            // مستمعي الأحداث لنافذة الألبومات المنبثقة
-            const closeAlbumsBtn = document.getElementById('close-albums-btn');
-            closeAlbumsBtn.addEventListener('click', function() {
-                albumsShowcase.classList.remove('show');
-                document.body.style.overflow = '';
-            });
-            
-            // إضافة وظيفة لعناصر الألبومات في النافذة المنبثقة
-            const albumItems = document.querySelectorAll('.album-showcase-item');
-            albumItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const albumId = this.getAttribute('data-album');
-                    
-                    // إخفاء النافذة المنبثقة
-                    albumsShowcase.classList.remove('show');
-                    document.body.style.overflow = '';
-                    
-                    // عرض الألبوم المختار
-                    showAlbum(albumId);
-                });
-            });
-
-            // ربط الألبومات الجديدة بوظيفة التمرير
-            const newAlbumItems = document.querySelectorAll('.new-album-item');
-            newAlbumItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const albumId = this.getAttribute('data-album');
-                    if (albumId) {
-                        showAlbum(albumId);
-                    }
-                });
-            });
-
-            // الدالة الرئيسية لعرض الألبوم
-            function showAlbum(albumId) {
-                console.log('Showing album:', albumId);
-                
-                // إخفاء جميع حاويات الأغاني
-                const allContainers = document.querySelectorAll('.songs-container');
-                allContainers.forEach(container => {
-                    container.style.display = 'none';
-                });
-                
-                // عرض حاوية الألبوم المحدد
-                const targetContainer = document.getElementById(`${albumId}-songs`);
-                if (targetContainer) {
-                    targetContainer.style.display = 'flex';
-                    
-                    // تحديث المتغير العام (للوصول من السكريبت الرئيسي)
-                    window.currentAlbum = albumId;
-                    
-                    // تمرير للألبوم
-                    targetContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    console.error(`Album container not found: ${albumId}-songs`);
-                }
-            }
-        });
-    </script>
-    <script>
-    // إعادة توجيه اي onclick قديم إلى الطريقة الجديدة للتنقل
-    function redirectAlbumClick(albumId) {
-        // استخدام وظيفة التنقل المحسنة من fixnav.js
-        if (typeof window.scrollToAlbum === 'function') {
-            window.scrollToAlbum(albumId);
-        } else {
-            // الطريقة القديمة إذا لم تتوفر الوظيفة المحسنة
-            showAlbum(albumId);
-        }
-    }
-    </script>
+  
 </body>
 </html>
