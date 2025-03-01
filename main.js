@@ -205,12 +205,20 @@ function updatePaginationControls(currentPage) {
         const pageBtn = document.createElement('button');
         pageBtn.className = `page-number ${i === currentPage ? 'active' : ''}`;
         pageBtn.textContent = i;
-        pageBtn.addEventListener('click', () => {
-            currentPage = i;
-            loadAlbumsPage(i);
-        });
+        pageBtn.setAttribute('data-page', i);
+        
+        // استخدام دالة معرفة خارج الحلقة
+        pageBtn.addEventListener('click', handlePageButtonClick);
+        
         paginationContainer.appendChild(pageBtn);
     }
+}
+
+// دالة معالجة النقر على أزرار الصفحات
+function handlePageButtonClick(event) {
+    const pageNum = parseInt(event.currentTarget.getAttribute('data-page'), 10);
+    currentPage = pageNum;
+    loadAlbumsPage(pageNum);
 }
 
 // دالة لتغيير الصفحة (السابقة أو التالية)
