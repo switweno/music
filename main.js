@@ -135,7 +135,7 @@ let isSeeking = false; // متغير للتحقق من السحب
 let favorites = [];
 
 // متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 8; // عدد الألبومات في كل صفحة
+const albumsPerPage = 6; // عدد الألبومات في كل صفحة
 let currentPage = 1; // الصفحة الحالية
 const allAlbums = [
     { id: 'naydanouda', name: 'NAYDA NOUDA', image: 'naydanouda.webp' },
@@ -886,3 +886,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
