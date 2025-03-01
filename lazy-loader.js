@@ -92,11 +92,12 @@ function loadSongsForAlbum(albumId, container) {
 function createSongElement(song) {
     const songElement = document.createElement('div');
     songElement.className = 'song';
-    songElement.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
     
-    // Generate unique ID for favorite functionality
+    // إضافة معرف فريد للأغنية
     const songId = song.file.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
     songElement.dataset.songId = songId;
+    
+    songElement.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
     
     songElement.innerHTML = `
         <i class="material-symbols-outlined">volume_up</i>
@@ -105,6 +106,15 @@ function createSongElement(song) {
             <i class="material-icons">favorite_border</i>
         </button>
     `;
+    
+    // Check if song is currently playing and update icon
+    const currentAudio = document.getElementById('audio-source');
+    if (currentAudio && currentAudio.src.includes(song.file)) {
+        const icon = songElement.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "graphic_eq";
+        }
+    }
     
     return songElement;
 }

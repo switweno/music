@@ -437,6 +437,10 @@ function getSongAlbumById(audioFile) {
 }
 
 // تعديل دالة تغيير الأغنية لاستخدام ألبوم الأغنية الصحيح
+// متغير عالمي لتتبع الأغنية الحالية
+let currentPlayingSong = null;
+
+// تعديل دالة تغيير المسار لتحديث أيقونة الأغنية الحالية
 function changeTrack(audioFile, trackName) {
     if (isRandomPlaying) isRandomPlaying = false;
 
@@ -468,6 +472,7 @@ function changeTrack(audioFile, trackName) {
     trackNameElement.querySelector('span').textContent = trackName;
     albumNameElement.querySelector('span').textContent = albumDisplayName;
     
+    // تحديث مصدر الصوت
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
 
@@ -480,6 +485,26 @@ function changeTrack(audioFile, trackName) {
     const artistDisplayElement = document.getElementById("current-artist");
     if (artistDisplayElement && artistName) {
         artistDisplayElement.textContent = artistName;
+    }
+
+    // تحديث الأيقونات - إعادة جميع الأيقونات إلى الوضع الافتراضي أولاً
+    document.querySelectorAll('.song i.material-symbols-outlined').forEach(icon => {
+        icon.innerText = "volume_up";
+    });
+    
+    // تحديد عنصر الأغنية المشغلة حاليًا
+    const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    const songElements = document.querySelectorAll(`.song[data-song-id="${songId}"]`);
+    
+    // تحديث المتغير العالمي
+    currentPlayingSong = songElements.length ? songElements[0] : null;
+    
+    // تغيير أيقونة الأغنية الحالية إلى "graphic_eq"
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "graphic_eq";
+        }
     }
 
     saveLastPlayed(audioFile, trackName, songAlbum);
@@ -633,6 +658,28 @@ function generateSongContainers() {
     
     // After generating all containers, show the default album
     showAlbum(currentAlbum);
+}
+
+// Helper function to create a song element - تعديل دالة إنشاء عنصر الأغنية
+function createSongElement(song) {
+    const songElement = document.createElement('div');
+    songElement.className = 'song';
+    
+    // إضافة معرف فريد للأغنية
+    const songId = song.file.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    songElement.dataset.songId = songId;
+    
+    songElement.setAttribute('onclick', `changeTrack('${song.file}', '${song.name}')`);
+    
+    songElement.innerHTML = `
+        <i class="material-symbols-outlined">volume_up</i>
+        <div class="song-title">${song.name}</div>
+        <button class="favorite-btn" onclick="toggleFavorite(event, '${songId}', '${song.file}', '${song.name}', '')">
+            <i class="material-icons">favorite_border</i>
+        </button>
+    `;
+    
+    return songElement;
 }
 
 // Modify the window load event listener to call our new function
@@ -985,6 +1032,38 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
     });
+});
+
+// تحديث حالة مشغل الصوت عند توقفه
+audioPlayer.addEventListener("ended", function() {
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "volume_up";
+        }
+        currentPlayingSong = null;
+    }
+    playNext(); // تشغيل الأغنية التالية
+});
+
+// تحديث حالة مشغل الصوت عند الإيقاف المؤقت
+audioPlayer.addEventListener("pause", function() {
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "volume_up";
+        }
+    }
+});
+
+// تحديث حالة مشغل الصوت عند التشغيل
+audioPlayer.addEventListener("play", function() {
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "graphic_eq";
+        }
+    }
 });
 
 
