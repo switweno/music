@@ -12,11 +12,8 @@ const config = {
 // Lazy load images using Intersection Observer
 function initLazyImages() {
     if (!('IntersectionObserver' in window)) {
-        // Fallback for browsers that don't support Intersection Observer
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => {
+        document.querySelectorAll('img[data-src]').forEach(img => {
             img.src = img.dataset.src;
-            img.classList.remove('lazy');
         });
         return;
     }
@@ -28,20 +25,11 @@ function initLazyImages() {
                 img.src = img.dataset.src;
                 img.classList.remove('lazy');
                 observer.unobserve(img);
-                
-                // Add a fade-in effect
-                img.style.opacity = 0;
-                setTimeout(() => {
-                    img.style.opacity = 1;
-                }, 50);
             }
         });
-    }, config);
+    }, { rootMargin: '100px', threshold: 0.5 });
 
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    lazyImages.forEach(img => {
-        // Add placeholder styles
-        img.style.transition = 'opacity 0.3s ease';
+    document.querySelectorAll('img[data-src]').forEach(img => {
         imageObserver.observe(img);
     });
 }
@@ -121,9 +109,59 @@ function createSongElement(song) {
     return songElement;
 }
 
+// Function to render albums with pagination
+function renderAlbums() {
+    const albumContainer = document.getElementById('album-container'); // تأكد من وجود هذا العنصر في HTML
+    albumContainer.innerHTML = '';
+
+    const startIndex = (currentPage - 1) * albumsPerPage;
+    const endIndex = startIndex + albumsPerPage;
+    const albumsToShow = allAlbums.slice(startIndex, endIndex);
+
+    albumsToShow.forEach(album => {
+        const albumElement = document.createElement('div');
+        albumElement.classList.add('album');
+
+        const img = new Image();
+        img.dataset.src = album.image;
+        img.classList.add('lazy');
+        img.alt = album.name;
+        img.loading = 'lazy'; // تحميل الصورة عند الاقتراب منها
+        albumElement.appendChild(img);
+
+        const title = document.createElement('p');
+        title.textContent = album.name;
+        albumElement.appendChild(title);
+
+        albumContainer.appendChild(albumElement);
+
+        // تحميل الصورة مسبقًا
+        preloadImage(album.image);
+    });
+
+    initLazyImages(); // تفعيل التحميل البطيء
+}
+
+// وظيفة لتحميل الصور مسبقًا عند اقترابها
+function preloadImage(src) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    initLazyImages();
+    // Use requestIdleCallback for better performance when available
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            initLazyImages();
+        });
+    } else {
+        setTimeout(initLazyImages, 500);
+    }
+    
     initLazyAlbums();
     
     // Re-check for new lazy elements after album page changes
