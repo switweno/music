@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     background-color: var(--light-bg);
     color: var(--text-dark);
-    padding-top: 208px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
+    padding-top: 244px;
     transition: all var(--transition-speed);
     overflow-x: hidden;
 }
@@ -158,13 +158,13 @@ body {
 /* تحسين مظهر اسم الأغنية */
 #track-name {
     font-size: 16px;
-    margin: 10px auto 10px;
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-    color: #ffffff;
+    margin: 10px auto 5px;
+    background: linear-gradient(to right, #ffffff, #f9f9f9);
+    color: var(--primary-color);
     font-weight: bold;
-    box-shadow: 0 2px 3px rgba(19, 22, 28, 0.46);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(154, 152, 152, 0.2);
-   padding: 6px 12px;
+    padding: 10px 15px;
     border-radius: 30px;
     max-width: 90%;
     text-align: center;
@@ -178,12 +178,17 @@ body {
     animation: fadeIn 0.5s ease;
 }
 
-
+#track-name::before {
+    content: '🎵';
+    margin-right: 8px;
+    font-size: 14px;
+    opacity: 0.8;
+}
 
 #track-name:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(126, 77, 255, 0.15);
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.15);
+    background: linear-gradient(to right, #ffffff, #fff5f5);
 }
 
 /* تنشيط الحركة عند تغيير الأغنية */
@@ -505,10 +510,13 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to right, #f7f7f7, #f9f9f9);
+background: linear-gradient(to right, #f7f7f7, #f9f9f9);
+
+
+
     z-index: 1000;
     padding: 15px;
-    margin-top: 0; /* إزالة الهامش العلوي الذي كان للشريط الإخباري */
+    margin-top: 29px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     color: #ffffff;
     transition: all var(--transition-speed);
@@ -669,6 +677,40 @@ body {
 .news-ticker.hidden {
     display: none;
 }
+/* شريط إخباري ثابت */
+.news-ticker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1F2937;
+    color: #ffffff;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-content {
+    display: inline-block;
+    white-space: nowrap;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+    padding-left: 100%;
+}
+
+.news-content span {
+    padding: 0 30px;
+}
+
+@keyframes marquee {
+    from { transform: translateX(40%); }
+    to { transform: translateX(-100%); }
+}
 
 /* الألبومات الجديدة */
 .new-albums-container {
@@ -688,29 +730,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out;
     position: relative;
-    animation: fadeIn 0.5s forwards;
-    opacity: 0;
 }
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.new-album-item:nth-child(1) { animation-delay: 0.1s; }
-.new-album-item:nth-child(2) { animation-delay: 0.15s; }
-.new-album-item:nth-child(3) { animation-delay: 0.2s; }
-.new-album-item:nth-child(4) { animation-delay: 0.25s; }
-.new-album-item:nth-child(5) { animation-delay: 0.3s; }
-.new-album-item:nth-child(6) { animation-delay: 0.35s; }
-.new-album-item:nth-child(7) { animation-delay: 0.4s; }
-.new-album-item:nth-child(8) { animation-delay: 0.45s; }
 
 .new-album-item:hover {
     transform: translateY(-5px);
@@ -766,101 +786,6 @@ body {
     background-color: #f5f5f5;
 }
 
-/* عناصر التنقل بين الصفحات */
-.pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    gap: 5px;
-}
-
-.pagination-numbers {
-    display: flex;
-    gap: 5px;
-}
-
-.pagination-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #333;
-}
-
-.pagination-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-.pagination-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: #f5f5f5;
-    color: #aaa;
-}
-
-.pagination-btn.active {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    font-weight: bold;
-}
-
-.page-number {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.page-number:hover {
-    background: #f0f0f0;
-}
-
-.page-number.active {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    font-weight: bold;
-}
-
-/* عنوان قسم الألبومات */
-.album-list-msc {
-    font-size: 17px;
-    font-weight: bold;
-    text-align: center;
-    padding: 12px;
-    margin: 10px 0;
-    border-top: 2px solid #ff6347;
-    color: var(--secondary-color);
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-
-.album-list-msc::after {
-    content: "📀"; /* إضافة رمز موسيقي بعد النص */
-    margin-left: 8px;
-     vertical-align: middle;
-}
-
-
 /* تحسينات للعرض على الأجهزة المحمولة */
 @media (max-width: 576px) {
     .new-albums-container {
@@ -872,12 +797,65 @@ body {
         font-size: 13px;
         padding: 8px 5px;
     }
-    
-    .pagination-btn, .page-number {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-    }
+}
+
+/* قائمة الألبومات */
+.album-list {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.album-list-msc {
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px;
+    margin: 10px 0;
+    border-top: 2px solid #ff6347;
+    color: #f40808;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.album-list-msc::before {
+    content: "📀";
+    margin-right: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+/* تنسيق الألبومات */
+.album-list-music {
+    font-size: 15px; /* تحديد حجم الخط */
+    font-weight: bold; /* جعل الخط عريض */
+    color: #f40808;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 12px;
+    padding-bottom: 10px;
+    margin-bottom: 2px;
+    border-bottom: 2px solid #ff6347; /* إضافة خط أحمر أسفل النص */
+    border-radius: 20px 20px 0 0; /* زوايا مدورة للأعلى فقط */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+min-width: 0; /* يمكن إزالته إذا كان غير ضروري */
+
+    text-align: center;
+}
+
+.album-list-music::before {
+    content: "📀"; /* إضافة رمز موسيقي قبل النص */
+    margin-right: 8px;
+}
+
+.album-list-music::after {
+    content: "📀"; /* إضافة رمز موسيقي بعد النص */
+    margin-left: 8px;
 }
 
 /* تحسين عنوان الألبومات */
@@ -947,383 +925,749 @@ body {
     box-shadow: 0 3px 8px rgba(255, 47, 47, 0.3);
 }
 
+/* تصميم قسم التعليقات */
+.comments-section {
+    margin: 20px 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-/* توحيد حجم وشكل الأزرار - إصلاح مشكلة عدم تطابق الحجم */
-#track-info .album-info,
-#track-info .track-name {
-    color: #ffffff;
+.comments-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.comments-header i {
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+.comments-header h2 {
+    color: var(--secondary-color);
+    font-size: 18px;
     font-weight: bold;
-    font-size: 13px !important;
-    padding: 7px 12px !important;
-    border-radius: 25px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.comments-form {
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+
+.user-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .user-info {
+        flex-direction: column;
+    }
+}
+
+.user-info input,
+.comments-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
+}
+
+.user-info input {
+    flex: 1;
+    min-width: 0;
+}
+
+.comments-form textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+#submit-comment {
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 5px rgba(142, 26, 79, 0.2);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    transition: all 0.2s ease;
-    min-width: 0;
-    flex: 1 1 auto;
-    min-height: 22px !important;
-    line-height: 22px !important;
-    height: auto;
-    margin: 0 !important;
+    margin-top: 5px;
+    min-width: 100px;
+    max-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+#submit-comment::before {
+    content: "📤"; /* أيقونة إرسال */
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+#submit-comment:hover {
+    background: linear-gradient(135deg, #e62828, #801845);
+    box-shadow: 0 4px 10px rgba(142, 26, 79, 0.3);
+    transform: translateY(-2px);
+}
+
+#submit-comment:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(142, 26, 79, 0.3);
+}
+
+#submit-comment:disabled {
+    background: linear-gradient(135deg, #aaa, #888);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+#comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-item {
+    background: #f8f8f8;
+    border-right: 3px solid var(--primary-color);
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.comment-date {
+    color: #888;
+    font-size: 12px;
+}
+
+.comment-content {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.no-comments,
+.loading-comments {
     text-align: center;
-    max-width: 45%;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
 }
 
-#track-info .album-info {
-    background: linear-gradient(135deg, #3f51b5, #2196F3);
-    border-color: rgba(33, 150, 243, 0.3) !important;
-}
-
-#track-info .track-name {
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-    border-color: rgba(142, 26, 79, 0.3) !important;
-}
-
-/* Reset any extra styling that might affect only track-name */
-#track-name {
-    margin: 0 !important;
-    padding: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    height: auto !important;
-    min-height: inherit !important;
-}
-
-/* Make sure the icons match */
-#track-info .album-info i,
-#track-info .track-name i {
-    font-size: 15px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-}
-
-/* Override any other selectors targeting .track-name alone */
-.track-name {
-    border: none !important;
-    margin-top: 0 !important;
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة مع الحفاظ على التناسق */
-@media (max-width: 576px) {
-    #track-info .album-info,
-    #track-info .track-name {
-        font-size: 12px !important;
-        padding: 5px 10px !important;
-      
+/* تعديلات للوضع الداكن إن كان موجوداً */
+@media (prefers-color-scheme: dark) {
+    .comments-form {
+        background: #2a2a2a;
     }
-    
-    #track-info .album-info i,
-    #track-info .track-name i {
-        font-size: 13px;
-        width: 16px;
-        height: 16px;
+
+    .user-info input,
+    .comments-form textarea {
+        background: #333;
+        color: #fff;
+        border-color: #444;
+    }
+
+    .comment-item {
+        background: #2a2a2a;
+    }
+
+    .comment-header {
+        border-color: #444;
+    }
+
+    .no-comments,
+    .loading-comments {
+        color: #aaa;
     }
 }
 
-/* توحيد حجم وشكل أزرار اسم الأغنية واسم الألبوم */
-.album-info, .track-name {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 13px;
-    padding: 7px 12px;
-    border-radius: 25px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;  /* توسيط المحتوى أفقيًا */
-    gap: 5px;
-    transition: all 0.2s ease;
-    min-width: 0;
-    max-width: 45%;
-    flex: 1 1 auto;
-    min-height: 22px; /* زيادة الارتفاع الأدنى للتأكد من التطابق */
-    line-height: 22px; /* توحيد ارتفاع السطر */
-    height: auto; /* السماح بارتفاع تلقائي */
-}
-
-.album-info {
-    background: linear-gradient(135deg, #3f51b5, #2196F3);
-}
-
-.track-name {
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-}
-
-/* تحسين تناسق حجم الأيقونات */
-.album-info i, .track-name i {
-    font-size: 15px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px; /* توحيد عرض الأيقونات */
-    height: 18px; /* توحيد ارتفاع الأيقونات */
-}
-
-/* إزالة تنسيق إضافي لزر track-name يمكن أن يؤثر على التناسق */
-.track-name {
-    border: none !important; /* إزالة أي حدود إضافية */
-    
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة مع الحفاظ على التناسق */
-@media (max-width: 576px) {
-    .album-info, .track-name {
-        font-size: 12px;
-        padding: 5px 10px;
-        min-height: 20px;
-        line-height: 20px;
-    }
-    
-    .album-info i, .track-name i {
-        font-size: 13px;
-        width: 16px;
-        height: 16px;
-    }
-}
-
-/* تبسيط تنسيق معلومات الأغنية والألبوم */
-.track-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 8px auto;
-    padding: 0;
+/* تعديلات على نظام التعليقات لدعم الإيموجي */
+.comment-textarea-container {
+    position: relative;
     width: 100%;
-    max-width: 90%;
 }
 
-.album-info, .track-name {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 13px; /* توحيد حجم الخط */
-    padding: 7px 12px;
-    border-radius: 25px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.2s ease;
-    min-width: 0;
-    max-width: 45%;
-    flex: 1 1 auto;
-    min-height: 18px;
-    line-height: normal;
-}
-
-.album-info {
-    background: linear-gradient(135deg, #3f51b5, #2196F3);
-}
-
-.track-name {
-    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-}
-
-.album-info i, .track-name i {
-    font-size: 15px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة */
-@media (max-width: 576px) {
-    .track-info {
-        gap: 8px;
-    }
-    
-    .album-info, .track-name {
-        font-size: 12px;
-        padding: 5px 10px;
-        min-height: 16px;
-    }
-    
-    .album-info i, .track-name i {
-        font-size: 13px;
-    }
-}
-
-/* للشاشات الصغيرة جداً */
-@media (max-width: 360px) {
-    .track-info {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .album-info, .track-name {
-        max-width: 85%;
-    }
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة */
-@media (max-width: 576px) {
-    .track-info {
-        gap: 8px;
-    }
-    
-    .album-info, .track-name {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-    
-    .album-info i, .track-name i {
-        font-size: 13px;
-    }
-}
-
-/* للشاشات الصغيرة جداً */
-@media (max-width: 360px) {
-    .track-info {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .album-info, .track-name {
-        max-width: 85%;
-    }
-}
-
-/* تحسين استجابة العرض للشاشات المتوسطة */
-@media (max-width: 768px) {
-    .track-info {
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-    
-    .album-info, .track-name {
-        position: relative;
-        left: auto;
-        transform: none;
-        margin: 0;
-    }
-}
-
-/* تحسين استجابة العرض للشاشات الصغيرة جداً */
-@media (max-width: 480px) {
-    .track-info {
-        flex-direction: row !important;
-        justify-content: center;
-        gap: 8px;
-    }
-    
-    .album-info {
-        font-size: 11px;
-        padding: 4px 10px;
-    }
-    
-    .track-name {
-        font-size: 12px;
-        padding: 5px 12px;
-    }
-    
-    .album-info i, .track-name i {
-        font-size: 12px;
-    }
-}
-
-/* للشاشات الصغيرة جداً فقط نستخدم ترتيب عمودي */
-@media (max-width: 360px) {
-    .track-info {
-        flex-direction: column !important;
-        gap: 6px;
-    }
-    
-    .album-info, .track-name {
-        max-width: 90%;
-    }
-}
-
-/* تعديل تخطيط الأزرار للشاشات الصغيرة لتبقى بجانب بعضها */
-.track-info {
-    display: flex;
-    flex-direction: row !important; /* لضمان البقاء أفقيًا دائمًا */
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 8px auto;
-    padding: 0 5px; /* إضافة تنسيق للجوانب */
+#comment-text {
     width: 100%;
-    max-width: 98%; /* زيادة العرض الأقصى لملء الشاشة بشكل أفضل */
+    height: 100px;
+    resize: vertical;
+    padding: 10px;
+    padding-right: 40px; /* مساحة لزر الإيموجي */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Tajawal', 'Amiri', Arial, sans-serif;
+    margin-bottom: 10px;
 }
 
-.album-info, .track-name {
-    color: #ffffff;
+.emoji-toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emoji-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+#emoji-picker-container {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: 15px;
+    z-index: 100; /* زيادة z-index للتأكد من ظهوره فوق العناصر الأخرى */
+}
+
+#emoji-picker-container.hidden {
+    display: none !important;
+}
+
+#emoji-picker-container:not(.hidden) {
+    display: block !important;
+}
+
+emoji-picker {
+    --emoji-size: 1.4rem;
+    --emoji-padding: 0.4rem;
+    --border-radius: var(--border-radius);
+    --background: #fff;
+    --category-emoji-size: 1.1rem;
+    --emoji-font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    height: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.emoji-toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.emoji-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.emoji-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.comment-textarea-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    emoji-picker {
+        width: 350px;
+        position: absolute;
+        right: 0;
+    }
+}
+
+/* تنسيق المحتوى مع الإيموجي */
+.comment-content {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* تكبير الإيموجي قليلاً لتحسين الظهور */
+.comment-content emoji {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+/* تعديلات للوضع الداكن */
+@media (prefers-color-scheme: dark) {
+    emoji-picker {
+        --background: #222;
+        --border-color: #444;
+        --text-color: #eee;
+    }
+}
+
+/* تصميم نظام تقييم النجوم */
+.star-rating-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    flex-wrap: wrap;
+    direction: rtl;
+}
+
+.rating-label {
     font-weight: bold;
-    font-size: 13px !important;
-   
+    margin-left: 10px;
+    color: var(--secondary-color);
 }
 
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* لترتيب النجوم من اليمين لليسار */
+    unicode-bidi: bidi-override; /* للتحكم باتجاه النص */
+    margin: 0 10px;
+}
 
+.star {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin: 0 2px;
+}
+
+.star:hover,
+.star.active {
+    color: #FFD700; /* لون ذهبي للنجوم النشطة */
+}
+
+.star:hover ~ .star {
+    color: #FFD700;
+}
+
+.rating-value {
+    font-size: 14px;
+    color: #666;
+    min-width: 50px;
+}
+
+/* تنسيق تقييم النجوم في التعليقات */
+.comment-rating {
+    margin: 5px 0 10px;
+    direction: ltr;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-rating .star {
+    font-size: 18px;
+    cursor: default;
+    margin: 0 1px;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 576px) {
+    .star-rating-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
     
-
-
-
+    .rating-label {
+        margin-bottom: 5px;
+    }
     
+    .star {
+        font-size: 24px;
+    }
+}
 
+/* نظام الإشعارات المحسن */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
+    opacity: 0;
+    transition: all 0.5s ease;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 200px;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* تنسيق عناصر التحميل البطئ (Lazy Loading) */
-.lazy {
-    opacity: 0.2;
+.notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.notification::before {
+    content: "✓";
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.notification.error::before {
+    content: "✕";
+}
+
+@media (max-width: 576px) {
+    .notification {
+        width: 90%;
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+}
+
+/* نظام عارض الألبومات المنبثق */
+.albums-modal-trigger {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.albums-modal-trigger:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 47, 47, 0.4);
+}
+
+.albums-modal-trigger::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* دوّار التحميل */
-.loading-songs {
+.albums-modal-trigger:hover::after {
+    opacity: 1;
+}
+
+.albums-modal-trigger i {
+    font-size: 18px;
+}
+
+/* تحسين عنوان الألبومات */
+.album-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 15px 0;
+}
+
+/* تنسيق عنوان الألبومات المدمج مع الزر */
+.integrated-albums-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #f7f7f7, #ffffff, #f7f7f7);
+    color: #f40808;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid #ff6347;
+}
+
+.integrated-albums-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 47, 47, 0.2);
+    background: linear-gradient(to right, #fff5f5, #ffffff, #fff5f5);
+}
+
+.integrated-albums-button i.left-icon,
+.integrated-albums-button i.right-icon {
+    font-size: 18px;
+    margin: 0 10px;
+    color: var(--primary-color);
+}
+
+/* تأثير زر الألبومات عند النقر */
+.integrated-albums-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(255, 47, 47, 0.15);
+}
+
+.integrated-albums-button .albums-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.integrated-albums-button:hover .albums-icon {
+    transform: rotate(15deg);
+    box-shadow: 0 3px 8px rgba(255, 47, 47, 0.3);
+}
+
+/* عارض الألبومات */
+.albums-showcase {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+}
+
+.albums-showcase.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.albums-showcase-content {
+    width: 90%;
+    max-width: 1000px;
+    max-height: 85vh;
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.albums-showcase.show .albums-showcase-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.showcase-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 15px;
+}
+
+.showcase-header h2 {
+    color: var(--secondary-color);
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.showcase-header h2 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.showcase-close-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showcase-close-btn:hover {
+    color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.album-showcase-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 30px;
-    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.album-showcase-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 47, 47, 0.15);
+    border-color: var(--primary-color);
+}
+
+.album-showcase-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.album-showcase-item:hover img {
+    border-color: var(--primary-color);
+    filter: brightness(1.1);
+}
+
+.album-showcase-item h3 {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
     text-align: center;
+    transition: color 0.3s ease;
 }
 
-.spinner {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 15px;
-    border: 4px solid rgba(255, 47, 47, 0.1);
-    border-left-color: var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.album-showcase-item:hover h3 {
+    color: var(--primary-color);
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
+/* تأثير الفتح */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.album-showcase-item {
+    animation: fadeIn 0.5s forwards;
+    opacity: 0;
+}
+
+/* تأخير تدريجي للعناصر للحصول على تأثير متتالي */
+.album-showcase-item:nth-child(1) { animation-delay: 0.1s; }
+.album-showcase-item:nth-child(2) { animation-delay: 0.15s; }
+.album-showcase-item:nth-child(3) { animation-delay: 0.2s; }
+.album-showcase-item:nth-child(4) { animation-delay: 0.25s; }
+.album-showcase-item:nth-child(5) { animation-delay: 0.3s; }
+.album-showcase-item:nth-child(6) { animation-delay: 0.35s; }
+.album-showcase-item:nth-child(7) { animation-delay: 0.4s; }
+.album-showcase-item:nth-child(8) { animation-delay: 0.45s; }
+
+/* تحسينات للهاتف المحمول */
+@media (max-width: 768px) {
+    .albums-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
     }
-}
-
-/* تنسيق صورة الغلاف البديلة */
-.album-placeholder {
-    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
+    
+    .albums-showcase-content {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .showcase-header h2 {
+        font-size: 18px;
+    }
 }
 
 
