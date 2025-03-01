@@ -161,6 +161,10 @@ function loadFavorites() {
 
 // دالة لتحميل صفحة محددة من الألبومات
 function loadAlbumsPage(page) {
+    // Dispatch event when page changes to notify lazy loader
+    const event = new CustomEvent('albumPageChanged', { detail: { page } });
+    document.dispatchEvent(event);
+    
     const albumsContainer = document.getElementById('albums-page-container');
     albumsContainer.innerHTML = '';
     
@@ -175,7 +179,7 @@ function loadAlbumsPage(page) {
         albumElement.className = 'new-album-item';
         albumElement.setAttribute('onclick', `scrollToAlbums('${album.id}')`);
         albumElement.innerHTML = `
-            <img src="${album.image}" alt="${album.name}">
+            <img class="lazy" src="placeholder.png" data-src="${album.image}" alt="${album.name}">
             <span>${album.name}</span>
         `;
         albumsContainer.appendChild(albumElement);
@@ -352,27 +356,25 @@ function showNotification(message) {
 // دالة عرض الألبوم
 function showAlbum(album) {
     const albums = document.querySelectorAll('.songs-container');
+    albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
     
-    // إخفاء جميع حاويات الأغاني
-    albums.forEach(a => a.style.display = 'none');
-    
-    // عرض حاوية الأغاني للألبوم المحدد
-    const targetContainer = document.getElementById(`${album}-songs`);
-    if (targetContainer) {
-        targetContainer.style.display = 'flex';
+    const albumElement = document.getElementById(`${album}-songs`);
+    if (albumElement) {
+        albumElement.style.display = 'flex'; // عرض الألبوم المحدد
+        
+        // تحميل الأغاني إذا لم يتم تحميلها بالفعل
+        if (!albumElement.classList.contains('loaded')) {
+            // Trigger lazy loading through dataset attribute
+            albumElement.dataset.album = album;
+            
+            // Create a custom event to notify our lazy loader
+            const event = new CustomEvent('albumSelected', { detail: albumElement });
+            document.dispatchEvent(event);
+        }
     }
 
-    // تحديث متغير الألبوم الحالي
-    currentAlbum = album; 
+    currentAlbum = album; // تحديث الألبوم الحالي
     currentTrackIndex = 0; // إعادة المؤشر إلى البداية
-    
-    // تفعيل زر الألبوم المقابل في القائمة العلوية
-    document.querySelectorAll('.album-item').forEach(item => {
-        const albumButton = item.querySelector('.album-btn');
-        if (albumButton && albumButton.getAttribute('onclick').includes(`'${album}'`)) {
-            // يمكن إضافة تأثير تفعيل هنا إذا أردت
-        }
-    });
 }
 
 // دالة تنسيق الوقت
@@ -776,7 +778,20 @@ function initializeFavoriteButtons() {
         const albums = document.querySelectorAll('.songs-container');
         albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
     
-        document.getElementById(`${album}-songs`).style.display = 'flex'; // عرض الألبوم المحدد
+        const albumElement = document.getElementById(`${album}-songs`);
+        if (albumElement) {
+            albumElement.style.display = 'flex'; // عرض الألبوم المحدد
+            
+            // تحميل الأغاني إذا لم يتم تحميلها بالفعل
+            if (!albumElement.classList.contains('loaded')) {
+                // Trigger lazy loading through dataset attribute
+                albumElement.dataset.album = album;
+                
+                // Create a custom event to notify our lazy loader
+                const event = new CustomEvent('albumSelected', { detail: albumElement });
+                document.dispatchEvent(event);
+            }
+        }
     
         currentAlbum = album; // تحديث الألبوم الحالي
         currentTrackIndex = 0; // إعادة المؤشر إلى البداية
