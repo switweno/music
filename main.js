@@ -512,39 +512,47 @@ function getSongAlbumById(audioFile) {
 // متغير عالمي لتتبع الأغنية الحالية
 let currentPlayingSong = null;
 
-// تعديل دالة تغيير المسار لتحديث أيقونة الأغنية الحالية
+// تعديل دالة تغيير المسار لتحديث أيقونة الأغنية الحالية وإصلاح مشكلة الترتيب
 function changeTrack(audioFile, trackName) {
     if (isRandomPlaying) isRandomPlaying = false;
 
-    // البحث عن معلومات الأغنية الحالية
+    // Get song and album info
     const currentSong = songs.find(song => song.file === audioFile);
     const artistName = currentSong ? currentSong.artist : '';
-    
-    // الحصول على مُعرّف الألبوم الصحيح للأغنية
     const songAlbum = getSongAlbumById(audioFile);
     
-    // الحصول على اسم الألبوم المناسب للعرض
+    // Update album if changed
+    if (currentAlbum !== songAlbum) {
+        currentAlbum = songAlbum;
+        showAlbum(currentAlbum);
+    }
+    
+    // Get a clean, ordered playlist for this album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Find the exact index of this song in the clean playlist
+    currentTrackIndex = albumPlaylist.findIndex(song => song.file === audioFile);
+    if (currentTrackIndex === -1) currentTrackIndex = 0;
+    
+    console.log("Playing song:", trackName, "at index:", currentTrackIndex, "of", albumPlaylist.length, "songs");
+    
+    // Update UI and play the song
     const albumDisplayName = getAlbumDisplayName(songAlbum);
     
-    // تحديث معلومات الأغنية
     const trackNameElement = document.getElementById("track-name");
     const albumNameElement = document.getElementById("album-name");
     
-    // إضافة تأثير بصري عند تغيير الأغنية
     trackNameElement.classList.add('track-name-changed');
     albumNameElement.classList.add('album-name-changed');
     
-    // إزالة الفئة بعد انتهاء التنشيط
     setTimeout(() => {
         trackNameElement.classList.remove('track-name-changed');
         albumNameElement.classList.remove('album-name-changed');
     }, 2000);
     
-    // تحديث نص اسم الألبوم واسم الأغنية
     trackNameElement.querySelector('span').textContent = trackName;
     albumNameElement.querySelector('span').textContent = albumDisplayName;
     
-    // تحديث مصدر الصوت
     const audioSource = document.getElementById("audio-source");
     audioSource.src = audioFile;
 
@@ -553,25 +561,16 @@ function changeTrack(audioFile, trackName) {
 
     playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
 
-    // تحديث عرض اسم الفنان إذا كان هناك عنصر له
-    const artistDisplayElement = document.getElementById("current-artist");
-    if (artistDisplayElement && artistName) {
-        artistDisplayElement.textContent = artistName;
-    }
-
-    // تحديث الأيقونات - إعادة جميع الأيقونات إلى الوضع الافتراضي أولاً
+    // Update icon states
     document.querySelectorAll('.song i.material-symbols-outlined').forEach(icon => {
         icon.innerText = "volume_up";
     });
     
-    // تحديد عنصر الأغنية المشغلة حاليًا
     const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
     const songElements = document.querySelectorAll(`.song[data-song-id="${songId}"]`);
     
-    // تحديث المتغير العالمي
     currentPlayingSong = songElements.length ? songElements[0] : null;
     
-    // تغيير أيقونة الأغنية الحالية إلى "graphic_eq"
     if (currentPlayingSong) {
         const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
         if (icon) {
@@ -582,11 +581,9 @@ function changeTrack(audioFile, trackName) {
     saveLastPlayed(audioFile, trackName, songAlbum);
 }
 
-// دالة للحصول على اسم الألبوم المناسب للعرض
-function getAlbumDisplayName(albumId) {
-    const album = allAlbums.find(a => a.id === albumId);
-    return album ? album.name : 'غير معروف';
-}
+// تأكد من وجود مستمع واحد فقط لنهاية الأغنية
+audioPlayer.removeEventListener("ended", playNext);
+audioPlayer.addEventListener("ended", playNext);
 
 // تحديث شريط التقدم عند تحميل بيانات الأغنية
 audioPlayer.addEventListener("loadedmetadata", () => {
@@ -656,16 +653,42 @@ function togglePlayPause() {
 
 // تشغيل الأغنية التالية
 function playNext() {
-    const activeSongs = songs.filter(song => song.album === currentAlbum);
-    currentTrackIndex = (currentTrackIndex + 1) % activeSongs.length;
-    changeTrack(activeSongs[currentTrackIndex].file, activeSongs[currentTrackIndex].name);
+    // Get clean, ordered playlist for current album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Safety check
+    if (albumPlaylist.length === 0) return;
+    
+    // Calculate next track index
+    const oldIndex = currentTrackIndex;
+    currentTrackIndex = (currentTrackIndex + 1) % albumPlaylist.length;
+    
+    // Debug info
+    console.log(`Moving from song ${oldIndex} to ${currentTrackIndex} in album ${currentAlbum}`);
+    
+    // Play the next track
+    const nextSong = albumPlaylist[currentTrackIndex];
+    changeTrack(nextSong.file, nextSong.name);
 }
 
 // تشغيل الأغنية السابقة
 function playPrevious() {
-    const activeSongs = songs.filter(song => song.album === currentAlbum);
-    currentTrackIndex = (currentTrackIndex - 1 + activeSongs.length) % activeSongs.length;
-    changeTrack(activeSongs[currentTrackIndex].file, activeSongs[currentTrackIndex].name);
+    // Get clean, ordered playlist for current album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Safety check
+    if (albumPlaylist.length === 0) return;
+    
+    // Calculate previous track index
+    const oldIndex = currentTrackIndex;
+    currentTrackIndex = (currentTrackIndex - 1 + albumPlaylist.length) % albumPlaylist.length;
+    
+    // Debug info
+    console.log(`Moving from song ${oldIndex} to ${currentTrackIndex} in album ${currentAlbum}`);
+    
+    // Play the previous track
+    const prevSong = albumPlaylist[currentTrackIndex];
+    changeTrack(prevSong.file, prevSong.name);
 }
 
 // حفظ آخر أغنية مشغلة
@@ -1037,5 +1060,439 @@ audioPlayer.addEventListener("play", function() {
         }
     }
 });
+
+// Remove ALL existing event listeners first to prevent duplicates
+function removeAllEndedEventListeners() {
+    // Clone the element to remove all event listeners
+    const oldAudio = audioPlayer;
+    const newAudio = oldAudio.cloneNode(true);
+    oldAudio.parentNode.replaceChild(newAudio, oldAudio);
+    
+    // Update the reference to the new element
+    window.audioPlayer = newAudio;
+    
+    // Re-attach other necessary event listeners (excluding 'ended')
+    newAudio.addEventListener("loadedmetadata", () => {
+        if (!isNaN(newAudio.duration) && newAudio.duration > 0) {
+            progressBar.value = 0;
+            currentTimeElement.textContent = "0:00";
+            durationTimeElement.textContent = formatTime(newAudio.duration);
+        }
+    });
+
+    newAudio.addEventListener("timeupdate", () => {
+        if (!isSeeking && !isNaN(newAudio.duration) && newAudio.duration > 0) {
+            const progress = (newAudio.currentTime / newAudio.duration) * 100;
+            progressBar.value = progress;
+            currentTimeElement.textContent = formatTime(newAudio.currentTime);
+        }
+    });
+
+    newAudio.addEventListener("pause", function() {
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "volume_up";
+            }
+        }
+    });
+
+    newAudio.addEventListener("play", function() {
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "graphic_eq";
+            }
+        }
+    });
+
+    // Add a single 'ended' listener that handles everything
+    newAudio.addEventListener("ended", function() {
+        console.log("Song ended, currentTrackIndex before:", currentTrackIndex);
+        
+        // Reset icon if needed
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "volume_up";
+            }
+            currentPlayingSong = null;
+        }
+        
+        // Play next song
+        const activeSongs = songs.filter(song => song.album === currentAlbum);
+        currentTrackIndex = (currentTrackIndex + 1) % activeSongs.length;
+        
+        console.log("Playing next song at index:", currentTrackIndex);
+        
+        if (activeSongs.length > 0) {
+            const nextSong = activeSongs[currentTrackIndex];
+            changeTrack(nextSong.file, nextSong.name);
+        }
+    });
+    
+    return newAudio;
+}
+
+// Fix changeTrack function to update currentTrackIndex accurately
+function changeTrack(audioFile, trackName) {
+    if (isRandomPlaying) isRandomPlaying = false;
+
+    // البحث عن معلومات الأغنية الحالية
+    const currentSong = songs.find(song => song.file === audioFile);
+    const artistName = currentSong ? currentSong.artist : '';
+    
+    // الحصول على مُعرّف الألبوم الصحيح للأغنية
+    const songAlbum = getSongAlbumById(audioFile);
+    
+    // تحديث الألبوم الحالي إذا تغير
+    if (currentAlbum !== songAlbum) {
+        currentAlbum = songAlbum;
+        showAlbum(currentAlbum);
+    }
+    
+    // تحديث مؤشر الأغنية الحالية لضمان الترتيب الصحيح للتشغيل
+    const activeSongs = songs.filter(song => song.album === currentAlbum);
+    currentTrackIndex = activeSongs.findIndex(song => song.file === audioFile);
+    if (currentTrackIndex === -1) currentTrackIndex = 0;
+    
+    console.log("Changed to song index:", currentTrackIndex);
+    
+    // الحصول على اسم الألبوم المناسب للعرض
+    const albumDisplayName = getAlbumDisplayName(songAlbum);
+    
+    // تحديث معلومات الأغنية
+    const trackNameElement = document.getElementById("track-name");
+    const albumNameElement = document.getElementById("album-name");
+    
+    // إضافة تأثير بصري عند تغيير الأغنية
+    trackNameElement.classList.add('track-name-changed');
+    albumNameElement.classList.add('album-name-changed');
+    
+    // إزالة الفئة بعد انتهاء التنشيط
+    setTimeout(() => {
+        trackNameElement.classList.remove('track-name-changed');
+        albumNameElement.classList.remove('album-name-changed');
+    }, 2000);
+    
+    // تحديث نص اسم الألبوم واسم الأغنية
+    trackNameElement.querySelector('span').textContent = trackName;
+    albumNameElement.querySelector('span').textContent = albumDisplayName;
+    
+    // تحديث مصدر الصوت
+    const audioSource = document.getElementById("audio-source");
+    audioSource.src = audioFile;
+
+    audioPlayer.load();
+    audioPlayer.play();
+
+    playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
+
+    // تحديث عرض اسم الفنان إذا كان هناك عنصر له
+    const artistDisplayElement = document.getElementById("current-artist");
+    if (artistDisplayElement && artistName) {
+        artistDisplayElement.textContent = artistName;
+    }
+
+    // تحديث الأيقونات - إعادة جميع الأيقونات إلى الوضع الافتراضي أولاً
+    document.querySelectorAll('.song i.material-symbols-outlined').forEach(icon => {
+        icon.innerText = "volume_up";
+    });
+    
+    // تحديد عنصر الأغنية المشغلة حاليًا
+    const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    const songElements = document.querySelectorAll(`.song[data-song-id="${songId}"]`);
+    
+    // تحديث المتغير العالمي
+    currentPlayingSong = songElements.length ? songElements[0] : null;
+    
+    // تغيير أيقونة الأغنية الحالية إلى "graphic_eq"
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "graphic_eq";
+        }
+    }
+
+    saveLastPlayed(audioFile, trackName, songAlbum);
+}
+
+// Simplified playNext function that will only be called manually
+function playNext() {
+    const activeSongs = songs.filter(song => song.album === currentAlbum);
+    currentTrackIndex = (currentTrackIndex + 1) % activeSongs.length;
+    
+    console.log("Manual playNext, new index:", currentTrackIndex);
+    
+    if (activeSongs.length > 0) {
+        const nextSong = activeSongs[currentTrackIndex];
+        changeTrack(nextSong.file, nextSong.name);
+    }
+}
+
+// Simplified playPrevious function
+function playPrevious() {
+    const activeSongs = songs.filter(song => song.album === currentAlbum);
+    currentTrackIndex = (currentTrackIndex - 1 + activeSongs.length) % activeSongs.length;
+    
+    console.log("Manual playPrevious, new index:", currentTrackIndex);
+    
+    if (activeSongs.length > 0) {
+        const prevSong = activeSongs[currentTrackIndex];
+        changeTrack(prevSong.file, prevSong.name);
+    }
+}
+
+// REMOVE all other 'ended' event listeners from the code
+// Do this by cleaning up all event listeners and setting up only what we need
+window.addEventListener("load", () => {
+    // Generate song containers dynamically
+    generateSongContainers();
+    
+    // Reset audio player event listeners
+    audioPlayer = removeAllEndedEventListeners();
+    
+    // Continue with existing initialization
+    restoreLastPlayed();
+    initializeSongInfo();
+    loadFavorites();
+    initializeFavoriteButtons();
+    
+    // Default time display
+    currentTimeElement.textContent = "00:00";
+    durationTimeElement.textContent = "00:00";
+    
+    // Load albums page
+    loadAlbumsPage(1);
+});
+
+// Utility function to create clean album playlists without duplicates
+// and ensure proper sequence based on filenames
+function getAlbumPlaylist(albumId) {
+    // Filter songs by album
+    let albumSongs = songs.filter(song => song.album === albumId);
+    
+    // Create a map to handle duplicates - keep only the first occurrence of each file
+    const uniqueSongs = new Map();
+    albumSongs.forEach(song => {
+        // Only add if not already in the map
+        if (!uniqueSongs.has(song.file)) {
+            uniqueSongs.set(song.file, song);
+        }
+    });
+    
+    // Convert back to array
+    albumSongs = Array.from(uniqueSongs.values());
+    
+    // Sort songs by their filenames to ensure correct sequence
+    albumSongs.sort((a, b) => {
+        // Extract numbers from filenames for numeric sorting
+        const numA = parseInt(a.file.match(/^\d+/) || ['0']);
+        const numB = parseInt(b.file.match(/^\d+/) || ['0']);
+        return numA - numB;
+    });
+    
+    return albumSongs;
+}
+
+// Update change track to use the clean playlist
+function changeTrack(audioFile, trackName) {
+    if (isRandomPlaying) isRandomPlaying = false;
+
+    // Get song and album info
+    const currentSong = songs.find(song => song.file === audioFile);
+    const artistName = currentSong ? currentSong.artist : '';
+    const songAlbum = getSongAlbumById(audioFile);
+    
+    // Update album if changed
+    if (currentAlbum !== songAlbum) {
+        currentAlbum = songAlbum;
+        showAlbum(currentAlbum);
+    }
+    
+    // Get a clean, ordered playlist for this album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Find the exact index of this song in the clean playlist
+    currentTrackIndex = albumPlaylist.findIndex(song => song.file === audioFile);
+    if (currentTrackIndex === -1) currentTrackIndex = 0;
+    
+    console.log("Playing song:", trackName, "at index:", currentTrackIndex, "of", albumPlaylist.length, "songs");
+    
+    // Update UI and play the song
+    const albumDisplayName = getAlbumDisplayName(songAlbum);
+    
+    const trackNameElement = document.getElementById("track-name");
+    const albumNameElement = document.getElementById("album-name");
+    
+    trackNameElement.classList.add('track-name-changed');
+    albumNameElement.classList.add('album-name-changed');
+    
+    setTimeout(() => {
+        trackNameElement.classList.remove('track-name-changed');
+        albumNameElement.classList.remove('album-name-changed');
+    }, 2000);
+    
+    trackNameElement.querySelector('span').textContent = trackName;
+    albumNameElement.querySelector('span').textContent = albumDisplayName;
+    
+    const audioSource = document.getElementById("audio-source");
+    audioSource.src = audioFile;
+
+    audioPlayer.load();
+    audioPlayer.play();
+
+    playPauseButton.innerHTML = '<span class="material-icons">pause</span>';
+
+    // Update icon states
+    document.querySelectorAll('.song i.material-symbols-outlined').forEach(icon => {
+        icon.innerText = "volume_up";
+    });
+    
+    const songId = audioFile.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    const songElements = document.querySelectorAll(`.song[data-song-id="${songId}"]`);
+    
+    currentPlayingSong = songElements.length ? songElements[0] : null;
+    
+    if (currentPlayingSong) {
+        const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+        if (icon) {
+            icon.innerText = "graphic_eq";
+        }
+    }
+
+    saveLastPlayed(audioFile, trackName, songAlbum);
+}
+
+// Fix playNext to use the clean playlist
+function playNext() {
+    // Get clean, ordered playlist for current album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Safety check
+    if (albumPlaylist.length === 0) return;
+    
+    // Calculate next track index
+    const oldIndex = currentTrackIndex;
+    currentTrackIndex = (currentTrackIndex + 1) % albumPlaylist.length;
+    
+    // Debug info
+    console.log(`Moving from song ${oldIndex} to ${currentTrackIndex} in album ${currentAlbum}`);
+    
+    // Play the next track
+    const nextSong = albumPlaylist[currentTrackIndex];
+    changeTrack(nextSong.file, nextSong.name);
+}
+
+// Fix playPrevious to use the clean playlist
+function playPrevious() {
+    // Get clean, ordered playlist for current album
+    const albumPlaylist = getAlbumPlaylist(currentAlbum);
+    
+    // Safety check
+    if (albumPlaylist.length === 0) return;
+    
+    // Calculate previous track index
+    const oldIndex = currentTrackIndex;
+    currentTrackIndex = (currentTrackIndex - 1 + albumPlaylist.length) % albumPlaylist.length;
+    
+    // Debug info
+    console.log(`Moving from song ${oldIndex} to ${currentTrackIndex} in album ${currentAlbum}`);
+    
+    // Play the previous track
+    const prevSong = albumPlaylist[currentTrackIndex];
+    changeTrack(prevSong.file, prevSong.name);
+}
+
+// Remove old event listeners and add a new one
+function setupAudioEndedListener() {
+    // Clone the element to remove all existing event listeners
+    const oldAudio = audioPlayer;
+    const newAudio = oldAudio.cloneNode(true);
+    oldAudio.parentNode.replaceChild(newAudio, oldAudio);
+    
+    // Update the global reference
+    window.audioPlayer = newAudio;
+    
+    // Re-attach necessary event listeners
+    newAudio.addEventListener("loadedmetadata", () => {
+        if (!isNaN(newAudio.duration) && newAudio.duration > 0) {
+            progressBar.value = 0;
+            currentTimeElement.textContent = "0:00";
+            durationTimeElement.textContent = formatTime(newAudio.duration);
+        }
+    });
+
+    newAudio.addEventListener("timeupdate", () => {
+        if (!isSeeking && !isNaN(newAudio.duration) && newAudio.duration > 0) {
+            const progress = (newAudio.currentTime / newAudio.duration) * 100;
+            progressBar.value = progress;
+            currentTimeElement.textContent = formatTime(newAudio.currentTime);
+        }
+    });
+
+    newAudio.addEventListener("pause", function() {
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "volume_up";
+            }
+        }
+    });
+
+    newAudio.addEventListener("play", function() {
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "graphic_eq";
+            }
+        }
+    });
+
+    // Add a single ended event listener that calls playNext
+    newAudio.addEventListener("ended", function() {
+        // Reset current song icon
+        if (currentPlayingSong) {
+            const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = "volume_up";
+            }
+            currentPlayingSong = null;
+        }
+        
+        // Play the next song
+        playNext();
+    });
+    
+    return newAudio;
+}
+
+// Update the initialization function
+window.addEventListener("load", function() {
+    // Initialize song containers
+    generateSongContainers();
+    
+    // Set up proper audio ended handling
+    window.audioPlayer = setupAudioEndedListener();
+    
+    // Initialize UI components
+    loadFavorites();
+    initializeFavoriteButtons();
+    
+    // Restore last played song if available
+    restoreLastPlayed();
+    
+    // Set default values
+    currentTimeElement.textContent = "00:00";
+    durationTimeElement.textContent = "00:00";
+    
+    // Load albums page
+    loadAlbumsPage(1);
+});
+
+// Remove these duplicate event listener assignments
+// audioPlayer.removeEventListener("ended", playNext);
+// audioPlayer.addEventListener("ended", playNext);
+// ... other duplicates ...
 
 
