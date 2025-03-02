@@ -114,6 +114,21 @@ const songs = [
     { file: '15 khalij.mp3', name: 'أغنية خليجية 15', album: 'khalij' },
     { file: '16 khalij.mp3', name: 'أغنية خليجية 16', album: 'khalij' },
     { file: '17 khalij.mp3', name: 'أغنية خليجية 17', album: 'khalij' },
+	
+	// Songs for album: fivestar
+{ file: 'https://files.catbox.moe/t51f12.mp3', name: 'five star 1', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/pf2b30.mp3', name: 'five star 2', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/mvvg94.mp3', name: 'five star 3', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/i4jz8b.mp3', name: 'five star 4', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/zzaxrj.mp3', name: 'five star 5', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/pas8bm.mp3', name: 'five star 6', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/h7u50c.mp3', name: 'five star 7', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/asba0r.mp3', name: 'five star 8', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/5g0t2s.mp3', name: 'five star 9', album: 'fivestar' },
+{ file: 'https://files.catbox.moe/lw5vcj.mp3', name: 'five star 10', album: 'fivestar' },
+
+
+
     
 ];
 
@@ -128,7 +143,7 @@ const allAlbums = [
     { id: 'starchaabi', name: 'STAR CHAABI', image: 'starchaabi.png' },
     { id: 'ahyadihahan', name: 'AAWAD IHAHAN', image: 'ahyadihahan.png' },
     { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
-    { id: 'kamalnew', name: 'KAMAL NEW', image: 'kamalnews.png' },
+	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
    
     // Add more albums as needed
 ];
