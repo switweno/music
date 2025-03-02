@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     background-color: var(--light-bg);
     color: var(--text-dark);
-    padding-top: 208px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
+    padding-top: 206px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
     transition: all var(--transition-speed);
     overflow-x: hidden;
 }
@@ -820,13 +820,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
 /* توحيد حجم وشكل الأزرار - إصلاح مشكلة عدم تطابق الحجم */
 #track-info .album-info,
 #track-info .track-name {
@@ -835,7 +828,7 @@ body {
     font-size: 13px !important;
     padding: 7px 12px !important;
     border-radius: 25px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     white-space: nowrap;
     overflow: hidden;
@@ -843,7 +836,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
     transition: all 0.2s ease;
     min-width: 0;
     flex: 1 1 auto;
@@ -852,7 +845,7 @@ body {
     height: auto;
     margin: 0 !important;
     text-align: center;
-    max-width: 45%;
+    max-width: 47%;
 }
 
 #track-info .album-info {
@@ -872,28 +865,18 @@ body {
 @media (max-width: 576px) {
     #track-info .album-info,
     #track-info .track-name {
-        font-size: 12px !important;
+        font-size: 13px !important;
         padding: 5px 10px !important;
       
     }
     
     #track-info .album-info i,
     #track-info .track-name i {
-        font-size: 13px;
+        font-size: 15px;
         width: 16px;
         height: 16px;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -991,15 +974,10 @@ body {
     margin: 8px auto;
     padding: 0 5px; /* إضافة تنسيق للجوانب */
     width: 100%;
-    max-width: 98%; /* زيادة العرض الأقصى لملء الشاشة بشكل أفضل */
+    max-width: 100%; /* زيادة العرض الأقصى لملء الشاشة بشكل أفضل */
 }
 
-.album-info, .track-name {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 13px !important;
-   
-}
+
 
 /* تنسيق إشعار إضافة المفضلة */
 .favorite-notification {
