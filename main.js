@@ -303,6 +303,55 @@ function toggleFavorite(event, songId, audioFile, songName, artistName) {
     // حفظ التغييرات وتحديث واجهة المستخدم
     saveFavorites();
     updateFavoritesUI();
+    
+    // تحديث حالة جميع أزرار المفضلة لهذه الأغنية
+    updateAllFavoriteButtonsForSong(songId);
+}
+
+// دالة جديدة لتحديث جميع أزرار المفضلة للأغنية المحددة
+function updateAllFavoriteButtonsForSong(songId) {
+    // تحديد جميع عناصر الأغنية التي لها نفس المعرف
+    const allSongElements = document.querySelectorAll(`.song[data-song-id="${songId}"]`);
+    
+    // تحديد ما إذا كانت الأغنية مفضلة
+    const isFavorite = favorites.some(song => song.id === songId);
+    
+    // تحديث كل عنصر أغنية
+    allSongElements.forEach(songElement => {
+        const favoriteBtn = songElement.querySelector('.favorite-btn');
+        if (favoriteBtn) {
+            const icon = favoriteBtn.querySelector('i');
+            
+            if (isFavorite) {
+                icon.textContent = 'favorite';
+                favoriteBtn.classList.add('active');
+            } else {
+                icon.textContent = 'favorite_border';
+                favoriteBtn.classList.remove('active');
+            }
+        }
+    });
+}
+
+// تعديل الدالة الحالية للتحديث الكامل للأزرار
+function updateFavoriteButtons() {
+    document.querySelectorAll('.song').forEach(songElement => {
+        const songId = songElement.dataset.songId;
+        if (!songId) return;
+        
+        const isFavorite = favorites.some(song => song.id === songId);
+        const favoriteBtn = songElement.querySelector('.favorite-btn');
+        if (!favoriteBtn) return;
+        
+        const icon = favoriteBtn.querySelector('i');
+        if (isFavorite) {
+            icon.textContent = 'favorite';
+            favoriteBtn.classList.add('active');
+        } else {
+            icon.textContent = 'favorite_border';
+            favoriteBtn.classList.remove('active');
+        }
+    });
 }
 
 // تحديث واجهة المستخدم للمفضلة
