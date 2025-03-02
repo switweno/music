@@ -117,27 +117,8 @@ const songs = [
     
 ];
 
-const audioPlayer = document.getElementById("audio-player");
-const playPauseButton = document.getElementById("play-pause-btn");
-const progressBar = document.getElementById("progress-bar");
-const volumeControl = document.getElementById("volume-control");
-const volumeControlContainer = document.getElementById("volume-control-container");
-const volumeButton = document.getElementById("volume-btn");
-const currentTimeElement = document.getElementById("current-time");
-const durationTimeElement = document.getElementById("duration-time");
 
-let currentTrackIndex = 0;
-let isRandomPlaying = false;
-let currentAlbum = "starchaabi"; // الألبوم الافتراضي
-let isSeeking = false; // متغير للتحقق من السحب
-
-// متغيرات للمفضلة - نستخدم مفتاح واحد فقط للتخزين المحلي
-let favorites = [];
-const FAVORITES_STORAGE_KEY = 'musicFavorites';
-
-// متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 6; // عدد الألبومات في كل صفحة
-let currentPage = 1; // الصفحة الحالية
+// Album definitions
 const allAlbums = [
     { id: 'naydanouda', name: 'NAYDA NOUDA', image: 'naydanouda.webp' },
     { id: 'sentralchaabi', name: 'SENTRAL CHAABI', image: 'sentralchaabi.png' },
@@ -148,8 +129,10 @@ const allAlbums = [
     { id: 'ahyadihahan', name: 'AAWAD IHAHAN', image: 'ahyadihahan.png' },
     { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
     { id: 'kamalnew', name: 'KAMAL NEW', image: 'kamalnews.png' },
-    // يمكن إضافة المزيد من الألبومات هنا عند الحاجة
+   
+    // Add more albums as needed
 ];
+
 
 // استدعاء المفضلة عند تحميل الصفحة
 function loadFavorites() {
@@ -738,45 +721,8 @@ function scrollAlbums(direction) {
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    let currentPlaying = null;
 
-    document.querySelectorAll(".song").forEach(song => {
-        song.addEventListener("click", function () {
-            let icon = this.querySelector("i");
 
-            // إذا كان نفس العنصر مضغوطًا مرة أخرى
-            if (currentPlaying === this) {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    icon.innerText = "graphic_eq"; // 🔊 تشغيل
-                } else {
-                    audioPlayer.pause();
-                    icon.innerText = "volume_up"; // 🔈 إيقاف مؤقت
-                }
-            } else {
-                // إذا كانت هناك أغنية تعمل، إعادة الأيقونة القديمة
-                if (currentPlaying) {
-                    currentPlaying.querySelector("i").innerText = "volume_up";
-                }
-
-                // تحديث العنصر الحالي
-                currentPlaying = this;
-                icon.innerText = "graphic_eq"; // 🔊 تشغيل
-
-                // لا نغير `src` أو `play()` هنا حتى لا يتعارض مع سكريبتاتك الأصلية
-            }
-        });
-    });
-
-    // التحقق من حالة التشغيل عند التوقف التلقائي
-    audioPlayer.addEventListener("ended", function () {
-        if (currentPlaying) {
-            currentPlaying.querySelector("i").innerText = "volume_up"; // 🔈 عند انتهاء الأغنية
-            currentPlaying = null;
-        }
-    });
-});
 
 function playRandom() {
     const activeSongs = songs.filter(song => song.album === currentAlbum);
@@ -983,55 +929,6 @@ document.addEventListener('mousedown', function(event) {
     }
 }, false);
 
-// إضافة وظائف للعارض المنبثق للألبومات
-document.addEventListener('DOMContentLoaded', function() {
-    const showAlbumsBtn = document.getElementById('show-albums-btn');
-    const closeAlbumsBtn = document.getElementById('close-albums-btn');
-    const albumsShowcase = document.getElementById('albums-showcase');
-    const albumItems = document.querySelectorAll('.album-showcase-item');
-
-    // فتح العارض
-    showAlbumsBtn.addEventListener('click', function() {
-        albumsShowcase.classList.add('show');
-        document.body.style.overflow = 'hidden'; // منع التمرير في الخلفية
-    });
-
-    // إغلاق العارض
-    closeAlbumsBtn.addEventListener('click', function() {
-        albumsShowcase.classList.remove('show');
-        document.body.style.overflow = ''; // استعادة التمرير
-    });
-
-    // عند النقر خارج المحتوى، يتم إغلاق العارض
-    albumsShowcase.addEventListener('click', function(e) {
-        if (e.target === albumsShowcase) {
-            albumsShowcase.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    });
-
-    // وظيفة اختيار الألبوم
-    albumItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const albumId = this.getAttribute('data-album');
-            
-            // إخفاء العارض
-            albumsShowcase.classList.remove('show');
-            document.body.style.overflow = '';
-            
-            // عرض الألبوم المختار وتمرير الصفحة للمكان المناسب
-            scrollToAlbums(albumId);
-        });
-    });
-
-    // إضافة مستمع للمفتاح ESC لإغلاق العارض
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && albumsShowcase.classList.contains('show')) {
-            albumsShowcase.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    });
-});
 
 // تحديث حالة مشغل الصوت عند توقفه
 audioPlayer.addEventListener("ended", function() {
