@@ -134,6 +134,45 @@ const allAlbums = [
 ];
 
 
+// Function to get album display name by ID
+function getAlbumDisplayName(albumId) {
+    const album = allAlbums.find(a => a.id === albumId);
+    return album ? album.name : 'غير معروف';
+}
+
+// Function to get album image by ID
+function getAlbumImage(albumId) {
+    const album = allAlbums.find(a => a.id === albumId);
+    return album ? album.image : 'placeholder.png';
+}
+
+const audioPlayer = document.getElementById("audio-player");
+const playPauseButton = document.getElementById("play-pause-btn");
+const progressBar = document.getElementById("progress-bar");
+const volumeControl = document.getElementById("volume-control");
+const volumeControlContainer = document.getElementById("volume-control-container");
+const volumeButton = document.getElementById("volume-btn");
+const currentTimeElement = document.getElementById("current-time");
+const durationTimeElement = document.getElementById("duration-time");
+
+let currentTrackIndex = 0;
+let isRandomPlaying = false;
+let currentAlbum = "starchaabi"; // الألبوم الافتراضي
+let isSeeking = false; // متغير للتحقق من السحب
+
+// متغيرات للمفضلة - نستخدم مفتاح واحد فقط للتخزين المحلي
+let favorites = [];
+const FAVORITES_STORAGE_KEY = 'musicFavorites';
+
+// متغيرات للتنقل بين صفحات الألبومات
+const albumsPerPage = 4; // عدد الألبومات في كل صفحة
+let currentPage = 1; // الصفحة الحالية
+
+
+
+
+
+
 // استدعاء المفضلة عند تحميل الصفحة
 function loadFavorites() {
     const storedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
