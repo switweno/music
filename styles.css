@@ -559,10 +559,14 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.facebook:hover { background: #3b5998; }
-.twitter:hover { background: #1DA1F2; }
-.whatsapp:hover { background: #25D366; }
-.linkedin:hover { background: #E4405F; }
+.facebook:hover { background: #2e4880; }
+.twitter:hover { background: #1981c1; }
+.whatsapp:hover { background: #23ac56; }
+.linkedin:hover { background: #ba3c54; }
+.facebook { background: #3b5998; }
+.twitter { background: #1DA1F2; }
+.whatsapp { background: #25D366; }
+.linkedin { background: #E4405F; }
 
 /* تصحيح تعارض زر المفضلة */
 .favorite-btn {
