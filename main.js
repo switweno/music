@@ -127,10 +127,9 @@ const songs = [
 { file: 'https://files.catbox.moe/5g0t2s.mp3', name: 'five star 9', album: 'fivestar' },
 { file: 'https://files.catbox.moe/lw5vcj.mp3', name: 'five star 10', album: 'fivestar' },
 
-
-
-    
+   
 ];
+
 
 
 // Album definitions
