@@ -165,7 +165,7 @@ let favorites = [];
 const FAVORITES_STORAGE_KEY = 'musicFavorites';
 
 // متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 4; // عدد الألبومات في كل صفحة
+const albumsPerPage = 8; // عدد الألبومات في كل صفحة
 let currentPage = 1; // الصفحة الحالية
 
 
@@ -184,10 +184,6 @@ function loadFavorites() {
 
 // دالة لتحميل صفحة محددة من الألبومات
 function loadAlbumsPage(page) {
-    // Dispatch event when page changes to notify lazy loader
-    const event = new CustomEvent('albumPageChanged', { detail: { page } });
-    document.dispatchEvent(event);
-    
     const albumsContainer = document.getElementById('albums-page-container');
     albumsContainer.innerHTML = '';
     
@@ -202,7 +198,7 @@ function loadAlbumsPage(page) {
         albumElement.className = 'new-album-item';
         albumElement.setAttribute('onclick', `scrollToAlbums('${album.id}')`);
         albumElement.innerHTML = `
-            <img class="lazy" src="placeholder.png" data-src="${album.image}" alt="${album.name}">
+            <img src="${album.image}" alt="${album.name}">
             <span>${album.name}</span>
         `;
         albumsContainer.appendChild(albumElement);
@@ -476,16 +472,6 @@ function showAlbum(album) {
     const albumElement = document.getElementById(`${album}-songs`);
     if (albumElement) {
         albumElement.style.display = 'flex'; // عرض الألبوم المحدد
-        
-        // تحميل الأغاني إذا لم يتم تحميلها بالفعل
-        if (!albumElement.classList.contains('loaded')) {
-            // Trigger lazy loading through dataset attribute
-            albumElement.dataset.album = album;
-            
-            // Create a custom event to notify our lazy loader
-            const event = new CustomEvent('albumSelected', { detail: albumElement });
-            document.dispatchEvent(event);
-        }
     }
 
     currentAlbum = album; // تحديث الألبوم الحالي
@@ -712,9 +698,6 @@ function generateSongContainers() {
         const albumContainer = document.createElement('div');
         albumContainer.className = `songs-container ${albumId}`;
         albumContainer.id = `${albumId}-songs`;
-        
-        // Add data attribute for lazy loading
-        albumContainer.dataset.album = albumId;
         
         // Add all songs to the container
         albumSongs.forEach(song => {
@@ -983,16 +966,6 @@ function initializeFavoriteButtons() {
         const albumElement = document.getElementById(`${album}-songs`);
         if (albumElement) {
             albumElement.style.display = 'flex'; // عرض الألبوم المحدد
-            
-            // تحميل الأغاني إذا لم يتم تحميلها بالفعل
-            if (!albumElement.classList.contains('loaded')) {
-                // Trigger lazy loading through dataset attribute
-                albumElement.dataset.album = album;
-                
-                // Create a custom event to notify our lazy loader
-                const event = new CustomEvent('albumSelected', { detail: albumElement });
-                document.dispatchEvent(event);
-            }
         }
     
         currentAlbum = album; // تحديث الألبوم الحالي
