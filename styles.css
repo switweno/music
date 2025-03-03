@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     background-color: var(--light-bg);
     color: var(--text-dark);
-    padding-top: 116px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
+    padding-top: 161px; /* تقليل المسافة من الأعلى بعد إزالة الشريط الإخباري */
     transition: all var(--transition-speed);
     overflow-x: hidden;
 }
