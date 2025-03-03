@@ -172,7 +172,7 @@ function getAlbumImage(albumId) {
     return album ? album.image : 'placeholder.png';
 }
 
-const audioPlayer = document.getElementById("audio-player");
+let audioPlayer = document.getElementById("audio-player");
 const playPauseButton = document.getElementById("play-pause-btn");
 const progressBar = document.getElementById("progress-bar");
 const volumeControl = document.getElementById("volume-control");
@@ -191,7 +191,7 @@ let favorites = [];
 const FAVORITES_STORAGE_KEY = 'musicFavorites';
 
 // متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 8; // عدد الألبومات في كل صفحة
+const albumsPerPage = 4; // عدد الألبومات في كل صفحة
 let currentPage = 1; // الصفحة الحالية
 
 
@@ -208,30 +208,50 @@ function loadFavorites() {
     }
 }
 
-// دالة لتحميل صفحة محددة من الألبومات
+// دالة لتحميل صفحة محددة من الألبومات - Fix the function in loop warning
 function loadAlbumsPage(page) {
     const albumsContainer = document.getElementById('albums-page-container');
+    if (!albumsContainer) {
+        console.error("Albums container not found");
+        return;
+    }
+    
     albumsContainer.innerHTML = '';
     
     // حساب نطاق الألبومات للصفحة المحددة
     const startIndex = (page - 1) * albumsPerPage;
     const endIndex = Math.min(startIndex + albumsPerPage, allAlbums.length);
     
+    console.log(`Loading albums page ${page}: items ${startIndex} to ${endIndex-1}`);
+    
     // عرض الألبومات للصفحة الحالية
     for (let i = startIndex; i < endIndex; i++) {
         const album = allAlbums[i];
         const albumElement = document.createElement('div');
         albumElement.className = 'new-album-item';
-        albumElement.setAttribute('onclick', `scrollToAlbums('${album.id}')`);
+        albumElement.dataset.albumId = album.id;
+        
         albumElement.innerHTML = `
             <img src="${album.image}" alt="${album.name}">
             <span>${album.name}</span>
         `;
+        
+        // Fix: Capture album.id inside closure to avoid JSHint W083 warning
+        (function(albumId) {
+            albumElement.addEventListener('click', function() {
+                console.log(`Album clicked: ${albumId}`);
+                showAlbum(albumId);
+            });
+        })(album.id);
+        
         albumsContainer.appendChild(albumElement);
     }
     
     // تحديث أزرار التنقل
     updatePaginationControls(page);
+    
+    // Call initialization after a short delay
+    setTimeout(initializeAlbumItems, 100);
 }
 
 // دالة لتحديث أزرار التنقل
@@ -492,16 +512,49 @@ function showFavoriteNotification(message, isAdded = true) {
 
 // دالة عرض الألبوم
 function showAlbum(album) {
-    const albums = document.querySelectorAll('.songs-container');
-    albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
+    console.log(`showAlbum called with album: ${album}`);
     
+    // Check if album exists
     const albumElement = document.getElementById(`${album}-songs`);
-    if (albumElement) {
-        albumElement.style.display = 'flex'; // عرض الألبوم المحدد
+    if (!albumElement) {
+        console.error(`Album element #${album}-songs not found`);
+        return;
     }
+    
+    // Hide all album containers
+    const albums = document.querySelectorAll('.songs-container');
+    albums.forEach(a => a.style.display = 'none');
+    
+    // Show the selected album's songs
+    albumElement.style.display = 'flex';
+    
+    // Calculate precise offset for scrolling
+    const playerHeight = document.getElementById('audio-player-container').offsetHeight;
+    const extraPadding = 30; // Additional padding for better visibility
+    
+    // Scroll to position with delay to ensure UI updates
+    setTimeout(() => {
+        const albumRect = albumElement.getBoundingClientRect();
+        const offsetPosition = window.pageYOffset + albumRect.top - playerHeight - extraPadding;
+        
+        console.log(`Scrolling to position: ${offsetPosition}`);
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+        
+        // Add focus effect
+        albumElement.classList.add('album-focus');
+        setTimeout(() => {
+            albumElement.classList.remove('album-focus');
+        }, 1000);
+    }, 200);
 
-    currentAlbum = album; // تحديث الألبوم الحالي
-    currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+    // Update current album
+    currentAlbum = album;
+    currentTrackIndex = 0;
+    
+    console.log(`Album display updated to: ${album}`);
 }
 
 // دالة تنسيق الوقت
@@ -977,54 +1030,54 @@ function initializeFavoriteButtons() {
     });
 
     function scrollToAlbums(albumId) {
-        // عرض الألبوم المحدد أولاً
+        console.log(`scrollToAlbums called with albumId: ${albumId}`);
         showAlbum(albumId);
+    }
+
+    function showAlbum(album) {
+        console.log(`showAlbum called with album: ${album}`);
         
-        // الحصول على موقع عنصر الفاصل الأحمر (أو قسم الأغاني)
-        const targetContainer = document.getElementById(`${albumId}-songs`);
+        // Check if album exists
+        const albumElement = document.getElementById(`${album}-songs`);
+        if (!albumElement) {
+            console.error(`Album element #${album}-songs not found`);
+            return;
+        }
         
-        if (targetContainer) {
-            // الحصول على عنصر الفاصل فوق قائمة الأغاني (عنوان الألبوم)
-            const albumListMusic = document.querySelector('.album-list-music');
+        // Hide all album containers
+        const albums = document.querySelectorAll('.songs-container');
+        albums.forEach(a => a.style.display = 'none');
+        
+        // Show the selected album's songs
+        albumElement.style.display = 'flex';
+        
+        // Calculate precise offset for scrolling
+        const playerHeight = document.getElementById('audio-player-container').offsetHeight;
+        const extraPadding = 30; // Additional padding for better visibility
+        
+        // Scroll to position with delay to ensure UI updates
+        setTimeout(() => {
+            const albumRect = albumElement.getBoundingClientRect();
+            const offsetPosition = window.pageYOffset + albumRect.top - playerHeight - extraPadding;
             
-            // حساب الارتفاع الثابت للعناصر في الأعلى
-            const headerOffset = 250; // تقريبًا ارتفاع مشغل الصوت والشريط الإخباري
-            
-            // حساب الموقع النهائي للتمرير
-            let offsetPosition;
-            
-            if (albumListMusic) {
-                // الموقع النسبي للفاصل
-                offsetPosition = albumListMusic.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            } else {
-                // إذا لم يتم العثور على الفاصل، استخدم موقع حاوية الأغاني
-                offsetPosition = targetContainer.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            }
-            
-            // التمرير إلى الموقع المحسوب
+            console.log(`Scrolling to position: ${offsetPosition}`);
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
             });
-        }
-    }
-
-    function showAlbum(album) {
-        const albums = document.querySelectorAll('.songs-container');
-        albums.forEach(a => a.style.display = 'none'); // إخفاء جميع الألبومات
-    
-        const albumElement = document.getElementById(`${album}-songs`);
-        if (albumElement) {
-            albumElement.style.display = 'flex'; // عرض الألبوم المحدد
             
-            // Scroll to the songs container with a little delay to ensure UI is updated
+            // Add focus effect
+            albumElement.classList.add('album-focus');
             setTimeout(() => {
-                albumElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
+                albumElement.classList.remove('album-focus');
+            }, 1000);
+        }, 200);
     
-        currentAlbum = album; // تحديث الألبوم الحالي
-        currentTrackIndex = 0; // إعادة المؤشر إلى البداية
+        // Update current album
+        currentAlbum = album;
+        currentTrackIndex = 0;
+        
+        console.log(`Album display updated to: ${album}`);
     }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1423,32 +1476,34 @@ function playPrevious() {
 
 // Remove old event listeners and add a new one
 function setupAudioEndedListener() {
-    // Clone the element to remove all existing event listeners
-    const oldAudio = audioPlayer;
-    const newAudio = oldAudio.cloneNode(true);
-    oldAudio.parentNode.replaceChild(newAudio, oldAudio);
+    // Instead of reassigning audioPlayer, get the DOM element directly
+    const player = document.getElementById('audio-player');
     
-    // Update the global reference
-    window.audioPlayer = newAudio;
+    // Clone the element to remove all existing event listeners
+    const newAudio = player.cloneNode(true);
+    player.parentNode.replaceChild(newAudio, player);
+    
+    // Get the new audio element from DOM instead of reassigning
+    const updatedPlayer = document.getElementById('audio-player');
     
     // Re-attach necessary event listeners
-    newAudio.addEventListener("loadedmetadata", () => {
-        if (!isNaN(newAudio.duration) && newAudio.duration > 0) {
+    updatedPlayer.addEventListener("loadedmetadata", () => {
+        if (!isNaN(updatedPlayer.duration) && updatedPlayer.duration > 0) {
             progressBar.value = 0;
             currentTimeElement.textContent = "0:00";
-            durationTimeElement.textContent = formatTime(newAudio.duration);
+            durationTimeElement.textContent = formatTime(updatedPlayer.duration);
         }
     });
 
-    newAudio.addEventListener("timeupdate", () => {
-        if (!isSeeking && !isNaN(newAudio.duration) && newAudio.duration > 0) {
-            const progress = (newAudio.currentTime / newAudio.duration) * 100;
+    updatedPlayer.addEventListener("timeupdate", () => {
+        if (!isSeeking && !isNaN(updatedPlayer.duration) && updatedPlayer.duration > 0) {
+            const progress = (updatedPlayer.currentTime / updatedPlayer.duration) * 100;
             progressBar.value = progress;
-            currentTimeElement.textContent = formatTime(newAudio.currentTime);
+            currentTimeElement.textContent = formatTime(updatedPlayer.currentTime);
         }
     });
 
-    newAudio.addEventListener("pause", function() {
+    updatedPlayer.addEventListener("pause", function() {
         if (currentPlayingSong) {
             const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
             if (icon) {
@@ -1457,7 +1512,7 @@ function setupAudioEndedListener() {
         }
     });
 
-    newAudio.addEventListener("play", function() {
+    updatedPlayer.addEventListener("play", function() {
         if (currentPlayingSong) {
             const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
             if (icon) {
@@ -1467,7 +1522,7 @@ function setupAudioEndedListener() {
     });
 
     // Add a single ended event listener that calls playNext
-    newAudio.addEventListener("ended", function() {
+    updatedPlayer.addEventListener("ended", function() {
         // Reset current song icon
         if (currentPlayingSong) {
             const icon = currentPlayingSong.querySelector('i.material-symbols-outlined');
@@ -1481,16 +1536,16 @@ function setupAudioEndedListener() {
         playNext();
     });
     
-    return newAudio;
+    // No need to return anything
 }
 
-// Update the initialization function
+// Update the initialization function to not reassign audioPlayer
 window.addEventListener("load", function() {
     // Initialize song containers
     generateSongContainers();
     
-    // Set up proper audio ended handling
-    window.audioPlayer = setupAudioEndedListener();
+    // Set up proper audio ended handling - don't reassign
+    setupAudioEndedListener();
     
     // Initialize UI components
     loadFavorites();
@@ -1507,9 +1562,180 @@ window.addEventListener("load", function() {
     loadAlbumsPage(1);
 });
 
-// Remove these duplicate event listener assignments
-// audioPlayer.removeEventListener("ended", playNext);
-// audioPlayer.addEventListener("ended", playNext);
-// ... other duplicates ...
+// This function ensures album items have proper event listeners
+function initializeAlbumItems() {
+    console.log("Initializing album items...");
+    
+    // Select all album items
+    const albumItems = document.querySelectorAll('.new-album-item');
+    
+    albumItems.forEach(item => {
+        // Get album ID from data attribute
+        const albumId = item.dataset.albumId;
+        if (!albumId) {
+            console.error("Album item missing albumId data attribute:", item);
+            return;
+        }
+        
+        // Remove any existing event listeners by cloning
+        const newItem = item.cloneNode(true);
+        if (item.parentNode) {
+            item.parentNode.replaceChild(newItem, item);
+        }
+        
+        // Add a fresh click event listener
+        newItem.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(`Album clicked: ${albumId}`);
+            
+            // First try to find the album container
+            const albumContainer = document.getElementById(`${albumId}-songs`);
+            if (!albumContainer) {
+                console.error(`Album container not found: #${albumId}-songs`);
+                // Try emergency function
+                if (typeof window.directShowAlbum === 'function') {
+                    window.directShowAlbum(albumId);
+                }
+                return;
+            }
+            
+            // Hide all album containers
+            document.querySelectorAll('.songs-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Show this album's container
+            albumContainer.style.display = 'flex';
+            
+            // Add visual focus
+            albumContainer.classList.add('album-focus');
+            
+            // Update current album tracking
+            window.currentAlbum = albumId;
+            window.currentTrackIndex = 0;
+            
+            // Scroll to the container using the same positioning as window.showAlbum
+            setTimeout(() => {
+                const playerHeight = document.getElementById('audio-player-container').offsetHeight || 0;
+                const extraPadding = 0; // Align directly with container top
+                const offsetPosition = albumContainer.offsetTop - playerHeight - extraPadding;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                setTimeout(() => {
+                    albumContainer.classList.remove('album-focus');
+                }, 1000);
+            }, 200);
+        });
+    });
+    
+    console.log(`${albumItems.length} album items initialized`);
+}
+
+// Make sure we have only one showAlbum function
+window.showAlbum = function(albumId) {
+    console.log(`Global showAlbum called with: ${albumId}`);
+    
+    // Try to find the album container
+    const albumContainer = document.getElementById(`${albumId}-songs`);
+    if (!albumContainer) {
+        console.error(`Album container not found: #${albumId}-songs`);
+        return;
+    }
+    
+    // Hide all album containers
+    document.querySelectorAll('.songs-container').forEach(container => {
+        container.style.display = 'none';
+    });
+    
+    // Show this album's container
+    albumContainer.style.display = 'flex';
+    
+    // Update global tracking
+    window.currentAlbum = albumId;
+    window.currentTrackIndex = 0;
+    
+    // Scroll to the container
+    setTimeout(() => {
+        const playerHeight = document.getElementById('audio-player-container').offsetHeight || 0;
+        const extraPadding = 30;
+        const offsetPosition = window.pageYOffset + albumContainer.getBoundingClientRect().top - playerHeight - extraPadding;
+        
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+        
+        // Add visual focus
+        albumContainer.classList.add('album-focus');
+        setTimeout(() => {
+            albumContainer.classList.remove('album-focus');
+        }, 1000);
+    }, 200);
+};
+
+// Update the scrollToAlbums function to call window.showAlbum
+function scrollToAlbums(albumId) {
+    console.log(`scrollToAlbums called with: ${albumId}`);
+    if (window.showAlbum) {
+        window.showAlbum(albumId);
+    }
+}
+
+window.addEventListener("load", function() {
+    // Initialize song containers
+    generateSongContainers();
+    
+    // Set up proper audio ended handling - don't reassign
+    setupAudioEndedListener();
+    
+    // Initialize UI components
+    loadFavorites();
+    initializeFavoriteButtons();
+    
+    // Load albums page
+    loadAlbumsPage(1);
+    
+    // Ensure default album is shown - ADDED THIS EXPLICIT CALL
+    setTimeout(() => {
+        // Show the default album
+        const defaultAlbum = "starchaabi";
+        const defaultAlbumContainer = document.getElementById(`${defaultAlbum}-songs`);
+        
+        if (defaultAlbumContainer) {
+            console.log("Showing default album:", defaultAlbum);
+            
+            // Hide all first
+            document.querySelectorAll('.songs-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Show default
+            defaultAlbumContainer.style.display = 'flex';
+            currentAlbum = defaultAlbum;
+        } else {
+            console.error("Default album not found, showing first available album");
+            
+            // If default not found, show first available album
+            const firstAlbumContainer = document.querySelector('.songs-container');
+            if (firstAlbumContainer) {
+                firstAlbumContainer.style.display = 'flex';
+                currentAlbum = firstAlbumContainer.id.replace('-songs', '');
+            }
+        }
+    }, 500);
+    
+    // Restore last played song if available (after showing default album)
+    setTimeout(() => {
+        restoreLastPlayed();
+    }, 800);
+    
+    // Set default values
+    currentTimeElement.textContent = "00:00";
+    durationTimeElement.textContent = "00:00";
+});
 
 
