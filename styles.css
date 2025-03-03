@@ -621,7 +621,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: var(--border-radius);
@@ -1051,137 +1051,6 @@ body {
 .songs-container-wrapper {
     margin-top: 15px; /* Reduced from 30px to 15px */
     padding-top: 0; /* Reduced from 5px to 0 */
-}
-
-/* أضف هذه الأنماط في نهاية ملف CSS */
-
-/* زر طي المشغل */
-.player-collapse-btn {
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 35px; /* زيادة الحجم */
-    height: 35px; /* زيادة الحجم */
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    border: 2px solid rgba(255, 255, 255, 0.9);
-}
-
-.player-collapse-btn:hover {
-    transform: translateX(-50%) scale(1.15);
-    box-shadow: 0 5px 15px rgba(255, 47, 47, 0.4);
-}
-
-.player-collapse-btn i {
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    font-size: 22px; /* زيادة حجم الأيقونة */
-}
-
-/* حالة المشغل المطوي */
-#audio-player-container.collapsed {
-    transform: translateY(-85%); /* تعديل نسبة الطي */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-#audio-player-container.collapsed .player-collapse-btn {
-    bottom: -20px; /* تعديل موضع الزر عند الطي */
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-}
-
-#audio-player-container.collapsed .player-collapse-btn i {
-    transform: rotate(180deg);
-}
-
-/* انتقال سلس للمشغل */
-#audio-player-container {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: visible; /* للسماح بظهور زر الطي خارج الحاوية */
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
-}
-
-/* شريط المعلومات المصغر - يظهر عند طي المشغل */
-.mini-info-bar {
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    width: 90%; /* تقليل العرض قليلاً لجعله أنيق */
-    margin: 0 auto; /* توسيط الشريط */
-    background: linear-gradient(135deg, rgba(45, 45, 45, 0.9), rgba(32, 32, 32, 0.9));
-    color: white;
-    padding: 8px 15px;
-    border-radius: 30px;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-#audio-player-container.collapsed .mini-info-bar {
-    opacity: 1;
-    transform: translateY(0);
-    padding: 10px 20px; /* زيادة الحشو عند الطي */
-    width: 95%; /* زيادة العرض عند الطي */
-}
-
-.mini-info-bar .song-title {
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: white;
-    font-weight: bold;
-    font-size: 15px; /* زيادة حجم الخط */
-    margin: 0 10px; /* إضافة هامش جانبي */
-}
-
-.mini-info-bar .play-state {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    animation: pulse 1.5s infinite;
-    flex-shrink: 0; /* منع تقليص الحجم */
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.3); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* تحسينات للهواتف المحمولة */
-@media (max-width: 576px) {
-    #audio-player-container.collapsed {
-        transform: translateY(-90%);
-    }
-
-    .player-collapse-btn {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .player-collapse-btn i {
-        font-size: 18px;
-    }
 }
 
 
