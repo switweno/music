@@ -367,6 +367,87 @@ class AudioController {
     }
 }
 
+// دالة لتبديل حالة طي مشغل الصوت
+function togglePlayerCollapse() {
+    const playerContainer = document.getElementById('audio-player-container');
+    const miniInfoBar = document.querySelector('.mini-info-bar .song-title');
+    const albumsContainer = document.querySelector('.albums-pagination-container');
+    const currentTrackName = document.querySelector('#track-name span').textContent;
+    
+    // تبديل فئة الطي
+    playerContainer.classList.toggle('collapsed');
+    
+    // تحديث عنوان الأغنية في الشريط المصغر
+    if (currentTrackName && currentTrackName !== 'لم يتم اختيار أغنية') {
+        miniInfoBar.textContent = currentTrackName;
+    } else {
+        miniInfoBar.textContent = 'لم يتم تشغيل أي أغنية';
+    }
+    
+    // تعديل تباعد الصفحة والألبومات بناءً على حالة المشغل
+    if (playerContainer.classList.contains('collapsed')) {
+        document.body.style.paddingTop = '65px'; // مساحة أقل عند طي المشغل
+        
+        // تحريك الألبومات للأعلى عند طي المشغل
+        if (albumsContainer) {
+            albumsContainer.style.marginTop = '10px';
+            // تطبيق انتقال سلس على حاوية الألبومات
+            albumsContainer.style.transition = 'margin-top 0.4s ease';
+        }
+    } else {
+        document.body.style.paddingTop = '185px'; // إعادة المساحة الأصلية
+        
+        // إعادة الهامش الأصلي للألبومات
+        if (albumsContainer) {
+            albumsContainer.style.marginTop = '1.0rem'; // يساوي mt-4 في Tailwind
+        }
+    }
+}
+
+// إضافة الحدث عند تحميل النافذة
+window.addEventListener('load', function() {
+    // تهيئة زر طي المشغل
+    const collapseBtn = document.getElementById('player-collapse-btn');
+    if (collapseBtn) {
+        collapseBtn.addEventListener('click', togglePlayerCollapse);
+    }
+    
+    // تحديث معلومات الشريط المصغر عند تغيير الأغنية
+    const audioPlayer = document.getElementById("audio-player");
+    if (audioPlayer) {
+        audioPlayer.addEventListener('play', function() {
+            updateMiniInfoBar();
+        });
+    }
+
+    // تعيين انتقال سلس لحاوية الألبومات
+    const albumsContainer = document.querySelector('.albums-pagination-container');
+    if (albumsContainer) {
+        albumsContainer.style.transition = 'margin-top 0.4s ease';
+    }
+});
+
+// تحديث معلومات الأغنية في الشريط المصغر
+function updateMiniInfoBar() {
+    const currentTrackName = document.querySelector('#track-name span').textContent;
+    const miniInfoBar = document.querySelector('.mini-info-bar .song-title');
+    const isPlaying = !document.getElementById("audio-player").paused;
+    const playState = document.querySelector('.mini-info-bar .play-state');
+    
+    if (miniInfoBar && currentTrackName && currentTrackName !== 'لم يتم اختيار أغنية') {
+        miniInfoBar.textContent = currentTrackName;
+        
+        // تحديث حالة التشغيل (إظهار/إخفاء نبض مؤشر التشغيل)
+        if (playState) {
+            if (isPlaying) {
+                playState.style.display = 'block';
+            } else {
+                playState.style.display = 'none';
+            }
+        }
+    }
+}
+
 // Create global player instance
 let audioController;
 

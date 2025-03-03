@@ -644,6 +644,7 @@ function changeTrack(audioFile, trackName) {
     }
 
     saveLastPlayed(audioFile, trackName, songAlbum);
+    updateMiniInfoBar(); // أضف هذا السطر لتحديث الشريط المصغر
 }
 
 // تأكد من وجود مستمع واحد فقط لنهاية الأغنية
@@ -1286,6 +1287,7 @@ function changeTrack(audioFile, trackName) {
     }
 
     saveLastPlayed(audioFile, trackName, songAlbum);
+    updateMiniInfoBar(); // أضف هذا السطر لتحديث الشريط المصغر
 }
 
 // Simplified playNext function that will only be called manually
@@ -1433,6 +1435,7 @@ function changeTrack(audioFile, trackName) {
     }
 
     saveLastPlayed(audioFile, trackName, songAlbum);
+    updateMiniInfoBar(); // أضف هذا السطر لتحديث الشريط المصغر
 }
 
 // Fix playNext to use the clean playlist
@@ -1738,4 +1741,61 @@ window.addEventListener("load", function() {
     currentTimeElement.textContent = "00:00";
     durationTimeElement.textContent = "00:00";
 });
+
+// أضف هذا الكود في ملف main.js أو player.js
+
+// دالة لتبديل حالة طي مشغل الصوت
+function togglePlayerCollapse() {
+    const playerContainer = document.getElementById('audio-player-container');
+    const miniInfoBar = document.querySelector('.mini-info-bar .song-title');
+    const currentTrackName = document.querySelector('#track-name span').textContent;
+    
+    // تبديل فئة الطي
+    playerContainer.classList.toggle('collapsed');
+    
+    // تحديث عنوان الأغنية في الشريط المصغر
+    if (currentTrackName && currentTrackName !== 'لم يتم اختيار أغنية') {
+        miniInfoBar.textContent = currentTrackName;
+    } else {
+        miniInfoBar.textContent = 'لم يتم تشغيل أي أغنية';
+    }
+    
+    // تعديل تباعد الصفحة بناءً على حالة المشغل
+    if (playerContainer.classList.contains('collapsed')) {
+        document.body.style.paddingTop = '65px'; // مساحة أقل عند طي المشغل
+    } else {
+        document.body.style.paddingTop = '185px'; // إعادة المساحة الأصلية
+    }
+}
+
+// إضافة الحدث عند تحميل النافذة
+window.addEventListener('load', function() {
+    // تهيئة زر طي المشغل
+    const collapseBtn = document.getElementById('player-collapse-btn');
+    if (collapseBtn) {
+        collapseBtn.addEventListener('click', togglePlayerCollapse);
+    }
+    
+    // تحديث معلومات الشريط المصغر عند تغيير الأغنية
+    audioPlayer.addEventListener('play', function() {
+        const currentTrackName = document.querySelector('#track-name span').textContent;
+        const miniInfoBar = document.querySelector('.mini-info-bar .song-title');
+        if (miniInfoBar && currentTrackName) {
+            miniInfoBar.textContent = currentTrackName;
+        }
+    });
+});
+
+// تحديث معلومات الأغنية في الشريط المصغر عند تغيير الأغنية
+function updateMiniInfoBar() {
+    const currentTrackName = document.querySelector('#track-name span').textContent;
+    const miniInfoBar = document.querySelector('.mini-info-bar .song-title');
+    if (miniInfoBar && currentTrackName && currentTrackName !== 'لم يتم اختيار أغنية') {
+        miniInfoBar.textContent = currentTrackName;
+    }
+}
+
+// إضافة استدعاء لتحديث الشريط المصغر داخل دالة changeTrack
+// أضف هذا السطر في نهاية دالة changeTrack الموجودة
+// updateMiniInfoBar();
 
