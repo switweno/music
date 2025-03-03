@@ -747,6 +747,7 @@ function generateSongContainers() {
         const albumContainer = document.createElement('div');
         albumContainer.className = `songs-container ${albumId}`;
         albumContainer.id = `${albumId}-songs`;
+        albumContainer.style.display = 'none'; // Initially hide all song containers
         
         // Add all songs to the container
         albumSongs.forEach(song => {
@@ -758,8 +759,8 @@ function generateSongContainers() {
         songsContainerWrapper.appendChild(albumContainer);
     });
     
-    // After generating all containers, show the default album
-    showAlbum(currentAlbum);
+    // Don't show any album initially
+    // The albums will only be shown when clicked
 }
 
 // Helper function to create a song element - تعديل دالة إنشاء عنصر الأغنية
@@ -1015,6 +1016,11 @@ function initializeFavoriteButtons() {
         const albumElement = document.getElementById(`${album}-songs`);
         if (albumElement) {
             albumElement.style.display = 'flex'; // عرض الألبوم المحدد
+            
+            // Scroll to the songs container with a little delay to ensure UI is updated
+            setTimeout(() => {
+                albumElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
     
         currentAlbum = album; // تحديث الألبوم الحالي

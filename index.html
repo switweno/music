@@ -39,7 +39,7 @@
         <div id="track-name" class="track-name"><i class="material-icons">music_note</i> <span>لم يتم اختيار أغنية</span></div>
     </div>
 
-    <div class="flex justify-center gap-3 mt-1">
+    <div class="flex justify-center gap-4 mt-4">
     <button onclick="playPrevious()" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-700 text-white ">
         <span class="material-icons text-2xl">skip_previous</span>
     </button>
@@ -61,7 +61,7 @@
     </button>
 </div>
 
-        <div class="mt-2 flex justify-between items-center bg-gray-800 p-2 rounded-lg">
+        <div class="mt-3 flex justify-between items-center bg-gray-800 p-3 rounded-lg">
     <span id="current-time" class="text-white">00:00</span>
     <input type="range" id="progress-bar" class="w-full mx-3 accent-blue-500" value="0" max="100">
     <span id="duration-time" class="text-white">00:00</span>
@@ -73,14 +73,8 @@
 
     </div>
 
-    <!-- قسم الأغاني -->
-    <div class="songs-container-wrapper"></div>
-        
-      
-    
-   <div class="album-list-msc">Autres albums</div>
-    <!-- الألبومات مع الصفحات -->
-    <div class="albums-pagination-container">
+    <!-- الألبومات مع الصفحات - MOVED TO TOP -->
+    <div class="albums-pagination-container mt-4">
         <div id="albums-page-container" class="new-albums-container">
             <!-- Albums will be loaded here by JavaScript -->
         </div>
@@ -98,6 +92,9 @@
             </button>
         </div>
     </div>
+
+    <!-- قسم الأغاني - MOVED BELOW ALBUMS -->
+    <div class="songs-container-wrapper"></div>
 
 <div class="favorites-section">
     <div class="favorites-header">

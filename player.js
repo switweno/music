@@ -272,7 +272,20 @@ class AudioController {
             const lastPlayed = JSON.parse(localStorage.getItem('lastPlayed'));
             if (lastPlayed && lastPlayed.file) {
                 console.log(`Restoring last played: ${lastPlayed.file}`);
-                this.changeTrack(lastPlayed.file, lastPlayed.name);
+                this.currentAlbum = lastPlayed.album;
+                this.currentSongFile = lastPlayed.file;
+                this.currentSongName = lastPlayed.name;
+                
+                // Just set the source and update the UI, but don't play automatically
+                this.audioSource.src = lastPlayed.file;
+                this.audioPlayer.load();
+                
+                // Update track info display
+                const albumName = this.getAlbumDisplayName(lastPlayed.album);
+                this.trackNameEl.querySelector('span').textContent = lastPlayed.name;
+                this.albumNameEl.querySelector('span').textContent = albumName;
+                
+                // Don't call showAlbum to avoid displaying songs immediately
             } else {
                 console.log("No last played song found");
             }
@@ -370,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.togglePlayPause = () => audioController.togglePlayPause();
     window.showAlbum = (albumId) => audioController.showAlbum(albumId);
     
-    // Load any saved song
+    // Load any saved song info but don't play or show album
     setTimeout(() => {
         audioController.restoreLastPlayed();
     }, 1000);
