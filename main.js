@@ -127,7 +127,19 @@ const songs = [
 { file: 'https://files.catbox.moe/5g0t2s.mp3', name: 'five star 9', album: 'fivestar' },
 { file: 'https://files.catbox.moe/lw5vcj.mp3', name: 'five star 10', album: 'fivestar' },
 
-   
+ // Songs for album: imghrane
+{ file: 'https://files.catbox.moe/sk38hk.mp3', name: 'IMGHRANE 1', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/c3kkfw.mp3', name: 'IMGHRANE 2', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/59iqhu.mp3', name: 'IMGHRANE 3', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/cbu2ol.mp3', name: 'IMGHRANE 4', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/z8f3r8.mp3', name: 'IMGHRANE 5', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/xvfg8c.mp3', name: 'IMGHRANE 6', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/r0ugkm.mp3', name: 'IMGHRANE 7', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/59iqhu.mp3', name: 'IMGHRANE 8', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/2dqn2j.mp3', name: 'IMGHRANE 9', album: 'imghrane' },
+{ file: 'https://files.catbox.moe/y3v50e.mp3', name: 'IMGHRANE 10', album: 'imghrane' },
+
+
 ];
 
 
@@ -143,7 +155,7 @@ const allAlbums = [
     { id: 'ahyadihahan', name: 'AAWAD IHAHAN', image: 'ahyadihahan.png' },
     { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
 	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
-   
+    { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
     // Add more albums as needed
 ];
 
