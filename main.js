@@ -7,7 +7,6 @@ const songs = [
 	{ file: '05 star cha3bi.mp3', name: 'star chaabi 5', album: 'starchaabi' },
 	{ file: '06 star cha3bi.mp3', name: 'star chaabi 6', album: 'starchaabi' },
     { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
-    { file: '07 star cha3bi.mp3', name: 'star chaabi 7', album: 'starchaabi' },
     { file: '08 star cha3bi.mp3', name: 'star chaabi 8', album: 'starchaabi' },
     
     { file: 'https://files.catbox.moe/9q3y1c.mp3', name: 'I3YALN MASSA 1', album: 'i3yalnmassa' },
