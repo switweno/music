@@ -155,6 +155,8 @@ const allAlbums = [
     { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
 	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
     { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
+	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
+    { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
     // Add more albums as needed
 ];
 
@@ -1736,5 +1738,4 @@ window.addEventListener("load", function() {
     currentTimeElement.textContent = "00:00";
     durationTimeElement.textContent = "00:00";
 });
-
 
