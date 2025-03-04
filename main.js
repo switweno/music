@@ -1738,3 +1738,169 @@ window.addEventListener("load", function() {
     durationTimeElement.textContent = "00:00";
 });
 
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const searchResults = document.getElementById('search-results');
+    const albumsDirectoryList = document.getElementById('albums-directory-list');
+    
+    // Initialize the search and album directory
+    initializeSearch();
+    generateAlbumsDirectory();
+    
+    // Function to initialize search event listeners
+    function initializeSearch() {
+        if (!searchButton || !searchInput || !searchResults) return;
+        
+        // Search when button is clicked
+        searchButton.addEventListener('click', performSearch);
+        
+        // Search when Enter key is pressed
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        // Live search as user types (with debounce)
+        let debounceTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            if (searchInput.value.length >= 2) {
+                debounceTimer = setTimeout(performSearch, 300);
+            } else if (searchInput.value.length === 0) {
+                searchResults.innerHTML = '';
+                searchResults.classList.remove('show');
+            }
+        });
+    }
+    
+    // Function to perform search
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        if (query.length < 2) return;
+        
+        // Find matching songs
+        const matchingSongs = songs.filter(song => 
+            song.name.toLowerCase().includes(query) || 
+            getAlbumDisplayName(song.album).toLowerCase().includes(query)
+        );
+        
+        // Display results
+        searchResults.innerHTML = '';
+        
+        if (matchingSongs.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">لم يتم العثور على نتائج</div>';
+        } else {
+            matchingSongs.forEach(song => {
+                const albumName = getAlbumDisplayName(song.album);
+                const songId = song.file.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.onclick = (e) => {
+                    // Only change track if not clicking on favorite button
+                    if (!e.target.closest('.favorite-btn')) {
+                        changeTrack(song.file, song.name);
+                    }
+                };
+                
+                resultItem.innerHTML = `
+                    <i class="material-symbols-outlined">music_note</i>
+                    <div>
+                        <span>${song.name}</span>
+                        <span class="search-result-album">${albumName}</span>
+                    </div>
+                    <button class="favorite-btn" onclick="toggleFavorite(event, '${songId}', '${song.file}', '${song.name}', '')">
+                        <i class="material-icons">${isFavorite(songId) ? 'favorite' : 'favorite_border'}</i>
+                    </button>
+                `;
+                
+                searchResults.appendChild(resultItem);
+            });
+        }
+        
+        searchResults.classList.add('show');
+    }
+    
+    // Function to check if a song is in favorites
+    function isFavorite(songId) {
+        return favorites.some(song => song.id === songId);
+    }
+    
+    // Function to generate albums directory
+    function generateAlbumsDirectory() {
+        if (!albumsDirectoryList) return;
+        
+        albumsDirectoryList.innerHTML = '';
+        
+        allAlbums.forEach(album => {
+            const albumSongs = songs.filter(song => song.album === album.id);
+            
+            if (albumSongs.length === 0) return; // Skip albums with no songs
+            
+            const albumItem = document.createElement('div');
+            albumItem.className = 'album-directory-item';
+            
+            // Create album header
+            const albumHeader = document.createElement('div');
+            albumHeader.className = 'album-directory-header';
+            albumHeader.innerHTML = `
+                <img src="${album.image}" alt="${album.name}" onerror="this.src='placeholder.png'">
+                <h3>${album.name}</h3>
+                <i class="material-icons album-expand-icon">keyboard_arrow_down</i>
+            `;
+            
+            // Create songs container
+            const songsContainer = document.createElement('div');
+            songsContainer.className = 'album-directory-songs';
+            
+            // Add songs to the container
+            albumSongs.forEach(song => {
+                const songId = song.file.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                const songItem = document.createElement('div');
+                songItem.className = 'album-directory-song';
+                songItem.onclick = (e) => {
+                    // Only change track if not clicking on favorite button
+                    if (!e.target.closest('.favorite-btn')) {
+                        changeTrack(song.file, song.name);
+                    }
+                };
+                
+                songItem.innerHTML = `
+                    <i class="material-symbols-outlined">music_note</i>
+                    <span>${song.name}</span>
+                    <button class="favorite-btn" onclick="toggleFavorite(event, '${songId}', '${song.file}', '${song.name}', '')">
+                        <i class="material-icons">${isFavorite(songId) ? 'favorite' : 'favorite_border'}</i>
+                    </button>
+                `;
+                
+                songsContainer.appendChild(songItem);
+            });
+            
+            // Toggle album songs visibility on click
+            albumHeader.addEventListener('click', () => {
+                songsContainer.classList.toggle('show');
+                const expandIcon = albumHeader.querySelector('.album-expand-icon');
+                if (expandIcon) {
+                    expandIcon.classList.toggle('rotated');
+                }
+            });
+            
+            albumItem.appendChild(albumHeader);
+            albumItem.appendChild(songsContainer);
+            albumsDirectoryList.appendChild(albumItem);
+        });
+    }
+    
+    // Update album directory when favorites change
+    const originalToggleFavorite = window.toggleFavorite;
+    if (typeof originalToggleFavorite === 'function') {
+        window.toggleFavorite = function() {
+            originalToggleFavorite.apply(this, arguments);
+            generateAlbumsDirectory(); // Refresh directory to update favorite status
+        };
+    }
+});
+
