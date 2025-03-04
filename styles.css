@@ -540,7 +540,7 @@ body {
 .footer {
     text-align: center;
     padding: 1px;
-    background-color: var(--dark-bg);
+     background: white;
     color: white;
     margin-top: 1px;
 }
@@ -586,7 +586,7 @@ body {
 .favorite-btn {
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 5px;
     background: none;
     border: none;
     font-size: 18px;
@@ -1053,16 +1053,16 @@ body {
     padding-top: 0; /* Reduced from 5px to 0 */
 }
 
-/* Search section styling */
-.search-section {
-  margin: 30px 10px;
+/* Directory section styling (replaces search section) */
+.directory-section {
+  margin: 10px 10px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: var(--border-radius);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-header, .albums-directory-header {
+.albums-directory-header {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1072,100 +1072,21 @@ body {
   direction: rtl;
 }
 
-.search-header i, .albums-directory-header i {
+.albums-directory-header i {
   color: var(--primary-color);
   font-size: 24px;
 }
 
-.search-header h2, .albums-directory-header h2 {
+.albums-directory-header h2 {
   color: var(--secondary-color);
   font-size: 18px;
   font-weight: bold;
   text-align: right;
 }
 
-.search-input-container {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-#search-input {
-  flex: 1;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-  font-family: inherit;
-  font-size: 16px;
-  direction: rtl;
-}
-
-#search-button {
-  background: linear-gradient(135deg, #ff2f2f, #8e1a4f);
-  color: white;
-  border: none;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  padding: 0 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#search-button:hover {
-  background: linear-gradient(135deg, #ff4a4a, #a02a5f);
-}
-
-.search-results-container {
-  display: none;
-  max-height: 300px;
-  overflow-y: auto;
-  border: 1px solid #eee;
-  border-radius: var(--border-radius);
-  margin-top: 10px;
-  background: #fff;
-}
-
-.search-results-container.show {
-  display: block;
-}
-
-.search-result-item {
-  padding: 12px 15px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  direction: rtl;
-}
-
-.search-result-item:last-child {
-  border-bottom: none;
-}
-
-.search-result-item:hover {
-  background-color: #f9f9f9;
-}
-
-.search-result-item i {
-  color: var(--primary-color);
-}
-
-.search-result-album {
-  font-size: 12px;
-  color: #666;
-  margin-top: 5px;
-  display: block;
-}
-
-.no-results {
-  padding: 20px;
-  text-align: center;
-  color: #666;
-  font-style: italic;
-}
-
 /* Album directory styling */
 .albums-directory {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .albums-list {
@@ -1178,10 +1099,7 @@ body {
   background: #2a2267;
   border-radius: var(--border-radius);
   overflow: hidden;
-}
-
-.album-directory-song:hover {
-  background-color: #071269;
+  margin-bottom: 10px;
 }
 
 .album-directory-header {
@@ -1214,7 +1132,6 @@ body {
   color: #333;
 }
 
-
 .album-directory-songs {
   max-height: 0;
   overflow: hidden;
@@ -1223,6 +1140,7 @@ body {
 
 .album-directory-songs.show {
   max-height: 500px;
+  overflow-y: auto;
 }
 
 .album-directory-song {
@@ -1233,6 +1151,12 @@ body {
   gap: 10px;
   cursor: pointer;
   direction: rtl;
+  background-color: #1F2937;
+  color: #fff;
+}
+
+.album-directory-song:hover {
+  background-color: #071269;
 }
 
 .album-directory-song:last-child {
@@ -1240,7 +1164,7 @@ body {
 }
 
 .album-directory-song i {
-  color: #666;
+  color: var(--primary-color);
 }
 
 .album-expand-icon {
@@ -1251,19 +1175,10 @@ body {
   transform: rotate(-180deg);
 }
 
-/* Responsive adjustments for search section */
+/* Responsive adjustments for directory section */
 @media (max-width: 576px) {
-  .search-section {
+  .directory-section {
     padding: 15px;
-  }
-  
-  .search-input-container {
-    flex-direction: row;
-  }
-  
-  #search-input {
-    font-size: 14px;
-    padding: 10px;
   }
   
   .album-directory-header img {
