@@ -1191,5 +1191,36 @@ body {
   }
 }
 
+/* عنوان قسم الأغاني */
+.songs-title {
+    margin: 20px 10px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.songs-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #ff2f2f; /* خط أحمر تحت العنوان */
+    direction: rtl;
+}
+
+.songs-header i {
+    color: #ff2f2f;
+    font-size: 24px;
+}
+
+.songs-header h2 {
+    color: var(--secondary-color);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+}
+
 
 
