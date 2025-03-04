@@ -540,7 +540,7 @@ body {
 .footer {
     text-align: center;
     padding: 1px;
-     background: white;
+    background-color: var(--dark-bg);
     color: white;
     margin-top: 1px;
 }
@@ -586,7 +586,7 @@ body {
 .favorite-btn {
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 10px;
     background: none;
     border: none;
     font-size: 18px;
@@ -1055,7 +1055,7 @@ body {
 
 /* Directory section styling (replaces search section) */
 .directory-section {
-  margin: 10px 10px;
+  margin: 30px 10px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: var(--border-radius);
