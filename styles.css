@@ -654,10 +654,13 @@ body {
 /* الفوتر */
 .footer {
     text-align: center;
-    padding: 1px;
+    padding: 8px;
     background: linear-gradient(to right, #1a1a2e, #16213e);
-    color: white;
+    color: #ffffff;
     margin-top: 1px;
+    display: flex;
+    flex-direction: column; /* لترتيب العناصر بشكل عمودي */
+    align-items: center;
 }
 
 /* أيقونات التواصل الاجتماعي */
