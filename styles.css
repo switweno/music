@@ -414,7 +414,7 @@ body {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--primary-color);
-    direction: rtl; /* جعل النص داخل العنوان من اليمين لليسار */
+    
 }
 
 .favorites-header i {
@@ -426,7 +426,7 @@ body {
     color: var(--secondary-color);
     font-size: 18px;
     font-weight: bold;
-    text-align: right; /* التأكد من محاذاة العنوان لليمين */
+    
 }
 
 .favorites-grid {
