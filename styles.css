@@ -197,7 +197,7 @@ body {
     animation: fadeIn 0.5s ease;
     position: relative; /* إضافة موضع نسبي للعنصر */
     border-top: 3px solid transparent; /* إضافة حدود شفافة */
-    background-color: rgba(255, 255, 255, 0.95); /* زيادة التعتيم للرؤية الأفضل */
+   
     min-height: 200px; /* ضمان وجود مساحة دائمًا لعرض الأغاني */
 }
 
@@ -849,7 +849,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px auto 5px; /* Reduced bottom margin from -17px to 5px */
+    margin: 15px auto 5px; /* Reduced bottom margin from -17px to 5px */
     gap: 5px;
 }
 
