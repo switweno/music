@@ -194,6 +194,7 @@ const allAlbums = [
 	{ id: 'nojoumstar', name: 'NOJOUM STAR', image: 'nojoumstar.png' },
 	{ id: 'mstaphazri3a', name: 'MSTAPHA ZRI3A', image: 'mstaphazri3a.png' },
 	{ id: 'abdelghanilanssar', name: 'LANSSAR', image: 'abdelghanilanssar.png' },
+	{ id: 'kamalnew', name: 'kamal el 3abdi', image: 'kamalnew.png' },
     // Add more albums as needed
 ];
 
