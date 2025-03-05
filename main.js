@@ -152,6 +152,16 @@ const songs = [
 { file: 'https://files.catbox.moe/g46g7l.mp3', name: 'NOJOUM STAR 10', album: 'nojoumstar' },
 { file: 'https://files.catbox.moe/y1qum7.mp3', name: 'NOJOUM STAR 11', album: 'nojoumstar' },
 
+// Songs for album: mstaphazri3a
+{ file: 'https://files.catbox.moe/xtsxp8.mp3', name: 'mstapha zri3a 1', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/4oacg5.mp3', name: 'mstapha zri3a 2', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/tsvthy.mp3', name: 'mstapha zri3a 3', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/z7ytrm.mp3', name: 'mstapha zri3a 4', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/61rx22.mp3', name: 'mstapha zri3a 5', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/0s33yd.mp3', name: 'mstapha zri3a 6', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/v2d2wz.mp3', name: 'mstapha zri3a 7', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/rpqodz.mp3', name: 'mstapha zri3a 8', album: 'mstaphazri3a' },
+{ file: 'https://files.catbox.moe/vqbip1.mp3', name: 'mstapha zri3a 9', album: 'mstaphazri3a' },
 
 
 ];
@@ -171,6 +181,7 @@ const allAlbums = [
 	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
     { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
 	{ id: 'nojoumstar', name: 'NOJOUM STAR', image: 'nojoumstar.png' },
+	{ id: 'mstaphazri3a', name: 'MSTAPHA ZRI3A', image: 'mstaphazri3a.png' },
     // Add more albums as needed
 ];
 
