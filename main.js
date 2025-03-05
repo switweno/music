@@ -139,6 +139,20 @@ const songs = [
 { file: 'https://files.catbox.moe/2dqn2j.mp3', name: 'IMGHRANE 9', album: 'imghrane' },
 { file: 'https://files.catbox.moe/y3v50e.mp3', name: 'IMGHRANE 10', album: 'imghrane' },
 
+// Songs for album: nojoumstar
+{ file: 'https://files.catbox.moe/xl9jot.mp3', name: 'NOJOUM STAR 1', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/r65x46.mp3', name: 'NOJOUM STAR 2', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/mzdkpb.mp3', name: 'NOJOUM STAR 3', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/rcsv5e.mp3', name: 'NOJOUM STAR 4', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/pah1xw.mp3', name: 'NOJOUM STAR 5', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/8zxlsk.mp3', name: 'NOJOUM STAR 6', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/dmamxk.mp3', name: 'NOJOUM STAR 7', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/u8j5if.mp3', name: 'NOJOUM STAR 8', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/3i4q3k.mp3', name: 'NOJOUM STAR 9', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/g46g7l.mp3', name: 'NOJOUM STAR 10', album: 'nojoumstar' },
+{ file: 'https://files.catbox.moe/y1qum7.mp3', name: 'NOJOUM STAR 11', album: 'nojoumstar' },
+
+
 
 ];
 
@@ -156,6 +170,7 @@ const allAlbums = [
     { id: 'casastar', name: 'CASA STAR', image: 'casastar.png' },
 	{ id: 'fivestar', name: 'FIVE STAR', image: 'fivestar.png' },
     { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
+	{ id: 'nojoumstar', name: 'NOJOUM STAR', image: 'nojoumstar.png' },
     // Add more albums as needed
 ];
 
@@ -191,7 +206,7 @@ let favorites = [];
 const FAVORITES_STORAGE_KEY = 'musicFavorites';
 
 // متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 8; // عدد الألبومات في كل صفحة
+const albumsPerPage = 6; // عدد الألبومات في كل صفحة
 let currentPage = 1; // الصفحة الحالية
 
 
@@ -252,6 +267,11 @@ function loadAlbumsPage(page) {
     
     // Call initialization after a short delay
     setTimeout(initializeAlbumItems, 100);
+    
+    // بعد تحميل الألبومات، قم باستدعاء وظيفة تحديث أزرار المفضلة
+    if (typeof updateFavoriteButtons === 'function') {
+        updateFavoriteButtons();
+    }
 }
 
 // دالة لتحديث أزرار التنقل
