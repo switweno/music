@@ -1368,5 +1368,58 @@ body {
     opacity: 1 !important;
 }
 
+/* زر الصعود للأعلى */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #ff1e2f, #ff2f2f);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: linear-gradient(135deg, #ff0057, #ff1e48);
+    box-shadow: 0 6px 15px rgba(255, 30, 47, 0.5);
+    transform: translateY(-5px);
+}
+
+.scroll-to-top i {
+    font-size: 24px;
+}
+
+/* للأجهزة المحمولة */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .scroll-to-top i {
+        font-size: 20px;
+    }
+}
+
 
 
