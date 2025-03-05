@@ -197,6 +197,8 @@ body {
     animation: fadeIn 0.5s ease;
     position: relative; /* إضافة موضع نسبي للعنصر */
     border-top: 3px solid transparent; /* إضافة حدود شفافة */
+    background-color: rgba(255, 255, 255, 0.95); /* زيادة التعتيم للرؤية الأفضل */
+    min-height: 200px; /* ضمان وجود مساحة دائمًا لعرض الأغاني */
 }
 
 @keyframes fadeIn {
@@ -214,6 +216,67 @@ body {
 .album-focus {
     animation: focusHighlight 1s ease;
     border-top-color: var(--primary-color);
+}
+
+/* أنيميشن تساقط الأغاني */
+@keyframes songDropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.song {
+    /* ...existing song styles... */
+    opacity: 1; /* جعل الأغاني مرئية افتراضيًا - تغيير من 0 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.song.animate-in {
+    animation: songDropIn 0.4s ease-out forwards;
+}
+
+/* مؤثر إضافي على العناصر أثناء العرض التدريجي */
+.songs-container.animating {
+    pointer-events: none; /* منع التفاعل أثناء الرسوم المتحركة */
+}
+
+/* تحسين مظهر حاوية الأغاني عند تحميل الألبوم */
+.songs-container.loading {
+    position: relative;
+    min-height: 300px;
+}
+
+.songs-container.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 2;
+    border-radius: var(--border-radius);
+}
+
+/* تعزيز مؤثر التركيز عند عرض الألبوم */
+.album-focus {
+    animation: focusHighlight 1s ease, containerAppear 0.5s ease;
+}
+
+@keyframes containerAppear {
+    from { 
+        opacity: 0.5;
+        transform: scale(0.98);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* تنسيق محسن للأغاني بإزالة معلومات الأغنية */
@@ -1297,6 +1360,12 @@ body {
 @keyframes playPulse {
     from { box-shadow: 0 0 5px rgba(255, 30, 47, 0.4); }
     to { box-shadow: 0 0 15px rgba(255, 30, 47, 0.7); }
+}
+
+/* إضافة حالة نشطة لضمان الرؤية */
+.songs-container.active {
+    display: flex !important;
+    opacity: 1 !important;
 }
 
 
