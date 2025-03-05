@@ -148,11 +148,18 @@
         </a>
     </div>
 </footer>
+
+<!-- زر الصعود للأعلى -->
+<button id="scrollToTop" class="scroll-to-top" title="العودة للأعلى">
+    <i class="material-icons">arrow_upward</i>
+</button>
+
    <script src="main.js" defer></script>
    <script src="player.js" defer></script>
    <script src="album-favorites.js" defer></script>
    <script src="media-session.js" defer></script>
    <script src="song-animations.js" defer></script>
+   <script src="scroll-to-top.js" defer></script>
    <script>
    // وظيفة لتبديل حالة المشغل بين مطوي وموسع
    function togglePlayer() {
@@ -166,9 +173,7 @@
            toggleIcon.textContent = 'expand_less';
        }
    }
-   </script>
-   <script>
-    // وظيفة لتبديل حالة المشغل بين مدمج وموسع
+    // وظيفة لتبديل حالة المشغل بين مدمج وموسع 'expand_less';
     function togglePlayerExpand() {
         const playerContainer = document.getElementById('audio-player-container');
         const expandBtn = document.getElementById('expand-btn');
@@ -200,12 +205,11 @@
                 compactInfo.textContent = trackNameElement.textContent;
             }
         }
-        
         requestAnimationFrame(updateMiniProgress);
     }
     
     // بدء تحديث شريط التقدم المصغر
     updateMiniProgress();
-    </script>
+</script>
 </body>
 </html>
