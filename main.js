@@ -163,6 +163,17 @@ const songs = [
 { file: 'https://files.catbox.moe/rpqodz.mp3', name: 'mstapha zri3a 8', album: 'mstaphazri3a' },
 { file: 'https://files.catbox.moe/vqbip1.mp3', name: 'mstapha zri3a 9', album: 'mstaphazri3a' },
 
+// Songs for album: abdelghanilanssar
+{ file: 'https://files.catbox.moe/m6fbm9.mp3', name: 'abdelghani lanssar 1', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/elh2ks.mp3', name: 'abdelghani lanssar 2', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/uhy6uf.mp3', name: 'abdelghani lanssar 3', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/k32y3j.mp3', name: 'abdelghani lanssar 4', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/2uaynv.mp3', name: 'abdelghani lanssar 5', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/lzazww.mp3', name: 'abdelghani lanssar 6', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/x0fnj8.mp3', name: 'abdelghani lanssar 7', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/zohhen.mp3', name: 'abdelghani lanssar 8', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/gzrjtr.mp3', name: 'abdelghani lanssar 9', album: 'abdelghanilanssar' },
+{ file: 'https://files.catbox.moe/9qnx3v.mp3', name: 'abdelghani lanssar 10', album: 'abdelghanilanssar' },
 
 ];
 
@@ -182,6 +193,7 @@ const allAlbums = [
     { id: 'imghrane', name: 'IMGHRANE', image: 'imghrane.png' },
 	{ id: 'nojoumstar', name: 'NOJOUM STAR', image: 'nojoumstar.png' },
 	{ id: 'mstaphazri3a', name: 'MSTAPHA ZRI3A', image: 'mstaphazri3a.png' },
+	{ id: 'abdelghanilanssar', name: 'LANSSAR', image: 'abdelghanilanssar.png' },
     // Add more albums as needed
 ];
 
