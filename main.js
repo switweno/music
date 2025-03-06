@@ -230,7 +230,7 @@ let favorites = [];
 const FAVORITES_STORAGE_KEY = 'musicFavorites';
 
 // متغيرات للتنقل بين صفحات الألبومات
-const albumsPerPage = 6; // عدد الألبومات في كل صفحة
+const albumsPerPage = 4; // عدد الألبومات في كل صفحة
 let currentPage = 1; // الصفحة الحالية
 
 
