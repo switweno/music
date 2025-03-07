@@ -1,216 +1,346 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-      <meta charset="UTF-8">
-    <meta name="google" content="notranslate">
-    <!-- Open Graph Meta Tags -->
-<meta property="og:title" content="Écoutez les plus belles chansons marocaines sur Mazika.site">
-<meta property="og:description" content="Écoutez les meilleures chansons marocaines sur Mazika.site, votre site préféré pour la musique marocaine.">
-<meta property="og:image" content="https://mazika.site/logozik.png">
-<meta property="og:url" content="https://mazika.site/">
-<meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>jouet maroc | عروض خاصة</title>
+    <!-- Add Google Fonts for Arabic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=volume_up"/>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="logozik.png" type="image/x-icon">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <title>Mazika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Add favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID_HERE');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <!-- مشغل الصوت العصري الجديد -->
-    <div id="audio-player-container" class="compact-player">
-        <!-- حاوية التحكم الرئيسية للمشغل المدمج -->
-        <div class="player-main-controls">
-            <!-- أزرار التشغيل الأساسية -->
-            <div class="playback-controls">
-                <button onclick="playPrevious()" class="mini-button">
-                    <span class="material-icons">skip_previous</span>
-                </button>
-                <button id="play-pause-btn" onclick="togglePlayPause()" class="mini-button mini-play-button">
-                    <span class="material-icons">play_arrow</span>
-                </button>
-                <button onclick="playNext()" class="mini-button">
-                    <span class="material-icons">skip_next</span>
-                </button>
-            </div>
-
-            <!-- معلومات المسار المختصرة -->
-            <div class="track-info-compact">
-                <span class="modern-text" id="compact-track-info"><!-- لم يتم اختيار اغنية --></span>
-            </div>
-
-            <!-- أزرار إضافية -->
-            <div class="extra-controls">
-                <button onclick="playRandom()" class="mini-button">
-                    <span class="material-icons">shuffle</span>
-                </button>
-                <button id="volume-btn" onclick="toggleVolumeControl()" class="mini-button">
-                    <span class="material-icons">volume_up</span>
-                </button>
-                <button onclick="togglePlayerExpand()" class="mini-button" id="expand-btn">
-                    <span class="material-icons">expand_more</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- شريط التقدم المصغر -->
-        <div class="progress-container">
-            <div class="progress-bar-mini" id="progress-mini"></div>
-        </div>
-
-        <!-- الجزء الموسع للمشغل -->
-        <div class="expanded-player">
-            <!-- شريط التقدم المفصل -->
-            <div class="progress-slider-container">
-                <span id="current-time" class="progress-time">00:00</span>
-                <input type="range" id="progress-bar" class="accent-blue-500" value="0" max="100">
-                <span id="duration-time" class="progress-time">00:00</span>
-            </div>
-            
-            <!-- التحكم في مستوى الصوت -->
-            <div id="volume-control-container" class="hidden mt-3 flex justify-center items-center gap-3">
-                <input type="range" id="volume-control" class="w-32 accent-green-500" value="100" max="100">
-            </div>
-            
-            <!-- معلومات المسار المفصلة -->
-            <div id="track-info" class="track-info modern-track-info">
-                <div id="album-name" class="album-info"><i class="material-icons">album</i> <span class="modern-text">لم يتم اختيار ألبوم</span></div>
-                <div id="track-name" class="track-name"><i class="material-icons">music_note</i> <span class="modern-text">لم يتم اختيار أغنية</span></div>
-            </div>
-        </div>
-
-        <audio id="audio-player" class="hidden">
-            <source id="audio-source" src="" type="audio/mpeg">
-            المتصفح لا يدعم تشغيل الصوت.
-        </audio>
-    </div>
-
-    <!-- الألبومات مع الصفحات - MOVED TO TOP -->
-    <div class="albums-pagination-container mt-4">
-        <div id="albums-page-container" class="new-albums-container">
-            <!-- Albums will be loaded here by JavaScript -->
-        </div>
-        
-        <!-- عناصر التنقل بين الصفحات -->
-        <div class="pagination-controls">
-            <button class="pagination-btn" id="prev-page" onclick="changePage(-1)">
-                <i class="material-icons">chevron_left</i>
-            </button>
-            <div id="pagination-numbers" class="pagination-numbers">
-                <!-- Page numbers will be generated here -->
-            </div>
-            <button class="pagination-btn" id="next-page" onclick="changePage(1)">
-                <i class="material-icons">chevron_right</i>
-            </button>
-        </div>
-    </div>
-
-    <!-- قسم الأغاني - MOVED BELOW ALBUMS -->
-    <div class="songs-container-wrapper"></div>
-
-<div class="favorites-section">
-    <div class="favorites-header">
-        <i class="material-icons">favorite</i>
-        <h2>Favoris</h2>
-    </div>
+<body>
+    <!-- Move Facebook Pixel noscript to body -->
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1" alt="Facebook Pixel"/>
+    </noscript>
     
-    <!-- Only keep the song favorites section -->
-    <div id="favorites-container" class="favorites-grid">
-        <!-- سيتم إضافة الأغاني المفضلة هنا عبر JavaScript -->
-        <div class="no-favorites-message">Aucune chanson n’a encore été ajoutée aux favoris</div>
+    <header>
+        <div class="container">
+            <h1>عروض حصرية ولفترة محدودة</h1>
+            <div class="special-offer">
+                <span class="offer-badge">تخفيض 30%</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="product-details">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="current-image" src="product1.webp" alt="صورة المنتج">
+                    <div class="zoom-icon" onclick="openImageModal()">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="thumbnails-container">
+                    <div class="thumbnails" id="thumbnails-slider">
+                        <img class="thumbnail active" src="product2.webp" alt="صورة مصغرة 1" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="product3.webp" alt="صورة مصغرة 2" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="product4.webp" alt="صورة مصغرة 3" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="product5.webp" alt="صورة مصغرة 4" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="product6.webp" alt="صورة مصغرة 5" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="product7.webp" alt="صورة مصغرة 6" onclick="changeImage(this.src)">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h2 class="product-title">VÉLO ÉLECTRIQUE LIKEBIKE HARLEY U9 
+                </h2>
+                <p class="product-brand">العلامة التجارية: LIKEBIKE</p>
+                <p class="product-category">الفئة: دراجات كهربائية</p>
+                <p class="product-availability">متوفر في المخزون</p>
+                <div class="ratings">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(120 تقييم)</span>
+                </div>
+                <div class="price">
+                    <span class="current-price">8700 درهم</span>
+                    <span class="old-price">10999 درهم</span>
+                    <span class="discount">-30%</span>
+                </div>
+                
+                <div class="product-description">
+                    <h3>مميزات المنتج</h3>
+                    <div class="features-container">
+                        <!-- First category - expanded by default -->
+<div class="feature-category expanded">
+    <div class="accordion-header french-heading">
+        <h4><i class="fas fa-bolt"></i> Moteur et performance</h4>
+        <button class="accordion-toggle"><i class="fas fa-chevron-down"></i></button>
+    </div>
+    <div class="accordion-content">
+        <ul class="feature-list">
+            <li class="feature-item"><strong>Marque:</strong> LIKEBIKE ORIGINAL 💯</li>
+            <li class="feature-item"><strong>Moteur:</strong> 500W MAX pour une conduite fluide 💯</li>
+            <li class="feature-item"><strong>Vitesse max:</strong> 61 KM/h 💯</li>
+        </ul>
     </div>
 </div>
 
-<footer class="footer">
-    
-    <div class="social-buttons">
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mazika.site/" 
-       class="social-btn facebook" target="_blank">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://twitter.com/intent/tweet?url=https://mazika.site/&text=Check%20this%20out!" 
-       class="social-btn twitter" target="_blank">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://api.whatsapp.com/send?text=Check%20this%20out!%20https://mazika.site/" 
-       class="social-btn whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mazika.site/" 
-       class="social-btn linkedin" target="_blank">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
+<!-- Other categories - collapsed by default -->
+<div class="feature-category">
+    <div class="accordion-header french-heading">
+        <h4><i class="fas fa-battery-full"></i> Batterie et autonomie</h4>
+        <button class="accordion-toggle"><i class="fas fa-chevron-down"></i></button>
+    </div>
+    <div class="accordion-content">
+        <ul class="feature-list">
+            <li class="feature-item"><strong>Batterie:</strong> Lithium 48V 15.6AH 💯</li>
+            <li class="feature-item"><strong>Autonomie:</strong> 50KM - 60KM max 💯</li>
+            <li class="feature-item"><strong>Charge max:</strong> 130 KG 💯</li>
+        </ul>
+    </div>
 </div>
-<p class="footer-text">Tous droits réservés 2025 Mazika.site</p>
-</footer>
 
-<!-- زر الصعود للأعلى -->
-<button id="scrollToTop" class="scroll-to-top" title="العودة للأعلى">
-    <i class="material-icons">arrow_upward</i>
-</button>
+<div class="feature-category">
+    <div class="accordion-header french-heading">
+        <h4><i class="fas fa-shield-alt"></i> Sécurité et durabilité</h4>
+        <button class="accordion-toggle"><i class="fas fa-chevron-down"></i></button>
+    </div>
+    <div class="accordion-content">
+        <ul class="feature-list">
+            <li class="feature-item"><strong>Freinage:</strong> Avant et arrière 💯</li>
+            <li class="feature-item"><strong>Amortisseur:</strong> Double amortisseur 💯</li>
+            <li class="feature-item"><strong>Pièces:</strong> Shimano 💯</li>
+            <li class="feature-item"><strong>Pneus:</strong> 20 pouces 💯</li>
+        </ul>
+    </div>
+</div>
 
-   <script src="main.js" defer></script>
-   <script src="player.js" defer></script>
-   <script src="album-favorites.js" defer></script>
-   <script src="media-session.js" defer></script>
-   
-   <script src="scroll-to-top.js" defer></script>
-   <script>
-   // وظيفة لتبديل حالة المشغل بين مطوي وموسع
-   function togglePlayer() {
-       const playerContainer = document.getElementById('audio-player-container');
-       const toggleIcon = document.getElementById('toggle-icon');
-       if (playerContainer.classList.contains('collapsed')) {
-           playerContainer.classList.remove('collapsed');
-           toggleIcon.textContent = 'expand_more';
-       } else {
-           playerContainer.classList.add('collapsed');
-           toggleIcon.textContent = 'expand_less';
-       }
-   }
-    // وظيفة لتبديل حالة المشغل بين مدمج وموسع 'expand_less';
-    function togglePlayerExpand() {
-        const playerContainer = document.getElementById('audio-player-container');
-        const expandBtn = document.getElementById('expand-btn');
+<div class="feature-category">
+    <div class="accordion-header french-heading">
+        <h4><i class="fas fa-cogs"></i> Avantages supplémentaires</h4>
+        <button class="accordion-toggle"><i class="fas fa-chevron-down"></i></button>
+    </div>
+    <div class="accordion-content">
+        <ul class="feature-list">
+            <li class="feature-item"><strong>Tableau de bord:</strong> Digital 💯</li>
+            <li class="feature-item"><strong>Klaxon:</strong> Oui 💯</li>
+            <li class="feature-item"><strong>Sièges:</strong> 2 places cuir 💯</li>
+            <li class="feature-item"><strong>Vitesse:</strong> 7e vitesse Shimano 💯</li>
+        </ul>
+    </div>
+</div>
+
+                        
+                        <div class="feature-highlight">
+                            <i class="fas fa-check-circle"></i> <span>Garantie de 3 mois</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quantity-selector">
+                    <h3>الكمية</h3>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus" onclick="updateQuantity(-1)">-</button>
+                        <input type="number" id="quantity" value="1" min="1" max="10">
+                        <button class="quantity-btn plus" onclick="updateQuantity(1)">+</button>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <button id="buy-now-btn" class="btn primary-btn" onclick="scrollToForm()">
+                        <i class="fas fa-shopping-cart"></i> اطلب الآن
+                    </button>
+                    <!-- Removing separate WhatsApp button as per requirement -->
+                </div>
+            </div>
+        </div>
+        <div class="product-video-section">
+            <h2>فيديو المنتج</h2>
+            <div class="video-container">
+                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjouetmaroc2%2Fvideos%2F1216627849670343%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+            </div>
+        </div>
         
-        if (playerContainer.classList.contains('compact-player')) {
-            playerContainer.classList.remove('compact-player');
-            expandBtn.querySelector('.material-icons').textContent = 'expand_less';
-        } else {
-            playerContainer.classList.add('compact-player');
-            expandBtn.querySelector('.material-icons').textContent = 'expand_more';
-        }
-    }
+        <!-- Why Choose Us Section -->
+        <div class="why-choose-us">
+            <h2>لماذا تختارنا؟</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>منتجات عالية الجودة</h3>
+                    <p>نقدم منتجات ذات جودة عالية تناسب احتياجاتك.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>شحن سريع</h3>
+                    <p>نوفر خدمة شحن سريع وموثوق بها.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم فني 24/7</h3>
+                    <p>فريق دعم فني متاح دائمًا لمساعدتك.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fix duplicate ID by changing the section ID -->
+        <div class="order-section" id="order-section">
+            <h2>املأ النموذج للطلب</h2>
+            <form id="order-form" onsubmit="submitFormViaWhatsApp(event)">
+                <div class="form-group">
+                    <label for="name" class="required-field">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" dir="ltr" placeholder="Votre nom complet" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="required-field">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" dir="ltr" placeholder="Numéro de téléphone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="required-field">العنوان</label>
+                    <textarea id="address" name="address" dir="ltr" placeholder="Votre adresse complète" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="required-field">المدينة</label>
+                    <input type="text" id="city" name="city" dir="ltr" placeholder="Entrez votre ville" required>
+                </div>
+                <div class="form-group payment-method">
+                    <label class="required-field">طريقة الدفع</label>
+                    <div class="radio-group">
+                        <input type="radio" id="cod" name="payment" value="cod" checked>
+                        <label for="cod">الدفع عند الاستلام</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn primary-btn submit-btn">
+                    <i class="fab fa-whatsapp"></i> تأكيد الطلب عبر واتساب
+                </button>
+            </form>
+        </div>
+    </main>
     
-    // تحديث شريط التقدم المصغر
-    function updateMiniProgress() {
-        const player = document.getElementById('audio-player');
-        const progressMini = document.getElementById('progress-mini');
-        const compactInfo = document.getElementById('compact-track-info');
-        
-        if (player.duration) {
-            const percentage = (player.currentTime / player.duration) * 100;
-            progressMini.style.width = percentage + '%';
-        }
-        
-        // تحديث عنوان المسار في الوضع المدمج
-        if (player.src) {
-            const trackNameElement = document.querySelector('#track-name span.modern-text');
-            if (trackNameElement) {
-                compactInfo.textContent = trackNameElement.textContent;
-            }
-        }
-        requestAnimationFrame(updateMiniProgress);
-    }
+    <!-- Image Modal/Lightbox - Fix empty src attributes -->
+    <div id="image-modal" class="image-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeImageModal()">&times;</span>
+            <div class="zoom-container">
+                <img id="modal-image" src="product1.webp" alt="صورة مكبرة">
+                
+                <!-- Navigation Arrows -->
+                <button class="nav-arrow arrow-left" onclick="navigateImages(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-arrow arrow-right" onclick="navigateImages(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="zoom-controls">
+                <button onclick="changeZoom(0.2)" class="zoom-btn"><i class="fas fa-search-plus"></i></button>
+                <button onclick="changeZoom(-0.2)" class="zoom-btn"><i class="fas fa-search-minus"></i></button>
+                <button onclick="resetZoom()" class="zoom-btn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+    </div>
     
-    // بدء تحديث شريط التقدم المصغر
-    updateMiniProgress();
-</script>
+    <!-- Order Confirmation Modal - Fix empty src attribute -->
+    <div id="confirmation-modal" class="confirmation-modal">
+        <div class="confirmation-content">
+            <h3>تأكيد الطلب</h3>
+            <div class="order-summary">
+                <div class="summary-product">
+                    <div class="summary-image">
+                        <img id="summary-product-image" src="product1.webp" alt="صورة المنتج">
+                    </div>
+                    <div class="summary-details">
+                        <h4 id="summary-product-name"></h4>
+                        <div class="summary-price">
+                            <span>السعر: </span>
+                            <span id="summary-product-price"></span>
+                        </div>
+                        <div class="summary-quantity">
+                            <span>الكمية: </span>
+                            <span id="summary-product-quantity"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-total">
+                    <span>المجموع الكلي: </span>
+                    <span id="summary-total-price"></span>
+                </div>
+            </div>
+            
+            <div class="customer-info">
+                <h4>معلومات العميل:</h4>
+                <p><strong>الاسم:</strong> <span id="summary-customer-name"></span></p>
+                <p><strong>الهاتف:</strong> <span id="summary-customer-phone"></span></p>
+                <p><strong>العنوان:</strong> <span id="summary-customer-address"></span></p>
+                <p><strong>المدينة:</strong> <span id="summary-customer-city"></span></p>
+                <p><strong>طريقة الدفع:</strong> <span id="summary-payment-method"></span></p>
+            </div>
+            
+            <div class="confirmation-buttons">
+                <button class="btn primary-btn" id="confirm-order-btn">
+                    <i class="fab fa-whatsapp"></i> تأكيد الطلب عبر واتساب
+                </button>
+                <button class="btn secondary-btn" id="cancel-order-btn">
+                    <i class="fas fa-times"></i> إلغاء الطلب
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                
+                <div class="social-media-container">
+                    <h3>تابعونا على وسائل التواصل</h3>
+                    <div class="social-media">
+                        <a href="https://www.facebook.com/jouetmaroc2" target="_blank" aria-label="فيسبوك">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/jouetmaroc/" target="_blank" aria-label="إنستغرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@jouetmaroc" target="_blank" aria-label="يوتيوب">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://wa.me/212762609147" target="_blank" aria-label="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 jouet-maroc.com | جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
