@@ -20,12 +20,16 @@ body {
     padding-top: 70px !important; /* تقليل الحشو العلوي لإفساح المجال للمشغل المصغر */
     transition: all var(--transition-speed);
     overflow-x: hidden;
+    /* إضافة إلغاء تأثيرات اللمس لكافة العناصر */
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* أيقونات المواد */
 .material-icons {
     font-size: 20px;
     vertical-align: middle;
+    /* إضافة إلغاء تأثيرات اللمس للأيقونات */
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* تحسينات جديدة للألبومات العلوية */
@@ -95,6 +99,8 @@ body {
     transition: all 0.4s ease;
     padding: 5px;
     position: relative;
+    /* إضافة إلغاء تأثيرات اللمس */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .album-item:hover {
@@ -114,6 +120,9 @@ body {
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
+    /* إضافة إلغاء تأثيرات اللمس */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .album-btn::before {
@@ -234,6 +243,8 @@ body {
     /* ...existing song styles... */
     opacity: 1; /* جعل الأغاني مرئية افتراضيًا - تغيير من 0 */
     transition: opacity 0.3s ease, transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .song.animate-in {
@@ -357,6 +368,8 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .favorite-btn:hover {
@@ -452,6 +465,8 @@ body {
     transition: all var(--transition-speed);
     color: var(--text-light);
     position: relative;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .favorite-item:hover {
@@ -500,7 +515,9 @@ body {
     height: auto;
     display: flex;
     flex-direction: column;
+    -webkit-tap-highlight-color: transparent;
 }
+
 #audio-player-container.shifted {
     top: 0; /* يصبح أعلى الصفحة */
     margin-top: 0; /* إزالة الهامش العلوي */
@@ -573,6 +590,8 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .mini-button:hover {
@@ -685,6 +704,8 @@ body {
     transition: all 0.3s;
     background: linear-gradient(to right, #1a1a2e, #16213e);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .social-btn:hover {
@@ -759,6 +780,9 @@ body {
     animation: fadeIn 0.5s forwards;
     opacity: 0;
     transform: scale(0.95);
+    /* إضافة إلغاء تأثيرات اللمس */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 @keyframes fadeIn {
@@ -874,6 +898,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     color: #333;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .pagination-btn:hover {
@@ -907,6 +933,8 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .page-number:hover {
@@ -1003,6 +1031,8 @@ body {
     max-width: 48%;
     flex: 1 1 auto;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 #track-info .album-info {
@@ -1261,6 +1291,8 @@ body {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .modern-button:hover {
@@ -1277,6 +1309,8 @@ body {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .modern-play-button:hover {
@@ -1422,6 +1456,104 @@ body {
     
     .scroll-to-top i {
         font-size: 20px;
+    }
+}
+
+/* تحسينات للعرض على الأجهزة المحمولة - تعديل استعلامات الوسائط */
+@media (max-width: 768px) {
+    /* إلغاء جميع التأثيرات التي تتطلب الحوم للأجهزة المحمولة */
+    .album-btn:hover,
+    .new-album-item:hover,
+    .album-item:hover,
+    .song:hover,
+    .favorite-item:hover,
+    #track-info .album-info:hover,
+    #track-info .track-name:hover,
+    .pagination-btn:hover,
+    .page-number:hover,
+    .mini-button:hover,
+    .social-btn:hover,
+    .scroll-to-top:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* منع ظهور العناصر الطافية في الألبومات عند اللمس على الأجهزة المحمولة */
+    .album-btn::after,
+    .new-album-item::before,
+    .album-btn::before,
+    .new-album-item::after {
+        display: none !important;
+    }
+
+    /* ضبط تنسيقات إضافية للأجهزة المحمولة */
+    .album-btn {
+        box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.3), 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .new-album-item {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* إضافة تأثيرات فورية للمس بدلاً من تأثيرات الحوم */
+    .song:active,
+    .favorite-item:active,
+    .mini-button:active,
+    .pagination-btn:active,
+    .page-number:active {
+        opacity: 0.7;
+        transition: opacity 0.1s ease;
+    }
+}
+
+/* تخصيص إضافي للأجهزة الصغيرة جداً */
+@media (max-width: 576px) {
+    /* تقليل الظلال والتأثيرات بشكل أكبر */
+    .album-btn,
+    .new-album-item,
+    .song,
+    .favorite-item,
+    .pagination-btn,
+    .page-number {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* تعطيل جميع الرسوم المتحركة والتأثيرات المعقدة */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.1s !important;
+        transform: none !important;
+    }
+
+    /* إصلاح مشكلة الأزرار المصغرة */
+    .mini-button:active .material-icons {
+        opacity: 0.7;
+    }
+}
+
+/* تأكيد على حذف تأثير الضغط للأجهزة اللمسية */
+@media (hover: none) and (pointer: coarse) {
+    /* للأجهزة اللمسية فقط مثل الهواتف واللوحات */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* تعطيل جميع مؤثرات الحركة المعقدة */
+    .album-btn::after,
+    .album-btn::before,
+    .new-album-item::before,
+    .new-album-item::after,
+    .song::after {
+        display: none !important;
+    }
+
+    /* تعطيل جميع التأثيرات عند الحوم لأنها لا تنطبق على الأجهزة اللمسية */
+    *:hover {
+        transform: none !important;
+        box-shadow: none !important;
     }
 }
 
