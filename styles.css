@@ -5,11 +5,6 @@
     box-sizing: border-box;
     font-family: 'Tajawal', 'Cairo', sans-serif;
 }
-html, body {
-    width: 100%;
-    overflow-x: hidden; /* منع التمرير الأفقي */
-}
-
 
 
 body {
@@ -19,6 +14,7 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding-top: 50px; /* المسافة بين المحتوى العلوي وبقية الصفحة */
 }
 
 /* تعديل الحاوية الرئيسية */
@@ -32,9 +28,7 @@ body {
 
 /* Header Styles */
 header {
-  background: linear-gradient(135deg, #333, #333);
-
-
+  background: linear-gradient(135deg, #2269b6,#2269b6);
 
     color: white;
     padding: 5px 0;
@@ -45,6 +39,7 @@ header {
     left: 0;
     width: 100%; /* ضمان أن الهيدر يأخذ عرض الشاشة بالكامل */
     z-index: 1000; /* التأكد من أن الهيدر فوق العناصر الأخرى */
+	 transition: top 0.3s ease-in-out;
 }
 
 /* تعديل الحاوية الداخلية للقائمة */
@@ -53,15 +48,26 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-direction: row; /* تغيير إلى row بدلاً من row-reverse */
-    padding: 3px 5px;
-    position: relative; /* للحفاظ على التنسيق داخل الهيدر */
-    z-index: 1; /* التأكد من أن المحتوى داخل الهيدر فوق العناصر الأخرى */
 }
 
-/* إضافة مسافة إضافية للمحتوى السفلي بسبب تثبيت الهيدر */
-body {
-    padding-top: 61px; /* المسافة بين المحتوى العلوي وبقية الصفحة */
-}
+
+
+    #whatsapp-button {
+        position: fixed;
+        bottom: 22px;
+        right: 14px;
+        z-index: 1000;
+        background-color: #25d366;
+        padding: 3px;
+        border-radius: 50%;
+        box-shadow: 6px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #whatsapp-button img {
+        width: 50px;
+        height: 50px;
+    }
+
 
 
 /* أنماط زر القائمة */
@@ -71,7 +77,7 @@ body {
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 9px 2px;
+    padding: 6px 2px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -85,23 +91,25 @@ body {
 }
 
 .menu-toggle i {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 }
 
 
 
+
+
 .site-brand h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
      margin: 0;
-    margin-right: 20px; /* إضافة مسافة على اليمين لتحريك النص */
-    color: #f9e816;
-    text-shadow: 0 1px 2px rgba(203, 237, 20, 0.3);
-    background: linear-gradient(45deg, #e8c709, #fd4f4f);
+    margin-left: 2px; /* إضافة مسافة على اليمين لتحريك النص */
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+    background: linear-gradient(45deg, #ffffff, #fff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    direction: ltr; /* التأكد من أن النص في الاتجاه من اليسار لليمين */
+     direction: ltr; /* التأكد من أن النص في الاتجاه من اليسار لليمين */ 
    
 }
 
@@ -122,7 +130,7 @@ body {
 .sidebar-menu.open {
     right: 0; /* القائمة تظهر */
     width: 100%; /* عرض القائمة عند الفتح */
-    background-color: rgba(255, 255, 255, 0.9); /* شفافية خفيفة لجعل السلايدر يظهر وراءها */
+    background-color: rgb(255, 255, 255); /* شفافية خفيفة لجعل السلايدر يظهر وراءها */
     z-index: 1000; /* تأكد من أن القائمة أعلى من السلايدر */
     transition: right 0.3s ease;
 }
@@ -151,7 +159,7 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     padding: 0;
     width: 30px;
@@ -265,7 +273,7 @@ body {
 .popup-close {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     color: #555;
     padding: 0;
@@ -363,6 +371,98 @@ body {
         width: 100%; /* عرض عند الفتح */
     }
 }
+
+/* إعدادات شريط العروض */
+.offers-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 101px;
+    overflow: hidden;
+    position: relative;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    direction: rtl; /* تحديد الكتابة من اليمين لليسار */
+    text-align: center;
+}
+
+.offer-item {
+    flex: 0 0 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 8px;
+    opacity: 0;
+    position: absolute;
+    animation: slideInOut 10s linear infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.offer-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0066cc;
+    margin-bottom: 5px;
+}
+.offer-item:empty {
+    display: none;
+}
+
+.offer-details {
+    font-size: 16px;
+    color: #666;
+}
+
+@keyframes slideInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    35% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.offer-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.offer-item:nth-child(2) {
+    animation-delay: 2.5s;
+}
+
+.offer-item:nth-child(3) {
+    animation-delay: 5s;
+}
+
+.offer-item:nth-child(4) {
+    animation-delay: 7.5s;
+}
+
+
+
+
+
 /* سلايدر العروض */
 .offers-slider {
     width: 100%;
@@ -511,53 +611,6 @@ main {
     background-color: #fafafa; /* خلفية خفيفة لمنع ظهور الفراغ أثناء التبديل */
 }
 
-/* تحسين أيقونة التكبير في الصورة الرئيسية */
-.zoom-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 86, 179, 0.8);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    z-index: 5;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-}
-
-.zoom-icon:hover {
-    background-color: rgba(0, 86, 179, 0.95);
-    transform: scale(1.1);
-}
-
-.zoom-icon i {
-    color: white;
-    font-size: 1.2rem;
-}
-
-.main-image img {
-    
-    max-width: 100%;
-    width: 100%; /* تأكيد العرض الكامل للصورة */
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: block; /* منع المساحة الفارغة تحت الصورة */
-    transition: opacity 0.2s ease; /* تسريع الانتقال */
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transition-property: transform, opacity;
-    transition-duration: var(--slider-transition-duration);
-    transition-timing-function: var(--slider-transition-timing);
-}
 
 /* شارة التخفيض للصورة الرئيسية */
 .main-image-discount-badge {
@@ -848,7 +901,7 @@ main {
     font-size: 1.4rem;
     text-align: center;
     border-bottom: 2px solid #2269b6;
-    padding-bottom: 8px;
+    padding-bottom: 9px;
 }
 
 /* Accordion Styles for Product Features */
@@ -1388,6 +1441,7 @@ main {
 .zoom-btn:hover {
     background-color: rgba(0, 86, 179, 1);
     transform: scale(1.1);
+    
 }
 
 .zoom-btn:active {
@@ -1995,88 +2049,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
-/* تعديل محاذاة أيقونات "لماذا تختارنا" */
-.feature-box {
-    flex: 1;
-    min-width: 250px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-    text-align: center; /* إضافة محاذاة نص للوسط */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* محاذاة كل المحتويات للوسط */
-}
 
-.feature-icon {
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center; /* توسيط الأيقونة أفقياً */
-    width: 100%; /* عرض كامل للحاوية */
-}
-
-.feature-icon i {
-    font-size: 2.5rem;
-    color: #2269b6;
-    background-color: #e9f2ff;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto; /* توسيط إضافي للأيقونة */
-}
-
-.feature-box h3 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #333;
-    text-align: center; /* تأكيد محاذاة العنوان للوسط */
-    width: 100%;
-}
-
-.feature-box p {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
-    text-align: center; /* تأكيد محاذاة النص للوسط */
-    width: 100%;
-}
-
-/* Mobile styles for Why Choose Us section */
-@media (max-width: 767px) {
-    .features-grid {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .feature-box {
-        min-width: auto;
-        padding: 15px;
-    }
-    
-    .feature-icon i {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-    }
-    
-    .why-choose-us h2 {
-        font-size: 1.5rem;
-    }
-    
-    .feature-box h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    
-    .why-choose-us {
-        padding: 20px 15px;
-    }
-}
 
 /* Improved Order Form Spacing for Mobile */
 @media (max-width: 767px) {
@@ -2586,9 +2559,9 @@ select {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgba(0, 86, 179, 0.8);
-    width: 40px;
-    height: 40px;
+    background-color: rgba(31, 138, 254, 0.97);
+    width: 31px;
+    height: 31px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2602,7 +2575,7 @@ select {
 }
 
 .zoom-icon:hover {
-    background-color: rgba(0, 86, 179, 0.95);
+    background-color: #0173ee;
     transform: scale(1.1);
 }
 
